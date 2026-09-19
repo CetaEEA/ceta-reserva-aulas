@@ -2,7 +2,6 @@
 <html lang="es">
 
 <head>
-
     <meta charset="UTF-8">
 
     <meta
@@ -10,26 +9,44 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>
-        CETA | Administrador
-    </title>
-
+    <title>CETA | Administrador</title>
 </head>
-
 
 <body>
 
-    <h1>
-        Reservas de Aulas y Laboratorios
-    </h1>
+    <h1>Reservas de Aulas y Laboratorios</h1>
 
-    <h2>
-        Panel Administrador
-    </h2>
+    <h2>Panel Administrador</h2>
 
-    <p>
-        Acceso administrador correcto.
-    </p>
+    <p>Acceso administrador correcto.</p>
+
+    <button id="btnCerrarSesion">
+        Cerrar sesión
+    </button>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="js/supabase.js?v=1"></script>
+
+    <script>
+        const btnCerrarSesion =
+            document.getElementById("btnCerrarSesion");
+
+        btnCerrarSesion.addEventListener("click", async () => {
+
+            const { error } =
+                await supabaseClient.auth.signOut();
+
+            if (error) {
+                alert("No se pudo cerrar la sesión.");
+                console.error(error);
+                return;
+            }
+
+            window.location.href = "index.html";
+        });
+    </script>
 
 </body>
 
