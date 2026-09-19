@@ -1,6 +1,6 @@
 /* ============================================================
-   CETA - RESERVAS DE AULAS Y LABORATORIOS
-   HOJA DE ESTILOS GENERAL
+   CETA - RESERVA DE AULAS Y LABORATORIOS
+   CSS GENERAL
    ============================================================ */
 
 
@@ -9,78 +9,61 @@
    ============================================================ */
 
 :root {
+    --azul: #163d68;
+    --azul-oscuro: #0d2947;
+    --azul-claro: #2875b7;
 
-    --color-principal: #163d68;
-    --color-principal-oscuro: #0e2b4b;
-    --color-principal-claro: #245d96;
+    --fondo: #f3f6fa;
+    --superficie: #ffffff;
+    --superficie-2: #f7f9fc;
 
-    --color-secundario: #2875b7;
+    --texto: #1f2937;
+    --texto-suave: #64748b;
 
-    --color-exito: #198754;
-    --color-exito-fondo: #e9f7ef;
+    --borde: #dce3eb;
+    --borde-fuerte: #c7d1dc;
 
-    --color-advertencia: #d89400;
-    --color-advertencia-fondo: #fff7dc;
+    --verde: #198754;
+    --verde-fondo: #eaf8f0;
 
-    --color-error: #c0392b;
-    --color-error-fondo: #fceceb;
+    --rojo: #c0392b;
+    --rojo-fondo: #fff0ee;
 
-    --color-reservado: #b54b3e;
-    --color-reservado-fondo: #fff0ee;
+    --morado: #7653a6;
+    --morado-fondo: #f3edfb;
 
-    --color-asignacion: #7653a6;
-    --color-asignacion-fondo: #f3edfb;
+    --amarillo: #c98200;
+    --amarillo-fondo: #fff6d9;
 
-    --color-libre: #198754;
-    --color-libre-fondo: #eaf8f0;
-
-    --color-fondo: #f3f6fa;
-    --color-superficie: #ffffff;
-    --color-superficie-secundaria: #f8fafc;
-
-    --color-texto: #1f2937;
-    --color-texto-secundario: #64748b;
-
-    --color-borde: #dce3eb;
-    --color-borde-fuerte: #c7d1dc;
-
-    --sombra-suave:
-        0 4px 16px rgba(15, 39, 65, 0.08);
-
-    --sombra-media:
-        0 8px 28px rgba(15, 39, 65, 0.13);
-
-    --radio-pequeno: 8px;
-    --radio-medio: 12px;
+    --radio: 12px;
     --radio-grande: 18px;
 
-    --transicion: 0.2s ease;
+    --sombra:
+        0 5px 18px rgba(15, 39, 65, 0.09);
+
+    --sombra-grande:
+        0 15px 45px rgba(15, 39, 65, 0.16);
 }
 
 
 /* ============================================================
-   2. RESET GENERAL
+   2. RESET
    ============================================================ */
 
 * {
-
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-
 }
 
 
 html {
-
     min-height: 100%;
     scroll-behavior: smooth;
-
 }
 
 
 body {
-
     min-height: 100vh;
 
     font-family:
@@ -88,13 +71,10 @@ body {
         Arial,
         sans-serif;
 
-    color: var(--color-texto);
-
-    background:
-        var(--color-fondo);
+    background: var(--fondo);
+    color: var(--texto);
 
     line-height: 1.5;
-
 }
 
 
@@ -102,84 +82,68 @@ button,
 input,
 select,
 textarea {
-
     font: inherit;
-
 }
 
 
 button {
-
     cursor: pointer;
-
 }
 
 
 button:disabled {
-
     cursor: not-allowed;
-    opacity: 0.6;
+    opacity: 0.55;
+}
 
+
+img {
+    display: block;
+    max-width: 100%;
 }
 
 
 input,
 select,
 textarea {
-
     width: 100%;
-
 }
 
 
-a {
-
-    color: inherit;
-    text-decoration: none;
-
-}
-
-
-img {
-
-    max-width: 100%;
-    display: block;
-
+.oculto {
+    display: none !important;
 }
 
 
 /* ============================================================
-   3. FONDO INSTITUCIONAL
+   3. LOGIN - PÁGINA COMPLETA
    ============================================================ */
 
-.fondo-institucional {
+.login-page {
+    position: relative;
 
-    position: fixed;
+    min-height: 100vh;
 
-    inset: 0;
+    display: flex;
+    flex-direction: column;
 
-    z-index: -2;
-
-    pointer-events: none;
+    overflow-x: hidden;
 
     background:
         linear-gradient(
             135deg,
-            rgba(245, 248, 252, 0.98),
-            rgba(231, 238, 247, 0.96)
+            rgba(245, 248, 252, 0.97),
+            rgba(224, 234, 245, 0.96)
         );
-
 }
 
 
-.fondo-institucional::after {
+/* LOGO INSTITUCIONAL DE FONDO */
 
+.login-page::before {
     content: "";
 
-    position: absolute;
-
-    width: min(620px, 78vw);
-    height: min(620px, 78vw);
+    position: fixed;
 
     left: 50%;
     top: 50%;
@@ -187,2357 +151,2066 @@ img {
     transform:
         translate(-50%, -50%);
 
+    width: min(720px, 82vw);
+    height: min(720px, 82vw);
+
     background-image:
         url("../img/logo-ceta-transparente.png");
 
     background-repeat: no-repeat;
-
     background-position: center;
-
     background-size: contain;
 
-    opacity: 0.035;
+    opacity: 0.055;
 
+    pointer-events: none;
+
+    z-index: 0;
 }
 
 
 /* ============================================================
-   4. LOGIN
+   4. CONTENEDOR LOGIN
    ============================================================ */
 
-.login-page {
+.login-container {
+    position: relative;
 
-    min-height: 100vh;
-
-    display: flex;
-    flex-direction: column;
-
-}
-
-
-.login-contenedor {
+    z-index: 1;
 
     flex: 1;
 
+    width: 100%;
+
     display: flex;
 
-    justify-content: center;
     align-items: center;
+    justify-content: center;
 
     padding: 35px 18px;
-
 }
 
 
-.login-card {
+/* ============================================================
+   5. TARJETA LOGIN
+   ============================================================ */
 
+.login-card {
     width: 100%;
     max-width: 430px;
 
+    padding: 31px 32px 25px;
+
     background:
-        rgba(255, 255, 255, 0.96);
+        rgba(255, 255, 255, 0.95);
 
     border:
-        1px solid var(--color-borde);
+        1px solid rgba(199, 209, 220, 0.85);
 
     border-radius:
         var(--radio-grande);
 
-    padding:
-        32px;
-
     box-shadow:
-        var(--sombra-media);
+        var(--sombra-grande);
 
     backdrop-filter:
-        blur(6px);
-
+        blur(7px);
 }
 
+
+/* ============================================================
+   6. LOGO LOGIN
+   ============================================================ */
 
 .login-logo {
-
-    width: 115px;
+    width: 108px;
 
     margin:
-        0 auto 20px;
-
+        0 auto 17px;
 }
 
 
+.login-logo img {
+    width: 100%;
+    height: auto;
+
+    object-fit: contain;
+}
+
+
+/* ============================================================
+   7. TÍTULO LOGIN
+   ============================================================ */
+
 .login-titulo {
+    text-align: center;
+
+    margin-bottom: 24px;
+}
+
+
+.login-instituto {
+    margin-bottom: 4px;
+
+    color: var(--azul-claro);
+
+    font-size: 0.78rem;
+    font-weight: 800;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.08em;
+}
+
+
+.login-titulo h1 {
+    margin: 0;
 
     font-family:
         "Poppins",
         "Inter",
         sans-serif;
 
-    text-align: center;
+    color: var(--azul);
 
     font-size: 1.55rem;
-
-    color:
-        var(--color-principal);
-
-    margin-bottom:
-        5px;
-
+    line-height: 1.2;
 }
 
 
-.login-subtitulo {
-
-    text-align: center;
-
-    color:
-        var(--color-texto-secundario);
-
-    font-size:
-        0.92rem;
-
-    margin-bottom:
-        28px;
-
+.login-titulo h1 span {
+    display: block;
 }
 
+
+.login-descripcion {
+    max-width: 330px;
+
+    margin:
+        9px auto 0;
+
+    color: var(--texto-suave);
+
+    font-size: 0.82rem;
+    line-height: 1.45;
+}
+
+
+/* ============================================================
+   8. FORMULARIO LOGIN
+   ============================================================ */
 
 .login-form {
-
     display: flex;
-
     flex-direction: column;
 
-    gap: 17px;
-
+    gap: 16px;
 }
 
 
 .campo {
-
     display: flex;
-
     flex-direction: column;
 
     gap: 6px;
-
 }
 
 
 .campo label {
+    color: var(--texto);
 
-    font-size:
-        0.88rem;
-
-    font-weight:
-        700;
-
-    color:
-        var(--color-texto);
-
+    font-size: 0.81rem;
+    font-weight: 700;
 }
 
 
 .campo input,
 .campo select,
 .campo textarea {
+    min-height: 43px;
+
+    padding: 10px 12px;
 
     border:
-        1px solid var(--color-borde-fuerte);
+        1px solid var(--borde-fuerte);
 
-    border-radius:
-        var(--radio-pequeno);
+    border-radius: 8px;
 
-    background:
-        var(--color-superficie);
+    outline: none;
 
-    color:
-        var(--color-texto);
-
-    padding:
-        11px 12px;
-
-    outline:
-        none;
+    background: var(--superficie);
+    color: var(--texto);
 
     transition:
-        border-color var(--transicion),
-        box-shadow var(--transicion),
-        background var(--transicion);
-
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
 
 .campo textarea {
+    min-height: 110px;
 
-    min-height:
-        110px;
-
-    resize:
-        vertical;
-
+    resize: vertical;
 }
 
 
 .campo input:focus,
 .campo select:focus,
 .campo textarea:focus {
-
-    border-color:
-        var(--color-secundario);
+    border-color: var(--azul-claro);
 
     box-shadow:
-        0 0 0 3px
-        rgba(40, 117, 183, 0.13);
-
+        0 0 0 3px rgba(40, 117, 183, 0.12);
 }
 
 
-.password-contenedor {
+/* ============================================================
+   9. CONTRASEÑA
+   ============================================================ */
 
+.password-container {
     position: relative;
-
 }
 
 
-.password-contenedor input {
-
-    padding-right:
-        48px;
-
+.password-container input {
+    padding-right: 48px;
 }
 
 
 .btn-ver-password {
-
     position: absolute;
 
+    right: 5px;
     top: 50%;
-    right: 7px;
 
     transform:
         translateY(-50%);
 
-    width: 36px;
-    height: 36px;
+    width: 38px;
+    height: 34px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     border: 0;
 
-    background:
-        transparent;
+    border-radius: 7px;
 
-    border-radius:
-        7px;
+    background: transparent;
 
-    color:
-        var(--color-texto-secundario);
-
+    color: var(--texto-suave);
 }
 
 
 .btn-ver-password:hover {
-
-    background:
-        var(--color-superficie-secundaria);
-
+    background: var(--superficie-2);
 }
 
 
+/* ============================================================
+   10. BOTÓN LOGIN
+   ============================================================ */
+
 .btn-login {
+    min-height: 44px;
+
+    margin-top: 2px;
+
+    padding: 10px 16px;
 
     border: 0;
 
-    border-radius:
-        var(--radio-pequeno);
+    border-radius: 8px;
 
-    padding:
-        12px 18px;
+    background: var(--azul);
 
-    background:
-        var(--color-principal);
+    color: #ffffff;
 
-    color:
-        #ffffff;
-
-    font-weight:
-        800;
+    font-weight: 800;
 
     transition:
-        background var(--transicion),
-        transform var(--transicion);
-
+        background 0.2s ease,
+        transform 0.1s ease;
 }
 
 
 .btn-login:hover {
-
-    background:
-        var(--color-principal-claro);
-
+    background: var(--azul-claro);
 }
 
 
 .btn-login:active {
-
-    transform:
-        scale(0.99);
-
-}
-
-
-.login-mensaje {
-
-    min-height:
-        22px;
-
-    text-align:
-        center;
-
-    font-size:
-        0.88rem;
-
-    font-weight:
-        600;
-
-    color:
-        var(--color-error);
-
+    transform: scale(0.99);
 }
 
 
 /* ============================================================
-   5. PANEL ADMINISTRADOR
+   11. MENSAJE LOGIN
+   ============================================================ */
+
+.mensaje-login {
+    min-height: 20px;
+
+    text-align: center;
+
+    color: var(--rojo);
+
+    font-size: 0.79rem;
+    font-weight: 650;
+}
+
+
+/* ============================================================
+   12. FOOTER INTERNO LOGIN
+   ============================================================ */
+
+.login-footer {
+    margin-top: 22px;
+
+    padding-top: 17px;
+
+    border-top:
+        1px solid var(--borde);
+
+    text-align: center;
+}
+
+
+.login-footer p {
+    color: var(--texto);
+
+    font-size: 0.73rem;
+    font-weight: 700;
+}
+
+
+.login-footer span {
+    display: block;
+
+    margin-top: 3px;
+
+    color: var(--texto-suave);
+
+    font-size: 0.67rem;
+}
+
+
+/* ============================================================
+   13. FOOTER DESARROLLADOR LOGIN
+   ============================================================ */
+
+.footer-desarrollador {
+    position: relative;
+
+    z-index: 1;
+
+    padding: 14px 15px;
+
+    text-align: center;
+
+    color: var(--texto-suave);
+
+    font-size: 0.7rem;
+}
+
+
+/* ============================================================
+   14. FONDO INSTITUCIONAL PANEL
+   ============================================================ */
+
+.fondo-institucional {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: -2;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(245, 248, 252, 0.98),
+            rgba(230, 237, 246, 0.97)
+        );
+
+    pointer-events: none;
+}
+
+
+.fondo-institucional::after {
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    width: min(700px, 75vw);
+    height: min(700px, 75vw);
+
+    background-image:
+        url("../img/logo-ceta-transparente.png");
+
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+
+    opacity: 0.035;
+}
+
+
+/* ============================================================
+   15. PANEL ADMINISTRADOR
    ============================================================ */
 
 .admin-page {
-
     min-height: 100vh;
 
     display: flex;
-
     flex-direction: column;
 
+    background: transparent;
 }
 
 
 /* ============================================================
-   6. ENCABEZADO DEL PANEL
+   16. CABECERA PRINCIPAL REAL DEL ADMIN.HTML
    ============================================================ */
 
-.encabezado-panel {
-
+.cabecera-principal {
     position: relative;
 
     z-index: 20;
 
+    width: 100%;
+
     background:
-        rgba(255, 255, 255, 0.97);
+        rgba(255, 255, 255, 0.96);
 
     border-bottom:
-        1px solid var(--color-borde);
+        1px solid var(--borde);
 
     box-shadow:
         0 2px 12px rgba(15, 39, 65, 0.06);
 
+    backdrop-filter:
+        blur(8px);
 }
 
 
-.encabezado-contenido {
+.cabecera-contenido {
+    width:
+        min(1450px, calc(100% - 32px));
 
-    width: min(1500px, calc(100% - 32px));
+    min-height: 78px;
 
-    min-height:
-        78px;
-
-    margin:
-        0 auto;
+    margin: 0 auto;
 
     display: flex;
 
     align-items: center;
-
     justify-content: space-between;
 
-    gap:
-        20px;
-
+    gap: 20px;
 }
 
 
-.marca-panel {
+/* ============================================================
+   17. MARCA CETA
+   ============================================================ */
 
+.marca-ceta {
     display: flex;
 
     align-items: center;
 
-    gap:
-        14px;
+    gap: 13px;
 
+    min-width: 0;
 }
 
 
-.logo-panel {
+/* ESTE ES EL LOGO QUE ANTES APARECÍA GIGANTE */
 
-    width:
-        60px;
+.marca-logo {
+    width: 58px;
+    height: 58px;
 
-    height:
-        60px;
-
-    object-fit:
-        contain;
-
-}
-
-
-.marca-textos {
+    flex:
+        0 0 58px;
 
     display: flex;
 
-    flex-direction: column;
-
+    align-items: center;
+    justify-content: center;
 }
 
 
-.marca-textos h1 {
+.marca-logo img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+}
+
+
+.marca-texto {
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+}
+
+
+.marca-instituto {
+    color: var(--azul-claro);
+
+    font-size: 0.68rem;
+    font-weight: 800;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.06em;
+}
+
+
+.marca-texto h1 {
+    margin: 1px 0;
+
+    color: var(--azul);
 
     font-family:
         "Poppins",
         "Inter",
         sans-serif;
 
-    font-size:
-        1.08rem;
-
-    line-height:
-        1.25;
-
-    color:
-        var(--color-principal);
-
+    font-size: 1.05rem;
+    line-height: 1.25;
 }
 
 
-.marca-textos span {
+.marca-panel {
+    color: var(--texto-suave);
 
-    margin-top:
-        3px;
-
-    font-size:
-        0.82rem;
-
-    color:
-        var(--color-texto-secundario);
-
+    font-size: 0.7rem;
 }
 
 
-.usuario-panel {
+/* ============================================================
+   18. USUARIO ADMINISTRADOR
+   ============================================================ */
 
+.cabecera-usuario {
     display: flex;
 
     align-items: center;
 
-    gap:
-        12px;
+    gap: 12px;
 
+    flex:
+        0 0 auto;
 }
 
 
-.usuario-datos {
-
-    text-align: right;
-
+.datos-usuario {
     display: flex;
-
     flex-direction: column;
 
+    text-align: right;
 }
 
 
-.usuario-datos small {
+.usuario-etiqueta {
+    color: var(--texto-suave);
 
-    color:
-        var(--color-texto-secundario);
-
-    font-size:
-        0.73rem;
-
+    font-size: 0.65rem;
 }
 
 
 #nombreAdministrador {
+    color: var(--texto);
 
-    font-size:
-        0.9rem;
-
-    font-weight:
-        800;
-
+    font-size: 0.82rem;
 }
 
 
 /* ============================================================
-   7. BOTÓN CERRAR SESIÓN
+   19. CERRAR SESIÓN
    ============================================================ */
 
 .btn-cerrar-sesion {
+    min-height: 38px;
+
+    padding: 8px 12px;
 
     border:
-        1px solid var(--color-borde-fuerte);
+        1px solid var(--borde-fuerte);
 
-    background:
-        var(--color-superficie);
+    border-radius: 8px;
 
-    color:
-        var(--color-principal);
+    background: var(--superficie);
 
-    padding:
-        9px 13px;
+    color: var(--azul);
 
-    border-radius:
-        var(--radio-pequeno);
-
-    font-weight:
-        700;
+    font-size: 0.78rem;
+    font-weight: 750;
 
     transition:
-        background var(--transicion),
-        border-color var(--transicion),
-        color var(--transicion);
-
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease;
 }
 
 
 .btn-cerrar-sesion:hover {
-
-    background:
-        var(--color-error-fondo);
+    background: var(--rojo-fondo);
 
     border-color:
         rgba(192, 57, 43, 0.35);
 
-    color:
-        var(--color-error);
-
+    color: var(--rojo);
 }
 
 
 /* ============================================================
-   8. NAVEGACIÓN PRINCIPAL
+   20. NAVEGACIÓN DEL PANEL
    ============================================================ */
 
 .navegacion-panel {
-
     position: sticky;
 
     top: 0;
 
     z-index: 15;
 
+    width: 100%;
+
     background:
         rgba(255, 255, 255, 0.96);
 
     border-bottom:
-        1px solid var(--color-borde);
+        1px solid var(--borde);
 
     backdrop-filter:
         blur(8px);
-
 }
 
 
 .navegacion-contenido {
-
     width:
-        min(1500px, calc(100% - 32px));
+        min(1450px, calc(100% - 32px));
 
-    margin:
-        0 auto;
+    min-height: 57px;
+
+    margin: 0 auto;
 
     display: flex;
 
     align-items: center;
 
-    gap:
-        5px;
+    justify-content: center;
 
-    overflow-x:
-        auto;
+    gap: 6px;
 
-    scrollbar-width:
-        thin;
+    padding: 7px 0;
 
-    padding:
-        7px 0;
-
+    overflow-x: auto;
 }
 
 
+/* ============================================================
+   21. BOTONES DE PESTAÑAS
+   ============================================================ */
+
 .btn-tab {
-
-    position: relative;
-
     flex:
         0 0 auto;
 
+    min-height: 40px;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 6px;
+
+    padding: 8px 13px;
+
     border: 0;
 
-    background:
-        transparent;
+    border-radius: 8px;
 
-    color:
-        var(--color-texto-secundario);
+    background: transparent;
 
-    padding:
-        10px 14px;
+    color: var(--texto-suave);
 
-    border-radius:
-        var(--radio-pequeno);
+    font-size: 0.79rem;
+    font-weight: 750;
 
-    font-size:
-        0.88rem;
-
-    font-weight:
-        750;
-
-    white-space:
-        nowrap;
+    white-space: nowrap;
 
     transition:
-        background var(--transicion),
-        color var(--transicion);
-
+        background 0.2s ease,
+        color 0.2s ease;
 }
 
 
 .btn-tab:hover {
+    background: var(--superficie-2);
 
-    background:
-        var(--color-superficie-secundaria);
-
-    color:
-        var(--color-principal);
-
+    color: var(--azul);
 }
 
 
 .btn-tab.activo {
+    background: var(--azul);
 
-    background:
-        var(--color-principal);
+    color: #ffffff;
+}
 
-    color:
-        #ffffff;
 
+.tab-icono {
+    font-size: 0.92rem;
 }
 
 
 /* ============================================================
-   9. CONTADOR DE OBSERVACIONES
+   22. CONTADOR OBSERVACIONES
    ============================================================ */
 
-#contadorObservaciones {
+.contador-tab {
+    min-width: 20px;
+    height: 20px;
 
-    display:
-        inline-flex;
+    display: inline-flex;
 
-    align-items:
-        center;
+    align-items: center;
+    justify-content: center;
 
-    justify-content:
-        center;
+    padding: 0 5px;
 
-    min-width:
-        21px;
+    border-radius: 20px;
 
-    height:
-        21px;
+    background: var(--rojo);
 
-    margin-left:
-        5px;
+    color: #ffffff;
 
-    padding:
-        0 5px;
-
-    border-radius:
-        20px;
-
-    background:
-        var(--color-error);
-
-    color:
-        #ffffff;
-
-    font-size:
-        0.7rem;
-
-    font-weight:
-        800;
-
+    font-size: 0.64rem;
+    font-weight: 800;
 }
 
 
-.btn-tab.activo
-#contadorObservaciones {
+.btn-tab.activo .contador-tab {
+    background: #ffffff;
 
-    background:
-        #ffffff;
-
-    color:
-        var(--color-error);
-
+    color: var(--rojo);
 }
 
 
 /* ============================================================
-   10. BOTÓN MODO OSCURO
+   23. BOTÓN MODO OSCURO
    ============================================================ */
 
+.btn-modo,
 #btnModoOscuro {
+    flex:
+        0 0 40px;
 
-    margin-left:
-        auto;
+    width: 40px;
+    height: 40px;
 
-    width:
-        42px;
+    margin-left: 8px;
 
-    min-width:
-        42px;
+    display: inline-flex;
 
-    height:
-        40px;
-
-    display:
-        inline-flex;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
+    align-items: center;
+    justify-content: center;
 
     border:
-        1px solid var(--color-borde);
+        1px solid var(--borde-fuerte);
 
-    border-radius:
-        var(--radio-pequeno);
+    border-radius: 8px;
 
-    background:
-        var(--color-superficie);
+    background: var(--superficie);
 
-    font-size:
-        1rem;
+    color: var(--texto);
+
+    font-size: 1rem;
 
     transition:
-        background var(--transicion),
-        transform var(--transicion);
-
+        background 0.2s ease,
+        transform 0.2s ease;
 }
 
 
+.btn-modo:hover,
 #btnModoOscuro:hover {
+    background: var(--superficie-2);
 
-    background:
-        var(--color-superficie-secundaria);
-
-    transform:
-        translateY(-1px);
-
+    transform: translateY(-1px);
 }
 
 
 /* ============================================================
-   11. CONTENIDO PRINCIPAL
+   24. CONTENIDO PRINCIPAL
    ============================================================ */
 
 .contenido-principal {
-
     flex: 1;
 
     width:
-        min(1500px, calc(100% - 32px));
+        min(1450px, calc(100% - 32px));
 
-    margin:
-        0 auto;
+    margin: 0 auto;
 
     padding:
-        24px 0 42px;
-
+        25px 0 42px;
 }
 
 
+/* ============================================================
+   25. PESTAÑAS
+   ============================================================ */
+
 .seccion-tab {
+    display: none;
 
-    display:
-        none;
-
+    width: 100%;
 }
 
 
 .seccion-tab.activa {
-
-    display:
-        block;
-
+    display: block;
 }
 
 
+/* ============================================================
+   26. ENCABEZADO DE SECCIONES
+   ============================================================ */
+
 .encabezado-seccion {
+    width: 100%;
 
     display: flex;
 
     align-items: flex-start;
-
     justify-content: space-between;
 
-    gap:
-        18px;
+    gap: 18px;
 
-    margin-bottom:
-        20px;
+    margin-bottom: 19px;
+}
 
+
+.encabezado-seccion > div {
+    width: 100%;
+}
+
+
+.seccion-etiqueta {
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: var(--azul-claro);
+
+    font-size: 0.68rem;
+    font-weight: 800;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.055em;
 }
 
 
 .encabezado-seccion h2 {
+    margin: 0;
+
+    color: var(--azul);
 
     font-family:
         "Poppins",
         "Inter",
         sans-serif;
 
-    color:
-        var(--color-principal);
-
-    font-size:
-        1.35rem;
-
+    font-size: 1.35rem;
+    line-height: 1.3;
 }
 
 
 .encabezado-seccion p {
+    max-width: 750px;
 
-    margin-top:
-        4px;
+    margin-top: 4px;
 
-    color:
-        var(--color-texto-secundario);
+    color: var(--texto-suave);
 
-    font-size:
-        0.9rem;
-
+    font-size: 0.83rem;
 }
 
 
 /* ============================================================
-   12. TARJETAS GENERALES
+   27. PANELES
    ============================================================ */
 
-.tarjeta {
+.panel {
+    width: 100%;
+
+    padding: 19px;
 
     background:
         rgba(255, 255, 255, 0.96);
 
     border:
-        1px solid var(--color-borde);
+        1px solid var(--borde);
 
-    border-radius:
-        var(--radio-medio);
+    border-radius: var(--radio);
 
-    box-shadow:
-        var(--sombra-suave);
-
-    padding:
-        20px;
-
+    box-shadow: var(--sombra);
 }
 
 
-.tarjeta + .tarjeta {
-
-    margin-top:
-        20px;
-
+.panel + .panel {
+    margin-top: 18px;
 }
 
 
-.tarjeta-titulo {
-
+.panel-cabecera {
     display: flex;
 
-    align-items: center;
-
+    align-items: flex-start;
     justify-content: space-between;
 
-    gap:
-        12px;
+    gap: 15px;
 
-    margin-bottom:
-        16px;
-
+    margin-bottom: 16px;
 }
 
 
-.tarjeta-titulo h3 {
+.panel-cabecera h3 {
+    color: var(--azul);
 
     font-family:
         "Poppins",
         "Inter",
         sans-serif;
 
-    font-size:
-        1rem;
-
-    color:
-        var(--color-principal);
-
+    font-size: 0.98rem;
 }
 
 
-.tarjeta-titulo p {
+.panel-cabecera p {
+    max-width: 650px;
 
-    color:
-        var(--color-texto-secundario);
+    margin-top: 3px;
 
-    font-size:
-        0.84rem;
+    color: var(--texto-suave);
 
+    font-size: 0.78rem;
 }
 
 
 /* ============================================================
-   13. BOTONES GENERALES
+   28. BOTONES GENERALES REALES
    ============================================================ */
 
-.btn-principal,
+.btn-primario,
 .btn-secundario,
-.btn-peligro,
-.btn-peligro-suave {
+.btn-peligro {
+    min-height: 39px;
 
-    display:
-        inline-flex;
+    display: inline-flex;
 
-    align-items:
-        center;
+    align-items: center;
+    justify-content: center;
 
-    justify-content:
-        center;
+    gap: 6px;
 
-    gap:
-        6px;
+    padding: 8px 13px;
 
-    min-height:
-        39px;
+    border-radius: 8px;
 
-    padding:
-        8px 14px;
-
-    border-radius:
-        var(--radio-pequeno);
-
-    font-weight:
-        750;
-
-    font-size:
-        0.86rem;
+    font-size: 0.79rem;
+    font-weight: 750;
 
     transition:
-        background var(--transicion),
-        color var(--transicion),
-        border-color var(--transicion),
-        transform var(--transicion);
-
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.1s ease;
 }
 
 
-.btn-principal {
-
+.btn-primario {
     border:
-        1px solid var(--color-principal);
+        1px solid var(--azul);
 
-    background:
-        var(--color-principal);
+    background: var(--azul);
 
-    color:
-        #ffffff;
-
+    color: #ffffff;
 }
 
 
-.btn-principal:hover {
+.btn-primario:hover {
+    border-color: var(--azul-claro);
 
-    background:
-        var(--color-principal-claro);
-
-    border-color:
-        var(--color-principal-claro);
-
+    background: var(--azul-claro);
 }
 
 
 .btn-secundario {
-
     border:
-        1px solid var(--color-borde-fuerte);
+        1px solid var(--borde-fuerte);
 
-    background:
-        var(--color-superficie);
+    background: var(--superficie);
 
-    color:
-        var(--color-principal);
-
+    color: var(--azul);
 }
 
 
 .btn-secundario:hover {
+    border-color: var(--azul-claro);
 
-    border-color:
-        var(--color-secundario);
-
-    background:
-        #f0f6fb;
-
+    background: #eef6fc;
 }
 
 
 .btn-peligro {
-
     border:
-        1px solid var(--color-error);
+        1px solid var(--rojo);
 
-    background:
-        var(--color-error);
+    background: var(--rojo);
 
-    color:
-        #ffffff;
-
+    color: #ffffff;
 }
 
 
 .btn-peligro:hover {
-
-    filter:
-        brightness(0.93);
-
-}
-
-
-.btn-peligro-suave {
-
-    border:
-        1px solid rgba(192, 57, 43, 0.25);
-
-    background:
-        var(--color-error-fondo);
-
-    color:
-        var(--color-error);
-
-}
-
-
-.btn-peligro-suave:hover {
-
-    border-color:
-        var(--color-error);
-
+    filter: brightness(0.94);
 }
 
 
 /* ============================================================
-   14. FORMULARIOS GENERALES DEL PANEL
+   29. FORMULARIOS DE PANEL
    ============================================================ */
 
-.form-grid {
+.formulario-panel {
+    display: flex;
 
+    flex-direction: column;
+
+    gap: 15px;
+}
+
+
+.grid-formulario {
     display: grid;
 
     grid-template-columns:
         repeat(2, minmax(0, 1fr));
 
-    gap:
-        16px;
-
+    gap: 14px;
 }
 
 
-.form-grid-3 {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, minmax(0, 1fr));
-
-    gap:
-        16px;
-
-}
-
-
-.form-grid-4 {
-
-    display: grid;
-
+.grid-formulario.grid-cuatro {
     grid-template-columns:
         repeat(4, minmax(0, 1fr));
-
-    gap:
-        16px;
-
 }
 
 
-.grupo-formulario {
+.grid-dos-columnas {
+    display: grid;
 
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 18px;
+
+    margin-bottom: 18px;
+}
+
+
+.acciones-formulario,
+.acciones-inline {
     display: flex;
 
-    flex-direction: column;
+    align-items: center;
 
-    gap:
-        6px;
+    flex-wrap: wrap;
 
-}
-
-
-.grupo-formulario label {
-
-    color:
-        var(--color-texto);
-
-    font-size:
-        0.82rem;
-
-    font-weight:
-        750;
-
-}
-
-
-.grupo-formulario input,
-.grupo-formulario select,
-.grupo-formulario textarea {
-
-    min-height:
-        42px;
-
-    border:
-        1px solid var(--color-borde-fuerte);
-
-    border-radius:
-        var(--radio-pequeno);
-
-    padding:
-        9px 11px;
-
-    background:
-        var(--color-superficie);
-
-    color:
-        var(--color-texto);
-
-    outline:
-        none;
-
-    transition:
-        border-color var(--transicion),
-        box-shadow var(--transicion);
-
-}
-
-
-.grupo-formulario textarea {
-
-    min-height:
-        110px;
-
-    resize:
-        vertical;
-
-}
-
-
-.grupo-formulario input:focus,
-.grupo-formulario select:focus,
-.grupo-formulario textarea:focus {
-
-    border-color:
-        var(--color-secundario);
-
-    box-shadow:
-        0 0 0 3px
-        rgba(40, 117, 183, 0.12);
-
+    gap: 8px;
 }
 
 
 .acciones-formulario {
-
-    display: flex;
-
-    align-items: center;
-
     justify-content: flex-end;
-
-    gap:
-        10px;
-
-    margin-top:
-        18px;
-
 }
 
 
 /* ============================================================
-   15. MENSAJES DE FORMULARIO
+   30. MENSAJES
    ============================================================ */
 
 .mensaje-formulario {
+    min-height: 18px;
 
-    min-height:
-        20px;
-
-    margin-top:
-        10px;
-
-    font-size:
-        0.84rem;
-
-    font-weight:
-        650;
-
+    font-size: 0.77rem;
+    font-weight: 650;
 }
 
 
 .mensaje-formulario:empty {
-
-    display:
-        none;
-
+    display: none;
 }
 
 
 .mensaje-error {
-
-    color:
-        var(--color-error);
-
+    color: var(--rojo);
 }
 
 
 .mensaje-exito {
-
-    color:
-        var(--color-exito);
-
-}
-
-
-/* ============================================================
-   16. CLASES AUXILIARES
-   ============================================================ */
-
-.oculto {
-
-    display:
-        none !important;
-
-}
-
-
-.texto-secundario {
-
-    color:
-        var(--color-texto-secundario);
-
-    font-size:
-        0.82rem;
-
-}
-
-
-.estado-vacio {
-
-    padding:
-        28px 18px;
-
-    text-align:
-        center;
-
-    color:
-        var(--color-texto-secundario);
-
-    background:
-        var(--color-superficie-secundaria);
-
-    border:
-        1px dashed var(--color-borde-fuerte);
-
-    border-radius:
-        var(--radio-medio);
-
-}
-
-
-.estado-error {
-
-    color:
-        var(--color-error);
-
-    background:
-        var(--color-error-fondo);
-
-    border-color:
-        rgba(192, 57, 43, 0.25);
-
+    color: var(--verde);
 }
 /* ============================================================
-   17. CONTROL DE SEMANA
+   31. PANEL SELECTOR DE SEMANA
    ============================================================ */
 
-.controles-semana {
-
+.panel-semana {
     display: flex;
-
     align-items: center;
-
     justify-content: space-between;
 
-    flex-wrap: wrap;
+    gap: 16px;
 
-    gap: 14px;
-
-    margin-bottom: 20px;
-
-    padding: 16px;
-
-    background:
-        rgba(255, 255, 255, 0.96);
-
-    border:
-        1px solid var(--color-borde);
-
-    border-radius:
-        var(--radio-medio);
-
-    box-shadow:
-        var(--sombra-suave);
-
+    margin-bottom: 14px;
 }
 
 
 .selector-semana {
+    flex: 1;
 
     display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 16px;
+}
+
+
+.semana-centro {
+    min-width: 260px;
+
+    display: flex;
+    flex-direction: column;
 
     align-items: center;
+    justify-content: center;
 
-    gap: 8px;
+    gap: 4px;
 
-    flex-wrap: wrap;
-
+    text-align: center;
 }
 
 
-.selector-semana input[type="date"] {
+.semana-centro label {
+    color: var(--texto-suave);
 
-    width: auto;
+    font-size: 0.68rem;
+    font-weight: 700;
 
-    min-height: 40px;
+    text-transform: uppercase;
 
-    padding: 8px 10px;
+    letter-spacing: 0.04em;
+}
+
+
+.semana-centro input[type="date"] {
+    width: 170px;
+
+    min-height: 37px;
+
+    padding: 7px 9px;
 
     border:
-        1px solid var(--color-borde-fuerte);
+        1px solid var(--borde-fuerte);
 
-    border-radius:
-        var(--radio-pequeno);
+    border-radius: 7px;
 
-    background:
-        var(--color-superficie);
-
-    color:
-        var(--color-texto);
+    background: var(--superficie);
+    color: var(--texto);
 
     outline: none;
-
 }
 
 
-.selector-semana input[type="date"]:focus {
-
-    border-color:
-        var(--color-secundario);
+.semana-centro input[type="date"]:focus {
+    border-color: var(--azul-claro);
 
     box-shadow:
-        0 0 0 3px
-        rgba(40, 117, 183, 0.12);
-
+        0 0 0 3px rgba(40, 117, 183, 0.1);
 }
 
 
 #textoSemana {
+    margin-top: 2px;
 
-    font-size: 0.9rem;
+    color: var(--azul);
 
-    font-weight: 750;
+    font-size: 0.77rem;
+    font-weight: 800;
+}
 
-    color:
-        var(--color-principal);
 
+.btn-semana {
+    white-space: nowrap;
 }
 
 
 .acciones-semana {
-
     display: flex;
-
     align-items: center;
 
     flex-wrap: wrap;
 
     gap: 8px;
-
 }
 
 
 /* ============================================================
-   18. BOTONES DE NAVEGACIÓN DE SEMANA
+   32. LEYENDA
    ============================================================ */
 
-.btn-semana {
+.leyenda-disponibilidad {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    min-height: 39px;
+    flex-wrap: wrap;
+
+    gap: 18px;
+
+    margin:
+        4px 0 16px;
 
     padding: 8px 12px;
-
-    border:
-        1px solid var(--color-borde-fuerte);
-
-    border-radius:
-        var(--radio-pequeno);
-
-    background:
-        var(--color-superficie);
-
-    color:
-        var(--color-principal);
-
-    font-size: 0.84rem;
-
-    font-weight: 750;
-
-    transition:
-        background var(--transicion),
-        border-color var(--transicion),
-        transform var(--transicion);
-
 }
 
 
-.btn-semana:hover {
+.leyenda-item {
+    display: inline-flex;
 
-    background:
-        #f0f6fb;
+    align-items: center;
 
-    border-color:
-        var(--color-secundario);
+    gap: 7px;
 
+    color: var(--texto-suave);
+
+    font-size: 0.73rem;
+    font-weight: 650;
 }
 
 
-.btn-semana:active {
+.indicador {
+    width: 11px;
+    height: 11px;
 
-    transform:
-        scale(0.98);
+    flex:
+        0 0 11px;
 
+    border-radius: 50%;
+}
+
+
+.indicador-libre {
+    background: var(--verde);
+
+    box-shadow:
+        0 0 0 3px rgba(25, 135, 84, 0.12);
+}
+
+
+.indicador-reserva {
+    background: var(--rojo);
+
+    box-shadow:
+        0 0 0 3px rgba(192, 57, 43, 0.11);
+}
+
+
+.indicador-asignacion {
+    background: var(--morado);
+
+    box-shadow:
+        0 0 0 3px rgba(118, 83, 166, 0.12);
 }
 
 
 /* ============================================================
-   19. BLOQUES DE HORARIO
+   33. BLOQUES DE HORARIO
    ============================================================ */
 
 .bloque-horario {
+    width: 100%;
 
-    margin-bottom: 22px;
+    margin-bottom: 18px;
+
+    overflow: hidden;
 
     background:
         rgba(255, 255, 255, 0.96);
 
     border:
-        1px solid var(--color-borde);
+        1px solid var(--borde);
 
-    border-radius:
-        var(--radio-medio);
+    border-radius: var(--radio);
 
-    box-shadow:
-        var(--sombra-suave);
-
-    overflow: hidden;
-
+    box-shadow: var(--sombra);
 }
 
 
-.bloque-horario-cabecera {
+.titulo-horario {
+    padding: 13px 17px;
 
+    background: var(--superficie-2);
+
+    border-bottom:
+        1px solid var(--borde);
+}
+
+
+.titulo-horario > div {
     display: flex;
 
     align-items: center;
 
-    justify-content: space-between;
-
-    gap: 14px;
-
-    padding:
-        15px 18px;
-
-    background:
-        var(--color-superficie-secundaria);
-
-    border-bottom:
-        1px solid var(--color-borde);
-
+    gap: 10px;
 }
 
 
-.bloque-horario-cabecera h3 {
+.horario-icono {
+    width: 35px;
+    height: 35px;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex:
+        0 0 35px;
+
+    border-radius: 9px;
+
+    background: var(--superficie);
+
+    border:
+        1px solid var(--borde);
+
+    font-size: 1rem;
+}
+
+
+.titulo-horario h3 {
+    color: var(--azul);
 
     font-family:
         "Poppins",
         "Inter",
         sans-serif;
 
-    font-size:
-        1rem;
-
-    color:
-        var(--color-principal);
-
+    font-size: 0.91rem;
 }
 
 
-.bloque-horario-cabecera span {
+.titulo-horario h3 + span {
+    display: block;
 
-    color:
-        var(--color-texto-secundario);
+    margin-top: 1px;
 
-    font-size:
-        0.82rem;
+    color: var(--texto-suave);
 
+    font-size: 0.7rem;
 }
 
 
 /* ============================================================
-   20. CONTENEDOR DE TABLAS
+   34. CONTENEDOR RESPONSIVE DE TABLAS
    ============================================================ */
 
 .tabla-responsive {
-
     width: 100%;
 
     overflow-x: auto;
 
     scrollbar-width: thin;
 
+    scrollbar-color:
+        var(--borde-fuerte)
+        transparent;
 }
 
 
 .tabla-responsive::-webkit-scrollbar {
-
     height: 8px;
+}
 
+
+.tabla-responsive::-webkit-scrollbar-track {
+    background: transparent;
 }
 
 
 .tabla-responsive::-webkit-scrollbar-thumb {
-
-    background:
-        var(--color-borde-fuerte);
+    background: var(--borde-fuerte);
 
     border-radius: 20px;
-
 }
 
 
 /* ============================================================
-   21. TABLAS GENERALES
+   35. TABLA DE DISPONIBILIDAD REAL
    ============================================================ */
 
-.tabla-panel {
-
+.tabla-disponibilidad {
     width: 100%;
 
-    min-width: 760px;
-
-    border-collapse: collapse;
-
-    background:
-        var(--color-superficie);
-
-}
-
-
-.tabla-panel th,
-.tabla-panel td {
-
-    padding:
-        11px 12px;
-
-    border-bottom:
-        1px solid var(--color-borde);
-
-    vertical-align: middle;
-
-    text-align: left;
-
-    font-size:
-        0.82rem;
-
-}
-
-
-.tabla-panel thead th {
-
-    background:
-        var(--color-principal);
-
-    color:
-        #ffffff;
-
-    font-weight:
-        750;
-
-    position: relative;
-
-}
-
-
-.tabla-panel thead th span,
-.tabla-panel thead th small {
-
-    display: block;
-
-}
-
-
-.tabla-panel thead th small {
-
-    margin-top: 2px;
-
-    font-size:
-        0.69rem;
-
-    font-weight: 500;
-
-    opacity: 0.82;
-
-}
-
-
-.tabla-panel tbody tr:last-child td,
-.tabla-panel tbody tr:last-child th {
-
-    border-bottom: 0;
-
-}
-
-
-.tabla-panel tbody tr:hover {
-
-    background:
-        rgba(40, 117, 183, 0.025);
-
-}
-
-
-/* ============================================================
-   22. TABLA SEMANAL
-   ============================================================ */
-
-.tabla-semanal {
+    min-width: 940px;
 
     table-layout: fixed;
 
-    min-width: 1000px;
+    border-collapse: collapse;
 
+    background: var(--superficie);
 }
 
 
-.tabla-semanal thead th:first-child {
-
-    width: 190px;
-
-}
-
-
-.tabla-semanal thead th:not(:first-child) {
-
-    width: 160px;
-
-    text-align: center;
-
-}
-
-
-.tabla-semanal td {
-
-    text-align: center;
-
-    padding: 8px;
-
-}
-
-
-.celda-nombre-espacio {
-
-    position: sticky;
-
-    left: 0;
-
-    z-index: 4;
-
-    min-width: 190px;
-
-    background:
-        var(--color-superficie);
-
-    color:
-        var(--color-texto);
-
-    text-align: left !important;
+.tabla-disponibilidad th,
+.tabla-disponibilidad td {
+    padding: 9px;
 
     border-right:
-        1px solid var(--color-borde);
+        1px solid var(--borde);
 
+    border-bottom:
+        1px solid var(--borde);
+
+    text-align: center;
+
+    vertical-align: middle;
+
+    font-size: 0.75rem;
 }
 
 
-.tabla-semanal thead th:first-child {
+.tabla-disponibilidad th:last-child,
+.tabla-disponibilidad td:last-child {
+    border-right: 0;
+}
 
+
+.tabla-disponibilidad tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+
+.tabla-disponibilidad thead th {
+    padding:
+        10px 7px;
+
+    background: var(--azul);
+
+    color: #ffffff;
+
+    font-size: 0.72rem;
+    font-weight: 800;
+}
+
+
+.tabla-disponibilidad .columna-espacio {
+    width: 190px;
+
+    text-align: left;
+}
+
+
+/* ============================================================
+   36. PRIMERA COLUMNA FIJA
+   ============================================================ */
+
+.tabla-disponibilidad
+.columna-espacio {
     position: sticky;
 
     left: 0;
 
     z-index: 7;
 
-    background:
-        var(--color-principal);
-
+    background: var(--azul);
 }
 
 
-.celda-nombre-espacio {
+.tabla-disponibilidad
+tbody td:first-child {
+    position: sticky;
 
-    display: table-cell;
+    left: 0;
 
-}
+    z-index: 5;
 
+    width: 190px;
 
-.celda-nombre-espacio > div {
+    min-width: 190px;
 
-    display: inline-flex;
+    background: var(--superficie);
 
-    flex-direction: column;
+    text-align: left;
 
-    vertical-align: middle;
-
-}
-
-
-.espacio-icono-tabla {
-
-    display: inline-block;
-
-    margin-right: 8px;
-
-    font-size: 1.05rem;
-
-    vertical-align: middle;
-
-}
-
-
-.celda-nombre-espacio strong {
-
-    font-size: 0.84rem;
-
-}
-
-
-.celda-nombre-espacio small {
-
-    margin-top: 2px;
-
-    color:
-        var(--color-texto-secundario);
-
-    font-size: 0.7rem;
-
-    font-weight: 500;
-
+    box-shadow:
+        1px 0 0 var(--borde);
 }
 
 
 /* ============================================================
-   23. CELDAS DE DISPONIBILIDAD
+   37. NOMBRE DEL ESPACIO EN TABLA
+   ============================================================ */
+
+.celda-nombre-espacio {
+    color: var(--texto);
+
+    font-weight: 750;
+
+    line-height: 1.3;
+}
+
+
+.celda-nombre-espacio strong {
+    display: block;
+
+    color: var(--texto);
+
+    font-size: 0.77rem;
+}
+
+
+.celda-nombre-espacio small {
+    display: block;
+
+    margin-top: 2px;
+
+    color: var(--texto-suave);
+
+    font-size: 0.64rem;
+    font-weight: 500;
+}
+
+
+.espacio-icono-tabla {
+    display: inline-block;
+
+    margin-right: 5px;
+
+    font-size: 0.95rem;
+}
+
+
+/* ============================================================
+   38. CELDAS DE DISPONIBILIDAD
    ============================================================ */
 
 .celda-disponibilidad {
+    min-width: 140px;
 
-    min-width: 150px;
-
-    transition:
-        background var(--transicion);
-
+    padding: 7px !important;
 }
 
 
 .estado-disponibilidad {
-
-    min-height: 62px;
+    min-height: 61px;
 
     display: flex;
 
     flex-direction: column;
 
     align-items: center;
-
     justify-content: center;
 
     gap: 3px;
 
-    padding: 7px;
+    padding: 6px;
 
-    border-radius:
-        var(--radio-pequeno);
+    border-radius: 8px;
 
+    line-height: 1.2;
 }
 
 
 .estado-disponibilidad strong {
+    font-size: 0.68rem;
 
-    font-size: 0.73rem;
+    font-weight: 800;
 
-    letter-spacing: 0.015em;
-
+    letter-spacing: 0.01em;
 }
 
 
 .estado-disponibilidad small {
-
-    font-size: 0.67rem;
-
-    opacity: 0.85;
-
+    font-size: 0.62rem;
 }
 
 
 .docente-disponibilidad {
-
     display: block;
 
     max-width: 100%;
 
     margin-top: 2px;
 
-    font-size: 0.69rem;
-
+    font-size: 0.64rem;
     font-weight: 650;
 
-    line-height: 1.25;
+    line-height: 1.2;
 
     overflow-wrap: anywhere;
-
 }
 
 
 /* ============================================================
-   24. ESTADO LIBRE
+   39. LIBRE
    ============================================================ */
 
 .celda-libre
 .estado-disponibilidad {
-
-    background:
-        var(--color-libre-fondo);
+    background: var(--verde-fondo);
 
     border:
-        1px solid
-        rgba(25, 135, 84, 0.18);
+        1px solid rgba(25, 135, 84, 0.2);
 
-    color:
-        var(--color-libre);
-
-}
-
-
-.celda-libre:hover
-.estado-disponibilidad {
-
-    border-color:
-        rgba(25, 135, 84, 0.42);
-
+    color: var(--verde);
 }
 
 
 /* ============================================================
-   25. ESTADO RESERVADO
+   40. RESERVA PUNTUAL
    ============================================================ */
 
 .celda-reservada
 .estado-disponibilidad {
-
-    background:
-        var(--color-reservado-fondo);
+    background: var(--rojo-fondo);
 
     border:
-        1px solid
-        rgba(181, 75, 62, 0.22);
+        1px solid rgba(192, 57, 43, 0.2);
 
-    color:
-        var(--color-reservado);
-
+    color: var(--rojo);
 }
 
 
 /* ============================================================
-   26. ASIGNACIÓN FIJA
+   41. ASIGNACIÓN FIJA
    ============================================================ */
 
 .celda-asignacion
 .estado-disponibilidad {
-
-    background:
-        var(--color-asignacion-fondo);
+    background: var(--morado-fondo);
 
     border:
-        1px solid
-        rgba(118, 83, 166, 0.22);
+        1px solid rgba(118, 83, 166, 0.22);
 
-    color:
-        var(--color-asignacion);
-
+    color: var(--morado);
 }
 
 
 /* ============================================================
-   27. OCUPADO
+   42. OTRO ESTADO OCUPADO
    ============================================================ */
 
 .celda-ocupada
 .estado-disponibilidad {
-
-    background:
-        #f4f4f5;
+    background: #f0f2f5;
 
     border:
-        1px solid #dedee3;
+        1px solid #d9dde3;
 
-    color:
-        #52525b;
-
+    color: #5c6672;
 }
 
 
 /* ============================================================
-   28. SIN GESTIÓN
+   43. SIN GESTIÓN
    ============================================================ */
 
 .celda-sin-gestion
 .estado-disponibilidad {
-
-    background:
-        #f3f4f6;
+    background: #f5f6f8;
 
     border:
-        1px dashed #cbd0d8;
+        1px dashed #c8cfd7;
 
-    color:
-        #7a8491;
-
-}
-
-
-.celda-sin-gestion
-.estado-disponibilidad strong {
-
-    font-size: 0.69rem;
-
+    color: #7b8794;
 }
 
 
 /* ============================================================
-   29. TABLAS VACÍAS / CARGANDO / ERROR
+   44. TABLA CARGANDO / VACÍA / ERROR
    ============================================================ */
 
-.tabla-vacia,
 .tabla-cargando,
+.tabla-vacia,
 .tabla-error {
-
     padding:
-        28px 16px !important;
+        24px 15px !important;
 
     text-align:
         center !important;
 
     font-size:
-        0.84rem !important;
-
+        0.78rem !important;
 }
 
 
-.tabla-vacia,
-.tabla-cargando {
-
-    color:
-        var(--color-texto-secundario);
-
+.tabla-cargando,
+.tabla-vacia {
+    color: var(--texto-suave);
 }
 
 
 .tabla-error {
+    color: var(--rojo);
 
-    color:
-        var(--color-error);
-
-    background:
-        var(--color-error-fondo);
-
+    background: var(--rojo-fondo);
 }
 
 
 /* ============================================================
-   30. BADGES DE ESTADO
+   45. TABLAS GENERALES
    ============================================================ */
 
-.estado-badge {
-
-    display:
-        inline-flex;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
-
-    min-height:
-        25px;
-
-    padding:
-        4px 9px;
-
-    border-radius:
-        20px;
-
-    font-size:
-        0.69rem;
-
-    font-weight:
-        800;
-
-    white-space:
-        nowrap;
-
-}
-
-
-.estado-activo {
-
-    background:
-        var(--color-exito-fondo);
-
-    color:
-        var(--color-exito);
-
-}
-
-
-.estado-inactivo {
-
-    background:
-        #eef0f3;
-
-    color:
-        #667085;
-
-}
-
-
-.estado-reservado {
-
-    background:
-        var(--color-reservado-fondo);
-
-    color:
-        var(--color-reservado);
-
-}
-
-
-.estado-pendiente {
-
-    background:
-        var(--color-advertencia-fondo);
-
-    color:
-        #9a6500;
-
-}
-
-
-/* ============================================================
-   31. ACCIONES DE TABLAS
-   ============================================================ */
-
-.acciones-tabla {
-
-    display: flex;
-
-    align-items: center;
-
-    flex-wrap: wrap;
-
-    gap: 6px;
-
-}
-
-
-.btn-tabla {
-
-    min-height: 31px;
-
-    padding:
-        5px 9px;
-
-    border-radius:
-        6px;
-
-    font-size:
-        0.72rem;
-
-    font-weight:
-        750;
-
-    transition:
-        background var(--transicion),
-        border-color var(--transicion),
-        color var(--transicion);
-
-}
-
-
-.btn-tabla.btn-editar {
-
-    border:
-        1px solid
-        rgba(40, 117, 183, 0.3);
-
-    background:
-        #eef6fc;
-
-    color:
-        var(--color-secundario);
-
-}
-
-
-.btn-tabla.btn-editar:hover {
-
-    border-color:
-        var(--color-secundario);
-
-    background:
-        #e3f1fb;
-
-}
-
-
-.btn-tabla.btn-eliminar {
-
-    border:
-        1px solid
-        rgba(192, 57, 43, 0.25);
-
-    background:
-        var(--color-error-fondo);
-
-    color:
-        var(--color-error);
-
-}
-
-
-.btn-tabla.btn-eliminar:hover {
-
-    border-color:
-        var(--color-error);
-
-}
-
-
-/* ============================================================
-   32. TABLAS DE LISTADOS ADMINISTRATIVOS
-   ============================================================ */
-
-.tabla-listado {
-
+.tabla-general {
     width: 100%;
 
     min-width: 720px;
 
     border-collapse: collapse;
 
+    background: var(--superficie);
 }
 
 
-.tabla-listado th,
-.tabla-listado td {
-
+.tabla-general th,
+.tabla-general td {
     padding:
-        11px 12px;
+        10px 11px;
 
     border-bottom:
-        1px solid var(--color-borde);
+        1px solid var(--borde);
 
     text-align: left;
 
     vertical-align: middle;
 
-    font-size:
-        0.82rem;
-
+    font-size: 0.76rem;
 }
 
 
-.tabla-listado thead th {
+.tabla-general thead th {
+    background: var(--superficie-2);
 
-    background:
-        var(--color-superficie-secundaria);
+    color: var(--azul);
 
-    color:
-        var(--color-principal);
+    font-size: 0.7rem;
+    font-weight: 800;
 
-    font-size:
-        0.76rem;
+    text-transform: uppercase;
 
-    font-weight:
-        800;
+    letter-spacing: 0.025em;
 
     border-bottom:
-        1px solid var(--color-borde-fuerte);
-
+        1px solid var(--borde-fuerte);
 }
 
 
-.tabla-listado tbody tr:hover {
+.tabla-general tbody tr:last-child td {
+    border-bottom: 0;
+}
 
+
+.tabla-general tbody tr {
+    transition:
+        background 0.15s ease;
+}
+
+
+.tabla-general tbody tr:hover {
     background:
         rgba(40, 117, 183, 0.035);
-
 }
 
 
 /* ============================================================
-   33. CELDA TIPO DE ESPACIO
+   46. PANEL DE LISTADOS
    ============================================================ */
 
-.celda-tipo-espacio {
+.panel-listado {
+    margin-top: 18px;
 
+    padding: 0;
+
+    overflow: hidden;
+}
+
+
+.panel-listado
+.panel-cabecera {
+    margin: 0;
+
+    padding: 17px 19px;
+
+    border-bottom:
+        1px solid var(--borde);
+}
+
+
+/* ============================================================
+   47. BADGES DE ESTADO
+   ============================================================ */
+
+.estado-badge {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-height: 24px;
+
+    padding:
+        3px 8px;
+
+    border-radius: 20px;
+
+    font-size: 0.65rem;
+    font-weight: 800;
+
+    white-space: nowrap;
+}
+
+
+.estado-activo {
+    background: var(--verde-fondo);
+
+    color: var(--verde);
+}
+
+
+.estado-inactivo {
+    background: #edf0f3;
+
+    color: #697586;
+}
+
+
+.estado-reservado {
+    background: var(--rojo-fondo);
+
+    color: var(--rojo);
+}
+
+
+.estado-cancelado {
+    background: #edf0f3;
+
+    color: #697586;
+}
+
+
+.estado-pendiente {
+    background: var(--amarillo-fondo);
+
+    color: var(--amarillo);
+}
+
+
+.estado-atendida {
+    background: var(--verde-fondo);
+
+    color: var(--verde);
+}
+
+
+/* ============================================================
+   48. ACCIONES DE TABLA
+   ============================================================ */
+
+.acciones-tabla {
     display: flex;
 
     align-items: center;
 
-    gap: 7px;
+    flex-wrap: wrap;
 
+    gap: 5px;
 }
 
 
-.celda-tipo-espacio span {
+.btn-tabla {
+    min-height: 29px;
 
-    font-size: 1rem;
+    padding:
+        4px 8px;
 
+    border-radius: 6px;
+
+    font-size: 0.67rem;
+    font-weight: 750;
+}
+
+
+.btn-editar {
+    border:
+        1px solid rgba(40, 117, 183, 0.3);
+
+    background: #eef6fc;
+
+    color: var(--azul-claro);
+}
+
+
+.btn-editar:hover {
+    border-color: var(--azul-claro);
+}
+
+
+.btn-eliminar {
+    border:
+        1px solid rgba(192, 57, 43, 0.28);
+
+    background: var(--rojo-fondo);
+
+    color: var(--rojo);
+}
+
+
+.btn-eliminar:hover {
+    border-color: var(--rojo);
 }
 
 
 /* ============================================================
-   34. CONTADORES / RESÚMENES
+   49. TARJETAS DE RESUMEN REALES
    ============================================================ */
 
-.resumen-grid {
-
+.tarjetas-resumen {
     display: grid;
 
     grid-template-columns:
         repeat(3, minmax(0, 1fr));
 
-    gap: 14px;
-
-    margin-bottom: 20px;
-
+    gap: 11px;
 }
 
 
 .tarjeta-resumen {
+    min-width: 0;
 
-    background:
-        rgba(255, 255, 255, 0.96);
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 13px;
+
+    background: var(--superficie-2);
 
     border:
-        1px solid var(--color-borde);
+        1px solid var(--borde);
 
-    border-radius:
-        var(--radio-medio);
-
-    padding:
-        17px;
-
-    box-shadow:
-        var(--sombra-suave);
-
+    border-radius: 9px;
 }
 
 
-.tarjeta-resumen span {
+.resumen-icono {
+    width: 36px;
+    height: 36px;
 
+    flex:
+        0 0 36px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: var(--superficie);
+
+    border:
+        1px solid var(--borde);
+
+    border-radius: 8px;
+
+    font-size: 1rem;
+}
+
+
+.tarjeta-resumen > div {
+    min-width: 0;
+}
+
+
+.tarjeta-resumen > div > span {
     display: block;
 
-    color:
-        var(--color-texto-secundario);
+    color: var(--texto-suave);
 
-    font-size: 0.76rem;
-
+    font-size: 0.65rem;
     font-weight: 650;
-
 }
 
 
 .tarjeta-resumen strong {
-
     display: block;
 
-    margin-top: 4px;
+    margin-top: 1px;
 
-    color:
-        var(--color-principal);
+    color: var(--azul);
 
     font-family:
         "Poppins",
         "Inter",
         sans-serif;
 
-    font-size:
-        1.55rem;
-
+    font-size: 1.25rem;
 }
 
 
 /* ============================================================
-   35. FILTROS
+   50. PANEL INFORMACIÓN
    ============================================================ */
 
-.barra-filtros {
+.panel-informacion {
+    display: flex;
 
+    flex-direction: column;
+}
+
+
+.panel-informacion
+.tarjetas-resumen {
+    margin-top: auto;
+}
+
+
+/* ============================================================
+   51. FILTROS DE ASIGNACIONES
+   ============================================================ */
+
+.filtros-asignaciones,
+.filtros-observaciones {
     display: flex;
 
     align-items: flex-end;
@@ -2546,483 +2219,272 @@ img {
 
     gap: 12px;
 
-    margin-bottom: 16px;
+    padding:
+        14px 19px;
 
+    background: var(--superficie-2);
+
+    border-bottom:
+        1px solid var(--borde);
 }
 
 
-.filtro {
+.filtros-asignaciones
+.campo,
+.filtros-observaciones
+.campo {
+    min-width: 190px;
 
-    min-width: 180px;
-
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 5px;
-
-}
-
-
-.filtro label {
-
-    font-size: 0.74rem;
-
-    font-weight: 750;
-
-    color:
-        var(--color-texto-secundario);
-
-}
-
-
-.filtro select,
-.filtro input {
-
-    min-height: 38px;
-
-    padding: 7px 10px;
-
-    border:
-        1px solid var(--color-borde-fuerte);
-
-    border-radius:
-        var(--radio-pequeno);
-
-    background:
-        var(--color-superficie);
-
-    color:
-        var(--color-texto);
-
-    outline: none;
-
-}
-
-
-.filtro select:focus,
-.filtro input:focus {
-
-    border-color:
-        var(--color-secundario);
-
-    box-shadow:
-        0 0 0 3px
-        rgba(40, 117, 183, 0.1);
-
+    flex:
+        0 1 260px;
 }
 
 
 /* ============================================================
-   36. SEPARADORES Y SUBSECCIONES
+   52. GESTIÓN SELECCIONADA
    ============================================================ */
 
-.subseccion {
-
-    margin-top: 24px;
-
-}
-
-
-.subseccion-cabecera {
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    flex-wrap: wrap;
-
-    gap: 12px;
-
-    margin-bottom: 13px;
-
-}
-
-
-.subseccion-cabecera h3 {
-
-    color:
-        var(--color-principal);
-
-    font-family:
-        "Poppins",
-        "Inter",
-        sans-serif;
-
-    font-size: 1rem;
-
-}
-
-
-.subseccion-cabecera p {
-
-    color:
-        var(--color-texto-secundario);
-
-    font-size: 0.82rem;
-
-}
-
-
-/* ============================================================
-   37. GRUPOS DE ACCIONES
-   ============================================================ */
-
-.grupo-botones {
-
-    display: flex;
-
-    align-items: center;
-
-    flex-wrap: wrap;
-
-    gap: 8px;
-
-}
-
-
-/* ============================================================
-   38. TABLA DE RESERVAS ADMIN
-   ============================================================ */
-
-#tablaReservasAdmin td:first-child {
-
-    white-space: nowrap;
-
-}
-
-
-#tablaReservasAdmin td:nth-child(2) {
-
-    white-space: nowrap;
-
-}
-
-
-/* ============================================================
-   39. TABLA DE ASIGNACIONES
-   ============================================================ */
-
-#tablaAsignaciones td:nth-child(4),
-#tablaAsignaciones td:nth-child(5) {
-
-    white-space: nowrap;
-
-}
-
-
-/* ============================================================
-   40. EFECTO VISUAL DE TABLAS
-   ============================================================ */
-
-.tabla-panel tbody tr,
-.tabla-listado tbody tr {
-
-    transition:
-        background var(--transicion);
-
-}
-
-
-/* ============================================================
-   41. MEJORAR VISIBILIDAD DEL PRIMER CAMPO
-   ============================================================ */
-
-.tabla-panel tbody th {
-
-    font-weight: 600;
-
-}
-
-
-/* ============================================================
-   42. INDICADOR DE ESTADO EN CELDAS
-   ============================================================ */
-
-.celda-libre {
-
-    background:
-        rgba(25, 135, 84, 0.015);
-
-}
-
-
-.celda-reservada {
-
-    background:
-        rgba(181, 75, 62, 0.015);
-
-}
-
-
-.celda-asignacion {
-
-    background:
-        rgba(118, 83, 166, 0.015);
-
-}
-
-
-/* ============================================================
-   43. LEYENDA DE DISPONIBILIDAD
-   ============================================================ */
-
-.leyenda-disponibilidad {
-
-    display: flex;
-
-    align-items: center;
-
-    flex-wrap: wrap;
-
-    gap: 10px;
-
-    margin:
-        10px 0 18px;
-
-}
-
-
-.leyenda-item {
-
-    display: inline-flex;
-
-    align-items: center;
-
-    gap: 6px;
-
-    color:
-        var(--color-texto-secundario);
-
-    font-size: 0.75rem;
-
-}
-
-
-.leyenda-color {
-
-    width: 12px;
-    height: 12px;
-
-    border-radius: 4px;
-
-}
-
-
-.leyenda-libre {
-
-    background:
-        var(--color-libre-fondo);
-
-    border:
-        1px solid
-        rgba(25, 135, 84, 0.35);
-
-}
-
-
-.leyenda-reservada {
-
-    background:
-        var(--color-reservado-fondo);
-
-    border:
-        1px solid
-        rgba(181, 75, 62, 0.35);
-
-}
-
-
-.leyenda-asignacion {
-
-    background:
-        var(--color-asignacion-fondo);
-
-    border:
-        1px solid
-        rgba(118, 83, 166, 0.35);
-
-}
-/* ============================================================
-   44. INFORMACIÓN DE GESTIÓN SELECCIONADA
-   ============================================================ */
-
-#infoGestionSeleccionada {
-
-    margin-top: 14px;
-
+.info-gestion {
+    width: 100%;
 }
 
 
 .info-gestion-vacia {
-
-    padding: 16px;
-
-    color:
-        var(--color-texto-secundario);
-
-    background:
-        var(--color-superficie-secundaria);
+    padding: 13px;
 
     border:
-        1px dashed var(--color-borde-fuerte);
+        1px dashed var(--borde-fuerte);
 
-    border-radius:
-        var(--radio-pequeno);
+    border-radius: 8px;
+
+    background: var(--superficie-2);
+
+    color: var(--texto-suave);
 
     text-align: center;
 
-    font-size: 0.82rem;
-
+    font-size: 0.75rem;
 }
 
 
 .info-gestion-contenido {
-
     display: flex;
 
     align-items: center;
-
     justify-content: space-between;
 
-    flex-wrap: wrap;
+    gap: 14px;
 
-    gap: 16px;
+    padding: 13px;
 
-    padding: 16px;
-
-    background:
-        var(--color-superficie-secundaria);
+    background: var(--superficie-2);
 
     border:
-        1px solid var(--color-borde);
+        1px solid var(--borde);
 
-    border-radius:
-        var(--radio-medio);
-
+    border-radius: 8px;
 }
 
 
 .info-gestion-principal {
-
     display: flex;
 
     flex-direction: column;
-
-    gap: 2px;
-
 }
 
 
 .info-gestion-principal span,
 .info-gestion-fechas span {
+    color: var(--texto-suave);
 
-    color:
-        var(--color-texto-secundario);
-
-    font-size: 0.7rem;
-
-    font-weight: 650;
-
+    font-size: 0.63rem;
 }
 
 
 .info-gestion-principal strong {
+    color: var(--azul);
 
-    color:
-        var(--color-principal);
-
-    font-family:
-        "Poppins",
-        "Inter",
-        sans-serif;
-
-    font-size: 1rem;
-
+    font-size: 0.83rem;
 }
 
 
 .info-gestion-fechas {
-
     display: flex;
 
-    align-items: center;
-
-    gap: 22px;
-
+    gap: 18px;
 }
 
 
 .info-gestion-fechas > div {
-
     display: flex;
 
     flex-direction: column;
-
-    gap: 2px;
-
 }
 
 
 .info-gestion-fechas strong {
-
-    font-size: 0.8rem;
-
+    font-size: 0.73rem;
 }
 
 
 /* ============================================================
-   45. OBSERVACIONES
+   53. AVISO INFORMATIVO
    ============================================================ */
 
-#listaObservaciones {
+.aviso-informativo {
+    display: flex;
 
-    display: grid;
+    align-items: flex-start;
 
-    grid-template-columns:
-        repeat(
-            auto-fit,
-            minmax(310px, 1fr)
-        );
+    gap: 11px;
 
-    gap: 16px;
+    margin:
+        18px 0;
 
+    padding:
+        14px 16px;
+
+    background: #eef6fc;
+
+    border:
+        1px solid rgba(40, 117, 183, 0.2);
+
+    border-radius: var(--radio);
 }
 
 
-.tarjeta-observacion {
+.aviso-icono {
+    width: 32px;
+    height: 32px;
 
-    position: relative;
+    flex:
+        0 0 32px;
 
     display: flex;
 
-    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 
-    gap: 15px;
+    border-radius: 8px;
 
-    padding: 18px;
+    background: #ffffff;
 
-    background:
-        var(--color-superficie);
+    font-size: 0.95rem;
+}
+
+
+.aviso-informativo strong {
+    color: var(--azul);
+
+    font-size: 0.78rem;
+}
+
+
+.aviso-informativo p {
+    margin-top: 3px;
+
+    color: var(--texto-suave);
+
+    font-size: 0.74rem;
+
+    line-height: 1.5;
+}
+
+
+/* ============================================================
+   54. MENSAJE DE DOCENTE EN RESERVA
+   ============================================================ */
+
+.info-reserva-docente {
+    padding: 10px 12px;
+
+    background: var(--superficie-2);
 
     border:
-        1px solid var(--color-borde);
+        1px solid var(--borde);
 
-    border-radius:
-        var(--radio-medio);
+    border-radius: 8px;
 
-    box-shadow:
-        var(--sombra-suave);
+    color: var(--texto-suave);
+
+    font-size: 0.76rem;
+    font-weight: 650;
+}
+/* ============================================================
+   55. RESUMEN DE OBSERVACIONES
+   ============================================================ */
+
+.resumen-observaciones {
+    margin-bottom: 18px;
+}
+
+
+/* ============================================================
+   56. LISTA DE OBSERVACIONES
+   ============================================================ */
+
+.lista-observaciones,
+#listaObservaciones {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 14px;
+
+    margin-top: 18px;
+}
+
+
+.estado-vacio {
+    grid-column: 1 / -1;
+
+    padding: 30px 20px;
+
+    background:
+        rgba(255, 255, 255, 0.96);
+
+    border:
+        1px dashed var(--borde-fuerte);
+
+    border-radius: var(--radio);
+
+    color: var(--texto-suave);
+
+    text-align: center;
+
+    font-size: 0.78rem;
+}
+
+
+/* ============================================================
+   57. TARJETA DE OBSERVACIÓN
+   ============================================================ */
+
+.tarjeta-observacion {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 11px;
+
+    padding: 16px;
+
+    background: var(--superficie);
+
+    border:
+        1px solid var(--borde);
+
+    border-radius: var(--radio);
+
+    box-shadow: var(--sombra);
 
     overflow: hidden;
-
 }
 
 
 .tarjeta-observacion::before {
-
     content: "";
 
     position: absolute;
@@ -3033,263 +2495,191 @@ img {
 
     width: 4px;
 
+    background: var(--borde-fuerte);
 }
 
 
 .tarjeta-observacion.observacion-pendiente::before {
-
-    background:
-        var(--color-advertencia);
-
+    background: var(--amarillo);
 }
 
 
 .tarjeta-observacion.observacion-atendida::before {
-
-    background:
-        var(--color-exito);
-
+    background: var(--verde);
 }
 
 
 .observacion-cabecera {
-
     display: flex;
 
     align-items: flex-start;
-
     justify-content: space-between;
 
-    gap: 12px;
-
+    gap: 10px;
 }
 
 
 .observacion-titulo {
-
     display: flex;
 
     align-items: center;
 
-    gap: 10px;
+    gap: 8px;
 
     min-width: 0;
-
 }
 
 
 .observacion-icono {
+    width: 34px;
+    height: 34px;
 
     flex:
-        0 0 auto;
+        0 0 34px;
 
-    font-size: 1.25rem;
+    display: flex;
 
+    align-items: center;
+    justify-content: center;
+
+    background: var(--superficie-2);
+
+    border:
+        1px solid var(--borde);
+
+    border-radius: 8px;
+
+    font-size: 0.95rem;
 }
 
 
-.observacion-titulo > div {
+.observacion-titulo strong {
+    display: block;
 
-    min-width: 0;
+    color: var(--azul);
 
+    font-size: 0.8rem;
+
+    overflow-wrap: anywhere;
 }
 
 
 .observacion-tipo {
-
     display: block;
 
-    color:
-        var(--color-texto-secundario);
+    margin-top: 1px;
 
-    font-size: 0.68rem;
+    color: var(--texto-suave);
 
-    font-weight: 650;
-
-    text-transform: uppercase;
-
-    letter-spacing: 0.035em;
-
-}
-
-
-.observacion-titulo h3 {
-
-    margin-top: 2px;
-
-    color:
-        var(--color-principal);
-
-    font-family:
-        "Poppins",
-        "Inter",
-        sans-serif;
-
-    font-size: 0.95rem;
-
-    overflow-wrap: anywhere;
-
+    font-size: 0.64rem;
 }
 
 
 .observacion-datos {
-
     display: grid;
 
     grid-template-columns:
         repeat(2, minmax(0, 1fr));
 
-    gap: 10px;
+    gap: 8px 12px;
 
+    padding:
+        9px 0;
+
+    border-top:
+        1px solid var(--borde);
+
+    border-bottom:
+        1px solid var(--borde);
 }
 
 
 .observacion-datos > div {
-
-    padding: 10px;
-
-    background:
-        var(--color-superficie-secundaria);
-
-    border-radius:
-        var(--radio-pequeno);
-
+    min-width: 0;
 }
 
 
 .observacion-datos span {
-
     display: block;
 
-    color:
-        var(--color-texto-secundario);
+    color: var(--texto-suave);
 
-    font-size: 0.67rem;
-
+    font-size: 0.62rem;
 }
 
 
 .observacion-datos strong {
-
     display: block;
 
-    margin-top: 2px;
+    margin-top: 1px;
 
-    font-size: 0.77rem;
+    color: var(--texto);
+
+    font-size: 0.72rem;
 
     overflow-wrap: anywhere;
-
 }
 
 
 .observacion-contenido {
+    color: var(--texto);
 
-    padding-top: 2px;
-
-}
-
-
-.observacion-contenido > span {
-
-    display: block;
-
-    margin-bottom: 5px;
-
-    color:
-        var(--color-texto-secundario);
-
-    font-size: 0.7rem;
-
-    font-weight: 700;
-
-}
-
-
-.observacion-contenido p {
-
-    font-size: 0.84rem;
+    font-size: 0.75rem;
 
     line-height: 1.55;
 
-    white-space: pre-wrap;
-
     overflow-wrap: anywhere;
-
 }
 
 
 .respuesta-observacion {
+    padding: 10px 11px;
 
-    padding: 11px 12px;
+    background: var(--verde-fondo);
 
-    background:
-        #eef6fc;
+    border:
+        1px solid rgba(25, 135, 84, 0.16);
 
-    border-left:
-        3px solid var(--color-secundario);
+    border-radius: 8px;
 
-    border-radius:
-        0 var(--radio-pequeno)
-        var(--radio-pequeno) 0;
+    color: var(--texto);
 
+    font-size: 0.72rem;
+
+    line-height: 1.45;
 }
 
 
-.respuesta-observacion span {
-
+.respuesta-observacion strong {
     display: block;
 
-    margin-bottom: 4px;
+    margin-bottom: 3px;
 
-    color:
-        var(--color-secundario);
+    color: var(--verde);
 
-    font-size: 0.68rem;
-
-    font-weight: 800;
-
-}
-
-
-.respuesta-observacion p {
-
-    color:
-        var(--color-texto);
-
-    font-size: 0.8rem;
-
-    white-space: pre-wrap;
-
-    overflow-wrap: anywhere;
-
+    font-size: 0.67rem;
 }
 
 
 .observacion-acciones {
-
     display: flex;
 
     align-items: center;
-
     justify-content: flex-end;
 
     flex-wrap: wrap;
 
-    gap: 8px;
+    gap: 6px;
 
     margin-top: auto;
-
-    padding-top: 3px;
-
 }
 
 
 /* ============================================================
-   46. MODALES
+   58. MODALES - FONDO GENERAL
    ============================================================ */
 
 .modal {
-
     position: fixed;
 
     inset: 0;
@@ -3299,103 +2689,98 @@ img {
     display: none;
 
     align-items: center;
-
     justify-content: center;
 
     padding: 20px;
-
-    background:
-        rgba(8, 18, 31, 0.58);
-
-    backdrop-filter:
-        blur(3px);
-
 }
 
 
 .modal.abierto {
-
     display: flex;
-
 }
 
 
 body.modal-abierto {
-
     overflow: hidden;
-
 }
 
 
+.modal-fondo {
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        rgba(5, 18, 31, 0.58);
+
+    backdrop-filter:
+        blur(3px);
+}
+
+
+/* ============================================================
+   59. CONTENIDO MODAL
+   ============================================================ */
+
 .modal-contenido {
+    position: relative;
 
-    width: 100%;
+    z-index: 2;
 
-    max-width: 570px;
+    width: min(100%, 530px);
 
     max-height:
         calc(100vh - 40px);
 
     overflow-y: auto;
 
-    background:
-        var(--color-superficie);
+    padding: 20px;
 
-    color:
-        var(--color-texto);
+    background: var(--superficie);
 
     border:
-        1px solid var(--color-borde);
+        1px solid var(--borde);
 
-    border-radius:
-        var(--radio-grande);
+    border-radius: 14px;
 
     box-shadow:
-        0 22px 65px
-        rgba(0, 0, 0, 0.25);
-
+        0 25px 70px rgba(0, 0, 0, 0.24);
 }
 
 
-.modal-contenido.modal-pequeno {
-
-    max-width: 450px;
-
+.modal-contenido-ancho {
+    width: min(100%, 760px);
 }
 
+
+.modal-confirmacion {
+    width: min(100%, 470px);
+}
+
+
+/* ============================================================
+   60. CABECERA MODAL
+   ============================================================ */
 
 .modal-cabecera {
-
-    position: sticky;
-
-    top: 0;
-
-    z-index: 2;
-
     display: flex;
 
-    align-items: center;
-
+    align-items: flex-start;
     justify-content: space-between;
 
-    gap: 12px;
+    gap: 14px;
 
-    padding:
-        17px 20px;
+    margin-bottom: 18px;
 
-    background:
-        var(--color-superficie);
+    padding-bottom: 13px;
 
     border-bottom:
-        1px solid var(--color-borde);
-
+        1px solid var(--borde);
 }
 
 
 .modal-cabecera h3 {
-
-    color:
-        var(--color-principal);
+    color: var(--azul);
 
     font-family:
         "Poppins",
@@ -3403,609 +2788,550 @@ body.modal-abierto {
         sans-serif;
 
     font-size: 1rem;
-
 }
 
 
 .btn-cerrar-modal {
-
-    flex:
-        0 0 auto;
-
     width: 34px;
     height: 34px;
 
-    display: inline-flex;
+    flex:
+        0 0 34px;
+
+    display: flex;
 
     align-items: center;
-
     justify-content: center;
 
-    border: 0;
+    border:
+        1px solid var(--borde);
 
-    border-radius:
-        50%;
+    border-radius: 8px;
 
-    background:
-        var(--color-superficie-secundaria);
+    background: var(--superficie-2);
 
-    color:
-        var(--color-texto-secundario);
+    color: var(--texto-suave);
 
-    font-size: 1.15rem;
-
+    font-size: 1.25rem;
     line-height: 1;
-
 }
 
 
 .btn-cerrar-modal:hover {
+    border-color:
+        rgba(192, 57, 43, 0.3);
 
-    background:
-        var(--color-error-fondo);
+    background: var(--rojo-fondo);
 
-    color:
-        var(--color-error);
-
+    color: var(--rojo);
 }
 
 
-.modal-cuerpo {
+/* ============================================================
+   61. ACCIONES MODAL
+   ============================================================ */
 
-    padding:
-        20px;
-
-}
-
-
-.modal-pie {
-
+.modal-acciones {
     display: flex;
 
     align-items: center;
-
     justify-content: flex-end;
 
     flex-wrap: wrap;
 
-    gap: 9px;
+    gap: 8px;
 
-    padding:
-        15px 20px;
-
-    border-top:
-        1px solid var(--color-borde);
-
-    background:
-        var(--color-superficie-secundaria);
-
+    margin-top: 4px;
 }
 
 
 /* ============================================================
-   47. INFORMACIÓN DENTRO DE MODALES
+   62. CONFIRMACIONES
    ============================================================ */
 
-.info-modal {
+.confirmacion-contenido {
+    padding:
+        6px 0 18px;
+
+    text-align: center;
+}
+
+
+.confirmacion-icono {
+    width: 55px;
+    height: 55px;
+
+    margin:
+        0 auto 11px;
 
     display: flex;
 
-    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 
-    gap: 5px;
+    background: var(--rojo-fondo);
+
+    border:
+        1px solid rgba(192, 57, 43, 0.18);
+
+    border-radius: 50%;
+
+    font-size: 1.4rem;
+}
+
+
+.confirmacion-contenido > p {
+    color: var(--texto);
+
+    font-size: 0.83rem;
+    font-weight: 700;
+}
+
+
+.confirmacion-contenido small {
+    display: block;
+
+    margin-top: 9px;
+
+    color: var(--texto-suave);
+
+    font-size: 0.7rem;
+
+    line-height: 1.45;
+}
+
+
+.detalle-confirmacion {
+    margin-top: 12px;
+
+    padding: 11px;
+
+    background: var(--superficie-2);
+
+    border:
+        1px solid var(--borde);
+
+    border-radius: 8px;
+
+    color: var(--texto-suave);
+
+    font-size: 0.73rem;
+
+    text-align: left;
+}
+
+
+/* ============================================================
+   63. MODAL OBSERVACIÓN - INFORMACIÓN
+   ============================================================ */
+
+.detalle-observacion-modal {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 10px;
+
+    margin-bottom: 14px;
+}
+
+
+.detalle-observacion-item {
+    padding: 10px;
+
+    background: var(--superficie-2);
+
+    border:
+        1px solid var(--borde);
+
+    border-radius: 8px;
+}
+
+
+.detalle-observacion-item span {
+    display: block;
+
+    color: var(--texto-suave);
+
+    font-size: 0.62rem;
+}
+
+
+.detalle-observacion-item strong {
+    display: block;
+
+    margin-top: 2px;
+
+    color: var(--texto);
+
+    font-size: 0.74rem;
+
+    overflow-wrap: anywhere;
+}
+
+
+.observacion-texto-modal {
+    margin-bottom: 15px;
 
     padding: 12px;
 
-    margin-bottom: 15px;
-
-    background:
-        var(--color-superficie-secundaria);
+    background: var(--amarillo-fondo);
 
     border:
-        1px solid var(--color-borde);
+        1px solid rgba(201, 130, 0, 0.18);
 
-    border-radius:
-        var(--radio-pequeno);
-
+    border-radius: 8px;
 }
 
 
-.info-modal strong {
+.observacion-texto-modal > span {
+    display: block;
 
-    color:
-        var(--color-principal);
+    margin-bottom: 4px;
 
-}
+    color: var(--amarillo);
 
-
-.info-modal span {
-
-    color:
-        var(--color-texto-secundario);
-
-    font-size: 0.8rem;
-
-}
-
-
-#infoCancelarReserva,
-#infoEliminarAsignacion {
-
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 5px;
-
-    margin:
-        12px 0;
-
-    padding: 13px;
-
-    background:
-        var(--color-superficie-secundaria);
-
-    border:
-        1px solid var(--color-borde);
-
-    border-radius:
-        var(--radio-pequeno);
-
-}
-
-
-#infoCancelarReserva strong,
-#infoEliminarAsignacion strong {
-
-    color:
-        var(--color-principal);
-
-}
-
-
-#infoCancelarReserva span,
-#infoEliminarAsignacion span {
-
-    color:
-        var(--color-texto-secundario);
-
-    font-size: 0.8rem;
-
-}
-
-
-/* ============================================================
-   48. DETALLE DE OBSERVACIÓN EN MODAL
-   ============================================================ */
-
-#observacionEspacio {
-
-    color:
-        var(--color-principal);
-
+    font-size: 0.65rem;
     font-weight: 800;
 
+    text-transform: uppercase;
 }
 
 
-#observacionDocente,
-#observacionFecha {
+.observacion-texto-modal p {
+    color: var(--texto);
 
-    color:
-        var(--color-texto-secundario);
+    font-size: 0.76rem;
 
-}
-
-
-#observacionTexto {
-
-    padding: 13px;
-
-    margin:
-        10px 0 16px;
-
-    background:
-        var(--color-superficie-secundaria);
-
-    border:
-        1px solid var(--color-borde);
-
-    border-radius:
-        var(--radio-pequeno);
-
-    white-space: pre-wrap;
+    line-height: 1.5;
 
     overflow-wrap: anywhere;
-
-    font-size: 0.84rem;
-
 }
 
 
 /* ============================================================
-   49. MENSAJE GLOBAL
+   64. MENSAJE GLOBAL
    ============================================================ */
 
 .mensaje-global {
-
     position: fixed;
 
-    left: 50%;
-    bottom: 24px;
+    right: 20px;
+    bottom: 20px;
 
     z-index: 2000;
 
     width:
-        min(430px, calc(100% - 30px));
+        min(390px, calc(100% - 40px));
 
-    padding:
-        12px 16px;
+    padding: 12px 15px;
 
-    border-radius:
-        var(--radio-pequeno);
+    border-radius: 9px;
+
+    background: var(--azul);
+
+    color: #ffffff;
 
     box-shadow:
-        var(--sombra-media);
+        0 12px 35px rgba(0, 0, 0, 0.2);
 
-    text-align: center;
-
-    font-size: 0.84rem;
-
-    font-weight: 750;
+    font-size: 0.76rem;
+    font-weight: 650;
 
     opacity: 0;
 
     visibility: hidden;
 
     transform:
-        translate(-50%, 20px);
+        translateY(12px);
 
     transition:
-        opacity 0.22s ease,
-        transform 0.22s ease,
-        visibility 0.22s ease;
-
+        opacity 0.2s ease,
+        visibility 0.2s ease,
+        transform 0.2s ease;
 }
 
 
 .mensaje-global.visible {
-
     opacity: 1;
 
     visibility: visible;
 
     transform:
-        translate(-50%, 0);
-
+        translateY(0);
 }
 
 
-.mensaje-global-exito {
-
-    background:
-        #157347;
-
-    color:
-        #ffffff;
-
+.mensaje-global.exito,
+.mensaje-global.mensaje-exito {
+    background: var(--verde);
 }
 
 
-.mensaje-global-error {
-
-    background:
-        #b02a37;
-
-    color:
-        #ffffff;
-
+.mensaje-global.error,
+.mensaje-global.mensaje-error {
+    background: var(--rojo);
 }
 
 
 /* ============================================================
-   50. CARGANDO GLOBAL
+   65. PANTALLA DE CARGA GLOBAL
    ============================================================ */
 
+.cargando-global,
 #cargandoGlobal {
-
     position: fixed;
 
     inset: 0;
 
-    z-index: 3000;
+    z-index: 2500;
 
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
     background:
-        rgba(245, 248, 252, 0.76);
+        rgba(9, 24, 39, 0.42);
 
     backdrop-filter:
-        blur(3px);
-
+        blur(2px);
 }
 
 
-.cargando-contenido {
+.cargando-global.oculto,
+#cargandoGlobal.oculto {
+    display: none !important;
+}
 
-    min-width: 190px;
 
-    padding: 22px;
+.cargando-caja {
+    min-width: 155px;
 
     display: flex;
 
     flex-direction: column;
 
     align-items: center;
-
     justify-content: center;
 
-    gap: 12px;
+    gap: 10px;
 
-    background:
-        var(--color-superficie);
+    padding: 20px;
+
+    background: var(--superficie);
 
     border:
-        1px solid var(--color-borde);
+        1px solid var(--borde);
 
-    border-radius:
-        var(--radio-medio);
+    border-radius: 12px;
 
-    box-shadow:
-        var(--sombra-media);
+    box-shadow: var(--sombra-grande);
 
-    color:
-        var(--color-principal);
+    color: var(--texto);
 
-    font-size: 0.83rem;
-
+    font-size: 0.75rem;
     font-weight: 700;
-
 }
 
 
 .spinner {
-
-    width: 34px;
-    height: 34px;
+    width: 32px;
+    height: 32px;
 
     border:
-        4px solid
-        rgba(22, 61, 104, 0.15);
+        3px solid var(--borde);
 
     border-top-color:
-        var(--color-principal);
+        var(--azul-claro);
 
-    border-radius:
-        50%;
+    border-radius: 50%;
 
     animation:
-        girar-spinner 0.8s linear infinite;
-
+        girar-spinner 0.75s linear infinite;
 }
 
 
 @keyframes girar-spinner {
 
     to {
-
-        transform:
-            rotate(360deg);
-
+        transform: rotate(360deg);
     }
 
 }
 
 
 /* ============================================================
-   51. FOOTER
+   66. FOOTER DEL PANEL
    ============================================================ */
 
-.footer-panel,
-.footer-login {
+.footer-panel {
+    position: relative;
 
-    margin-top: auto;
+    z-index: 2;
+
+    width: 100%;
+
+    min-height: 62px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
 
     padding:
-        17px 20px;
-
-    text-align: center;
-
-    color:
-        var(--color-texto-secundario);
-
-    font-size:
-        0.75rem;
-
-    border-top:
-        1px solid var(--color-borde);
+        12px max(20px, calc((100% - 1450px) / 2));
 
     background:
-        rgba(255, 255, 255, 0.72);
+        rgba(255, 255, 255, 0.94);
 
+    border-top:
+        1px solid var(--borde);
+
+    color: var(--texto-suave);
+
+    font-size: 0.68rem;
 }
 
 
-.footer-panel strong,
-.footer-login strong {
+.footer-panel > div {
+    display: flex;
 
-    color:
-        var(--color-principal);
+    flex-direction: column;
+}
 
+
+.footer-panel strong {
+    color: var(--azul);
+
+    font-size: 0.72rem;
 }
 
 
 /* ============================================================
-   52. MODO OSCURO - VARIABLES
+   67. MODO OSCURO - VARIABLES
    ============================================================ */
 
 body.modo-oscuro {
+    --fondo: #0d1520;
 
-    --color-principal: #82b8e8;
-    --color-principal-oscuro: #a9cff0;
-    --color-principal-claro: #6ca8dc;
+    --superficie: #141f2c;
 
-    --color-secundario: #70b6ee;
+    --superficie-2: #192635;
 
-    --color-exito: #65d59a;
-    --color-exito-fondo: #153c2c;
+    --texto: #e7edf5;
 
-    --color-advertencia: #f0b846;
-    --color-advertencia-fondo: #493916;
+    --texto-suave: #9eacbd;
 
-    --color-error: #ff8d84;
-    --color-error-fondo: #472321;
+    --borde: #29394b;
 
-    --color-reservado: #ff9b90;
-    --color-reservado-fondo: #482723;
+    --borde-fuerte: #3b4c60;
 
-    --color-asignacion: #c5a8ed;
-    --color-asignacion-fondo: #352b46;
+    --azul: #75b8f0;
 
-    --color-libre: #72dda5;
-    --color-libre-fondo: #173c2d;
+    --azul-claro: #58a9eb;
 
-    --color-fondo: #101820;
-    --color-superficie: #18232d;
-    --color-superficie-secundaria: #202d38;
+    --azul-oscuro: #0a1724;
 
-    --color-texto: #edf3f8;
-    --color-texto-secundario: #aebdca;
+    --verde: #55c98a;
 
-    --color-borde: #30404d;
-    --color-borde-fuerte: #405362;
+    --verde-fondo: rgba(41, 156, 93, 0.13);
 
-    --sombra-suave:
-        0 4px 16px rgba(0, 0, 0, 0.18);
+    --rojo: #ff7c71;
 
-    --sombra-media:
-        0 8px 28px rgba(0, 0, 0, 0.28);
+    --rojo-fondo: rgba(209, 66, 55, 0.13);
 
+    --morado: #c19bea;
+
+    --morado-fondo: rgba(144, 94, 193, 0.14);
+
+    --amarillo: #e5b34f;
+
+    --amarillo-fondo: rgba(202, 145, 24, 0.13);
+
+    --sombra:
+        0 5px 20px rgba(0, 0, 0, 0.23);
+
+    --sombra-grande:
+        0 18px 50px rgba(0, 0, 0, 0.36);
+
+    background: var(--fondo);
+
+    color: var(--texto);
 }
 
 
 /* ============================================================
-   53. FONDO MODO OSCURO
+   68. FONDO MODO OSCURO
    ============================================================ */
 
 body.modo-oscuro
 .fondo-institucional {
-
     background:
         linear-gradient(
             135deg,
-            rgba(15, 24, 32, 0.99),
-            rgba(19, 31, 42, 0.98)
+            rgba(11, 20, 30, 0.99),
+            rgba(17, 31, 45, 0.99)
         );
-
 }
 
 
 body.modo-oscuro
 .fondo-institucional::after {
-
     opacity: 0.025;
-
 }
 
 
 /* ============================================================
-   54. SUPERFICIES MODO OSCURO
+   69. CABECERA Y NAVEGACIÓN OSCURA
    ============================================================ */
 
 body.modo-oscuro
-.encabezado-panel,
+.cabecera-principal,
 body.modo-oscuro
-.navegacion-panel,
+.navegacion-panel {
+    background:
+        rgba(20, 31, 44, 0.96);
+
+    border-color: var(--borde);
+}
+
+
+/* ============================================================
+   70. PANELES OSCUROS
+   ============================================================ */
+
 body.modo-oscuro
-.tarjeta,
+.panel,
 body.modo-oscuro
 .bloque-horario,
 body.modo-oscuro
-.controles-semana,
+.tarjeta-observacion,
 body.modo-oscuro
-.tarjeta-resumen,
+.modal-contenido,
 body.modo-oscuro
-.login-card {
+.cargando-caja {
+    background: var(--superficie);
 
-    background:
-        rgba(24, 35, 45, 0.97);
-
+    border-color: var(--borde);
 }
 
 
 body.modo-oscuro
-.footer-panel,
+.titulo-horario,
 body.modo-oscuro
-.footer-login {
-
-    background:
-        rgba(24, 35, 45, 0.78);
-
-}
-
-
-/* ============================================================
-   55. TABLAS MODO OSCURO
-   ============================================================ */
-
+.filtros-asignaciones,
 body.modo-oscuro
-.tabla-panel,
-body.modo-oscuro
-.tabla-listado {
-
-    background:
-        var(--color-superficie);
-
-}
-
-
-body.modo-oscuro
-.tabla-panel thead th {
-
-    background:
-        #244a6d;
-
-    color:
-        #ffffff;
-
-}
-
-
-body.modo-oscuro
-.tabla-semanal thead th:first-child {
-
-    background:
-        #244a6d;
-
-}
-
-
-body.modo-oscuro
-.celda-nombre-espacio {
-
-    background:
-        var(--color-superficie);
-
-}
-
-
-body.modo-oscuro
-.tabla-panel tbody tr:hover,
-body.modo-oscuro
-.tabla-listado tbody tr:hover {
-
-    background:
-        rgba(112, 182, 238, 0.06);
-
+.filtros-observaciones {
+    background: var(--superficie-2);
 }
 
 
 /* ============================================================
-   56. CAMPOS MODO OSCURO
+   71. CAMPOS OSCUROS
    ============================================================ */
 
 body.modo-oscuro
@@ -4014,1200 +3340,1239 @@ body.modo-oscuro
 select,
 body.modo-oscuro
 textarea {
+    background: var(--superficie);
+
+    border-color: var(--borde-fuerte);
+
+    color: var(--texto);
 
     color-scheme: dark;
+}
 
+
+body.modo-oscuro
+input::placeholder,
+body.modo-oscuro
+textarea::placeholder {
+    color: #7f8da0;
+}
+
+
+/* ============================================================
+   72. TABLAS OSCURAS
+   ============================================================ */
+
+body.modo-oscuro
+.tabla-disponibilidad,
+body.modo-oscuro
+.tabla-general {
+    background: var(--superficie);
+
+    color: var(--texto);
+}
+
+
+body.modo-oscuro
+.tabla-general thead th {
+    background: var(--superficie-2);
+
+    color: var(--azul);
+}
+
+
+body.modo-oscuro
+.tabla-disponibilidad
+tbody td:first-child {
+    background: var(--superficie);
+}
+
+
+body.modo-oscuro
+.tabla-general tbody tr:hover {
+    background:
+        rgba(88, 169, 235, 0.06);
+}
+
+
+/* ============================================================
+   73. BOTONES OSCUROS
+   ============================================================ */
+
+body.modo-oscuro
+.btn-secundario,
+body.modo-oscuro
+.btn-cerrar-sesion,
+body.modo-oscuro
+.btn-modo,
+body.modo-oscuro
+#btnModoOscuro {
+    background: var(--superficie);
+
+    border-color: var(--borde-fuerte);
+
+    color: var(--texto);
 }
 
 
 body.modo-oscuro
 .btn-secundario:hover,
 body.modo-oscuro
-.btn-semana:hover {
+.btn-modo:hover,
+body.modo-oscuro
+#btnModoOscuro:hover {
+    background: var(--superficie-2);
 
-    background:
-        #243745;
+    color: var(--azul);
+}
 
+
+body.modo-oscuro
+.btn-tab:hover {
+    background: var(--superficie-2);
+
+    color: var(--azul);
+}
+
+
+body.modo-oscuro
+.btn-tab.activo {
+    background: #286da8;
+
+    color: #ffffff;
 }
 
 
 /* ============================================================
-   57. OBSERVACIONES MODO OSCURO
+   74. INFORMACIÓN OSCURA
    ============================================================ */
+
+body.modo-oscuro
+.tarjeta-resumen,
+body.modo-oscuro
+.resumen-icono,
+body.modo-oscuro
+.horario-icono,
+body.modo-oscuro
+.info-gestion-vacia,
+body.modo-oscuro
+.info-gestion-contenido,
+body.modo-oscuro
+.info-reserva-docente,
+body.modo-oscuro
+.detalle-confirmacion,
+body.modo-oscuro
+.detalle-observacion-item {
+    background: var(--superficie-2);
+
+    border-color: var(--borde);
+}
+
+
+/* ============================================================
+   75. AVISO INFORMATIVO OSCURO
+   ============================================================ */
+
+body.modo-oscuro
+.aviso-informativo {
+    background:
+        rgba(40, 117, 183, 0.1);
+
+    border-color:
+        rgba(88, 169, 235, 0.18);
+}
+
+
+body.modo-oscuro
+.aviso-icono {
+    background: var(--superficie);
+}
+
+
+/* ============================================================
+   76. OBSERVACIONES OSCURAS
+   ============================================================ */
+
+body.modo-oscuro
+.observacion-texto-modal {
+    background: var(--amarillo-fondo);
+}
+
 
 body.modo-oscuro
 .respuesta-observacion {
-
-    background:
-        #1b3447;
-
-}
-
-
-body.modo-oscuro
-.celda-ocupada
-.estado-disponibilidad {
-
-    background:
-        #29343d;
-
-    border-color:
-        #3a4752;
-
-    color:
-        #c3ccd4;
-
-}
-
-
-body.modo-oscuro
-.celda-sin-gestion
-.estado-disponibilidad {
-
-    background:
-        #222c34;
-
-    border-color:
-        #45525d;
-
-    color:
-        #9caab5;
-
+    background: var(--verde-fondo);
 }
 
 
 /* ============================================================
-   58. MODALES MODO OSCURO
+   77. SCROLLBAR MODO OSCURO
    ============================================================ */
 
 body.modo-oscuro
-.modal {
-
-    background:
-        rgba(0, 0, 0, 0.72);
-
+.tabla-responsive {
+    scrollbar-color:
+        var(--borde-fuerte)
+        transparent;
 }
 
-
-body.modo-oscuro
-#cargandoGlobal {
-
-    background:
-        rgba(10, 16, 22, 0.78);
-
-}
-
-
-/* ============================================================
-   59. SCROLLBAR MODO OSCURO
-   ============================================================ */
 
 body.modo-oscuro
 .tabla-responsive::-webkit-scrollbar-thumb {
-
-    background:
-        #526473;
-
+    background: var(--borde-fuerte);
 }
 
 
 /* ============================================================
-   60. SELECCIÓN DE TEXTO
+   78. SELECCIÓN DE TEXTO
    ============================================================ */
 
 ::selection {
-
     background:
-        rgba(40, 117, 183, 0.24);
-
+        rgba(40, 117, 183, 0.25);
 }
+
+
 /* ============================================================
-   61. TABLETS Y PANTALLAS MEDIANAS
+   79. FOCUS ACCESIBLE
    ============================================================ */
 
-@media (max-width: 1100px) {
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline:
+        3px solid rgba(40, 117, 183, 0.24);
 
-    .contenido-principal,
-    .encabezado-contenido,
+    outline-offset: 2px;
+}
+/* ============================================================
+   80. TABLETS GRANDES
+   ============================================================ */
+
+@media (max-width: 1150px) {
+
+    .cabecera-contenido,
+    .navegacion-contenido,
+    .contenido-principal {
+        width: calc(100% - 24px);
+    }
+
+
+    .grid-formulario.grid-cuatro {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+
+    .tabla-disponibilidad {
+        min-width: 900px;
+    }
+
+
+    .footer-panel {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+}
+
+
+/* ============================================================
+   81. TABLETS
+   ============================================================ */
+
+@media (max-width: 900px) {
+
+    /* CABECERA */
+
+    .cabecera-contenido {
+        min-height: 70px;
+    }
+
+
+    .marca-logo {
+        width: 50px;
+        height: 50px;
+
+        flex:
+            0 0 50px;
+    }
+
+
+    .marca-texto h1 {
+        font-size: 0.92rem;
+    }
+
+
+    .marca-instituto,
+    .marca-panel {
+        font-size: 0.63rem;
+    }
+
+
+    .datos-usuario {
+        display: none;
+    }
+
+
+    /* NAVEGACIÓN */
+
     .navegacion-contenido {
+        justify-content: flex-start;
 
-        width:
-            min(100% - 24px, 1500px);
+        overflow-x: auto;
 
+        scrollbar-width: none;
     }
 
 
-    .form-grid-4 {
+    .navegacion-contenido::-webkit-scrollbar {
+        display: none;
+    }
 
+
+    /* CONTENIDO */
+
+    .grid-dos-columnas {
+        grid-template-columns: 1fr;
+    }
+
+
+    .lista-observaciones,
+    #listaObservaciones {
+        grid-template-columns: 1fr;
+    }
+
+
+    .panel-semana {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+
+    .acciones-semana {
+        justify-content: center;
+    }
+
+
+    .detalle-observacion-modal {
         grid-template-columns:
             repeat(2, minmax(0, 1fr));
-
-    }
-
-
-    .tabla-semanal {
-
-        min-width:
-            940px;
-
     }
 
 }
 
 
 /* ============================================================
-   62. TABLETS PEQUEÑAS
+   82. CELULARES GRANDES
    ============================================================ */
 
-@media (max-width: 850px) {
-
-    .encabezado-contenido {
-
-        min-height:
-            70px;
-
-    }
-
-
-    .logo-panel {
-
-        width:
-            52px;
-
-        height:
-            52px;
-
-    }
-
-
-    .marca-textos h1 {
-
-        font-size:
-            0.98rem;
-
-    }
-
-
-    .marca-textos span {
-
-        font-size:
-            0.74rem;
-
-    }
-
-
-    .usuario-datos {
-
-        display:
-            none;
-
-    }
-
-
-    .form-grid-3 {
-
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
-
-    }
-
-
-    .resumen-grid {
-
-        grid-template-columns:
-            repeat(3, minmax(0, 1fr));
-
-    }
-
-
-    .encabezado-seccion {
-
-        flex-direction:
-            column;
-
-    }
-
-
-    .info-gestion-contenido {
-
-        align-items:
-            flex-start;
-
-    }
-
-
-    .info-gestion-fechas {
-
-        width:
-            100%;
-
-    }
-
-}
-
-
-/* ============================================================
-   63. CELULARES
-   ============================================================ */
-
-@media (max-width: 650px) {
+@media (max-width: 700px) {
 
     body {
-
-        font-size:
-            14px;
-
+        font-size: 14px;
     }
 
 
-    /* --------------------------------------------------------
-       CONTENEDORES
-       -------------------------------------------------------- */
+    /* ========================================================
+       CABECERA
+       ======================================================== */
 
-    .contenido-principal,
-    .encabezado-contenido,
-    .navegacion-contenido {
+    .cabecera-contenido {
+        width: calc(100% - 18px);
 
-        width:
-            calc(100% - 20px);
+        min-height: 62px;
 
+        gap: 8px;
     }
 
 
-    .contenido-principal {
+    .marca-ceta {
+        gap: 8px;
 
-        padding:
-            16px 0 30px;
-
+        min-width: 0;
     }
 
 
-    /* --------------------------------------------------------
-       HEADER
-       -------------------------------------------------------- */
+    .marca-logo {
+        width: 43px;
+        height: 43px;
 
-    .encabezado-contenido {
+        flex:
+            0 0 43px;
+    }
 
-        min-height:
-            64px;
 
-        gap:
-            8px;
+    .marca-texto {
+        min-width: 0;
+    }
 
+
+    .marca-texto h1 {
+        max-width: 220px;
+
+        font-size: 0.78rem;
+
+        white-space: nowrap;
+
+        overflow: hidden;
+
+        text-overflow: ellipsis;
+    }
+
+
+    .marca-instituto {
+        font-size: 0.58rem;
     }
 
 
     .marca-panel {
-
-        gap:
-            8px;
-
-        min-width:
-            0;
-
+        font-size: 0.58rem;
     }
 
 
-    .logo-panel {
-
-        width:
-            45px;
-
-        height:
-            45px;
-
-        flex:
-            0 0 45px;
-
-    }
-
-
-    .marca-textos {
-
-        min-width:
-            0;
-
-    }
-
-
-    .marca-textos h1 {
-
-        font-size:
-            0.85rem;
-
-        white-space:
-            nowrap;
-
-        overflow:
-            hidden;
-
-        text-overflow:
-            ellipsis;
-
-    }
-
-
-    .marca-textos span {
-
-        font-size:
-            0.66rem;
-
+    .cabecera-usuario {
+        gap: 5px;
     }
 
 
     .btn-cerrar-sesion {
+        min-height: 34px;
 
-        padding:
-            7px 9px;
+        padding: 6px 8px;
 
-        font-size:
-            0.72rem;
+        font-size: 0.67rem;
 
-        white-space:
-            nowrap;
-
+        white-space: nowrap;
     }
 
 
-    /* --------------------------------------------------------
+    /* ========================================================
        NAVEGACIÓN
-       -------------------------------------------------------- */
+       ======================================================== */
 
     .navegacion-contenido {
+        width: calc(100% - 12px);
 
-        gap:
-            4px;
+        min-height: 51px;
 
-        padding:
-            6px 0;
+        padding: 6px 0;
 
+        gap: 4px;
     }
 
 
     .btn-tab {
+        min-height: 36px;
 
-        padding:
-            8px 10px;
+        padding: 7px 9px;
 
-        font-size:
-            0.75rem;
-
+        font-size: 0.69rem;
     }
 
 
+    .tab-icono {
+        font-size: 0.82rem;
+    }
+
+
+    .contador-tab {
+        min-width: 17px;
+        height: 17px;
+
+        padding: 0 4px;
+
+        font-size: 0.57rem;
+    }
+
+
+    .btn-modo,
     #btnModoOscuro {
+        width: 36px;
+        height: 36px;
 
-        width:
-            36px;
+        flex:
+            0 0 36px;
 
-        min-width:
-            36px;
+        margin-left: 2px;
 
-        height:
-            36px;
-
-        font-size:
-            0.9rem;
-
+        font-size: 0.88rem;
     }
 
 
-    #contadorObservaciones {
+    /* ========================================================
+       CONTENIDO
+       ======================================================== */
 
-        min-width:
-            18px;
-
-        height:
-            18px;
+    .contenido-principal {
+        width: calc(100% - 18px);
 
         padding:
-            0 4px;
-
-        font-size:
-            0.62rem;
-
+            17px 0 28px;
     }
 
-
-    /* --------------------------------------------------------
-       ENCABEZADOS DE SECCIÓN
-       -------------------------------------------------------- */
 
     .encabezado-seccion {
+        flex-direction: column;
 
-        margin-bottom:
-            14px;
+        gap: 10px;
 
+        margin-bottom: 14px;
     }
 
 
     .encabezado-seccion h2 {
-
-        font-size:
-            1.12rem;
-
+        font-size: 1.08rem;
     }
 
 
     .encabezado-seccion p {
-
-        font-size:
-            0.78rem;
-
+        font-size: 0.75rem;
     }
 
 
-    /* --------------------------------------------------------
-       TARJETAS
-       -------------------------------------------------------- */
-
-    .tarjeta {
-
-        padding:
-            14px;
-
-        border-radius:
-            10px;
-
+    .seccion-etiqueta {
+        font-size: 0.61rem;
     }
 
 
-    .tarjeta-titulo {
+    /* ========================================================
+       PANELES
+       ======================================================== */
 
-        align-items:
-            flex-start;
+    .panel {
+        padding: 14px;
 
-        flex-direction:
-            column;
-
-        margin-bottom:
-            13px;
-
+        border-radius: 10px;
     }
 
 
-    .tarjeta-titulo h3 {
+    .panel-cabecera {
+        flex-direction: column;
 
-        font-size:
-            0.92rem;
-
+        gap: 10px;
     }
 
 
-    /* --------------------------------------------------------
+    .panel-cabecera h3 {
+        font-size: 0.88rem;
+    }
+
+
+    .panel-cabecera p {
+        font-size: 0.72rem;
+    }
+
+
+    .panel-listado {
+        padding: 0;
+    }
+
+
+    .panel-listado
+    .panel-cabecera {
+        padding: 14px;
+    }
+
+
+    /* ========================================================
        FORMULARIOS
-       -------------------------------------------------------- */
-
-    .form-grid,
-    .form-grid-3,
-    .form-grid-4 {
-
-        grid-template-columns:
-            1fr;
-
-        gap:
-            12px;
-
-    }
-
-
-    .grupo-formulario input,
-    .grupo-formulario select,
-    .grupo-formulario textarea {
-
-        min-height:
-            44px;
-
-        font-size:
-            0.86rem;
-
-    }
-
-
-    .acciones-formulario {
-
-        flex-direction:
-            column;
-
-        align-items:
-            stretch;
-
-    }
-
-
-    .acciones-formulario button {
-
-        width:
-            100%;
-
-    }
-
-
-    /* --------------------------------------------------------
-       CONTROL DE SEMANA
-       -------------------------------------------------------- */
-
-    .controles-semana {
-
-        padding:
-            12px;
-
-        gap:
-            11px;
-
-    }
-
-
-    .selector-semana {
-
-        width:
-            100%;
-
-    }
-
-
-    .selector-semana input[type="date"] {
-
-        flex:
-            1;
-
-        min-width:
-            150px;
-
-    }
-
-
-    #textoSemana {
-
-        width:
-            100%;
-
-        font-size:
-            0.77rem;
-
-    }
-
-
-    .acciones-semana {
-
-        width:
-            100%;
-
-        display:
-            grid;
-
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
-
-    }
-
-
-    .acciones-semana button {
-
-        width:
-            100%;
-
-    }
-
-
-    /* --------------------------------------------------------
-       HORARIOS
-       -------------------------------------------------------- */
-
-    .bloque-horario {
-
-        margin-bottom:
-            16px;
-
-        border-radius:
-            10px;
-
-    }
-
-
-    .bloque-horario-cabecera {
-
-        padding:
-            12px 14px;
-
-        align-items:
-            flex-start;
-
-        flex-direction:
-            column;
-
-        gap:
-            3px;
-
-    }
-
-
-    .bloque-horario-cabecera h3 {
-
-        font-size:
-            0.9rem;
-
-    }
-
-
-    .bloque-horario-cabecera span {
-
-        font-size:
-            0.72rem;
-
-    }
-
-
-    /* --------------------------------------------------------
-       TABLA SEMANAL EN CELULAR
-       -------------------------------------------------------- */
-
-    .tabla-semanal {
-
-        min-width:
-            830px;
-
-    }
-
-
-    .tabla-semanal thead th:first-child {
-
-        width:
-            145px;
-
-    }
-
-
-    .tabla-semanal thead th:not(:first-child) {
-
-        width:
-            137px;
-
-    }
-
-
-    .celda-nombre-espacio {
-
-        min-width:
-            145px;
-
-    }
-
-
-    .tabla-panel th,
-    .tabla-panel td {
-
-        padding:
-            8px;
-
-        font-size:
-            0.75rem;
-
-    }
-
-
-    .estado-disponibilidad {
-
-        min-height:
-            58px;
-
-        padding:
-            6px 4px;
-
-    }
-
-
-    .estado-disponibilidad strong {
-
-        font-size:
-            0.66rem;
-
-    }
-
-
-    .docente-disponibilidad {
-
-        font-size:
-            0.63rem;
-
-    }
-
-
-    .celda-nombre-espacio strong {
-
-        font-size:
-            0.75rem;
-
-    }
-
-
-    .celda-nombre-espacio small {
-
-        font-size:
-            0.63rem;
-
-    }
-
-
-    /* --------------------------------------------------------
-       RESÚMENES
-       -------------------------------------------------------- */
-
-    .resumen-grid {
-
-        grid-template-columns:
-            repeat(3, minmax(0, 1fr));
-
-        gap:
-            7px;
-
-    }
-
-
-    .tarjeta-resumen {
-
-        padding:
-            11px 8px;
-
-        text-align:
-            center;
-
-    }
-
-
-    .tarjeta-resumen span {
-
-        font-size:
-            0.62rem;
-
-    }
-
-
-    .tarjeta-resumen strong {
-
-        font-size:
-            1.2rem;
-
-    }
-
-
-    /* --------------------------------------------------------
-       FILTROS
-       -------------------------------------------------------- */
-
-    .barra-filtros {
-
-        align-items:
-            stretch;
-
-    }
-
-
-    .filtro {
-
-        width:
-            100%;
-
-        min-width:
-            0;
-
-    }
-
-
-    /* --------------------------------------------------------
-       BOTONES
-       -------------------------------------------------------- */
-
-    .grupo-botones {
-
-        width:
-            100%;
-
-    }
-
-
-    .grupo-botones .btn-principal,
-    .grupo-botones .btn-secundario {
-
-        flex:
-            1;
-
-    }
-
-
-    /* --------------------------------------------------------
-       GESTIÓN
-       -------------------------------------------------------- */
-
-    .info-gestion-contenido {
-
-        flex-direction:
-            column;
-
-    }
-
-
-    .info-gestion-fechas {
-
-        display:
-            grid;
-
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
-
-        gap:
-            10px;
-
-    }
-
-
-    /* --------------------------------------------------------
-       OBSERVACIONES
-       -------------------------------------------------------- */
-
-    #listaObservaciones {
-
-        grid-template-columns:
-            1fr;
-
-    }
-
-
-    .tarjeta-observacion {
-
-        padding:
-            15px;
-
-    }
-
-
-    .observacion-datos {
-
-        grid-template-columns:
-            1fr;
-
-    }
-
-
-    .observacion-acciones {
-
-        align-items:
-            stretch;
-
-        flex-direction:
-            column;
-
-    }
-
-
-    .observacion-acciones button {
-
-        width:
-            100%;
-
-    }
-
-
-    /* --------------------------------------------------------
-       MODALES
-       -------------------------------------------------------- */
-
-    .modal {
-
-        padding:
-            10px;
-
-        align-items:
-            flex-end;
-
-    }
-
-
-    .modal-contenido,
-    .modal-contenido.modal-pequeno {
-
-        max-width:
-            none;
-
-        max-height:
-            calc(100vh - 20px);
-
-        border-radius:
-            15px 15px 8px 8px;
-
-    }
-
-
-    .modal-cabecera {
-
-        padding:
-            14px 15px;
-
-    }
-
-
-    .modal-cuerpo {
-
-        padding:
-            15px;
-
-    }
-
-
-    .modal-pie {
-
-        padding:
-            12px 15px;
-
-        flex-direction:
-            column-reverse;
-
-        align-items:
-            stretch;
-
-    }
-
-
-    .modal-pie button {
-
-        width:
-            100%;
-
-    }
-
-
-    /* --------------------------------------------------------
-       FOOTER
-       -------------------------------------------------------- */
-
-    .footer-panel,
-    .footer-login {
-
-        padding:
-            14px 10px;
-
-        font-size:
-            0.67rem;
-
-    }
-
-}
-
-
-/* ============================================================
-   64. CELULARES PEQUEÑOS
-   ============================================================ */
-
-@media (max-width: 420px) {
-
-    .marca-textos span {
-
-        display:
-            none;
-
-    }
-
-
-    .marca-textos h1 {
-
-        max-width:
-            145px;
-
-    }
-
-
-    .btn-cerrar-sesion {
-
-        padding:
-            7px 8px;
-
-        font-size:
-            0.68rem;
-
-    }
-
-
-    .acciones-semana {
-
-        grid-template-columns:
-            1fr 1fr;
-
-    }
-
-
-    .btn-semana {
-
-        font-size:
-            0.72rem;
-
-        padding:
-            7px 8px;
-
-    }
-
-
-    .resumen-grid {
-
-        grid-template-columns:
-            1fr;
-
-    }
-
-
-    .tarjeta-resumen {
-
-        display: flex;
-
-        align-items: center;
-
-        justify-content: space-between;
-
-        text-align:
-            left;
-
-    }
-
-
-    .tarjeta-resumen strong {
-
-        margin-top:
-            0;
-
-    }
-
-
-    .info-gestion-fechas {
-
-        grid-template-columns:
-            1fr;
-
-    }
-
-
-    .observacion-cabecera {
-
-        flex-direction:
-            column;
-
-    }
-
-}
-
-
-/* ============================================================
-   65. LOGIN EN CELULAR
-   ============================================================ */
-
-@media (max-width: 520px) {
-
-    .login-contenedor {
-
-        padding:
-            20px 14px;
-
-    }
-
-
-    .login-card {
-
-        padding:
-            24px 18px;
-
-        border-radius:
-            14px;
-
-    }
-
-
-    .login-logo {
-
-        width:
-            95px;
-
-    }
-
-
-    .login-titulo {
-
-        font-size:
-            1.3rem;
-
-    }
-
-
-    .login-subtitulo {
-
-        font-size:
-            0.82rem;
-
-        margin-bottom:
-            22px;
-
-    }
-
-
-    .login-form {
-
-        gap:
-            14px;
-
+       ======================================================== */
+
+    .grid-formulario,
+    .grid-formulario.grid-cuatro {
+        grid-template-columns: 1fr;
     }
 
 
     .campo input,
     .campo select,
     .campo textarea {
+        min-height: 42px;
 
-        min-height:
-            45px;
-
+        font-size: 0.8rem;
     }
 
 
-    .btn-login {
+    .campo label {
+        font-size: 0.75rem;
+    }
 
-        min-height:
-            45px;
 
+    .acciones-formulario {
+        align-items: stretch;
+
+        flex-direction: column;
+    }
+
+
+    .acciones-formulario
+    button {
+        width: 100%;
+    }
+
+
+    /* ========================================================
+       SELECTOR DE SEMANA
+       ======================================================== */
+
+    .panel-semana {
+        padding: 13px;
+    }
+
+
+    .selector-semana {
+        width: 100%;
+
+        display: grid;
+
+        grid-template-columns:
+            auto minmax(0, 1fr) auto;
+
+        gap: 7px;
+    }
+
+
+    .semana-centro {
+        min-width: 0;
+
+        width: 100%;
+    }
+
+
+    .semana-centro input[type="date"] {
+        width: 100%;
+
+        max-width: 180px;
+    }
+
+
+    #textoSemana {
+        font-size: 0.68rem;
+    }
+
+
+    .btn-semana {
+        min-width: 38px;
+
+        padding: 7px;
+
+        font-size: 0;
+
+        white-space: normal;
+    }
+
+
+    #btnSemanaAnterior::after {
+        content: "←";
+
+        font-size: 1rem;
+    }
+
+
+    #btnSemanaSiguiente::after {
+        content: "→";
+
+        font-size: 1rem;
+    }
+
+
+    .acciones-semana {
+        width: 100%;
+
+        display: grid;
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 7px;
+    }
+
+
+    .acciones-semana button {
+        width: 100%;
+
+        padding:
+            7px 8px;
+
+        font-size: 0.68rem;
+    }
+
+
+    /* ========================================================
+       LEYENDA
+       ======================================================== */
+
+    .leyenda-disponibilidad {
+        justify-content: flex-start;
+
+        gap: 9px 14px;
+
+        margin-bottom: 12px;
+
+        padding:
+            7px 4px;
+    }
+
+
+    .leyenda-item {
+        font-size: 0.65rem;
+    }
+
+
+    /* ========================================================
+       BLOQUES DE HORARIO
+       ======================================================== */
+
+    .bloque-horario {
+        margin-bottom: 14px;
+
+        border-radius: 10px;
+    }
+
+
+    .titulo-horario {
+        padding:
+            10px 12px;
+    }
+
+
+    .horario-icono {
+        width: 31px;
+        height: 31px;
+
+        flex:
+            0 0 31px;
+
+        font-size: 0.87rem;
+    }
+
+
+    .titulo-horario h3 {
+        font-size: 0.8rem;
+    }
+
+
+    .titulo-horario h3 + span {
+        font-size: 0.63rem;
+    }
+
+
+    /* ========================================================
+       TABLA SEMANAL
+       ======================================================== */
+
+    .tabla-disponibilidad {
+        min-width: 810px;
+    }
+
+
+    .tabla-disponibilidad
+    .columna-espacio {
+        width: 145px;
+    }
+
+
+    .tabla-disponibilidad
+    tbody td:first-child {
+        width: 145px;
+
+        min-width: 145px;
+    }
+
+
+    .tabla-disponibilidad th,
+    .tabla-disponibilidad td {
+        padding: 7px;
+
+        font-size: 0.68rem;
+    }
+
+
+    .tabla-disponibilidad
+    thead th {
+        font-size: 0.65rem;
+    }
+
+
+    .celda-disponibilidad {
+        min-width: 125px;
+
+        padding: 5px !important;
+    }
+
+
+    .estado-disponibilidad {
+        min-height: 55px;
+
+        padding: 5px;
+    }
+
+
+    .estado-disponibilidad strong {
+        font-size: 0.61rem;
+    }
+
+
+    .docente-disponibilidad {
+        font-size: 0.58rem;
+    }
+
+
+    .celda-nombre-espacio strong {
+        font-size: 0.68rem;
+    }
+
+
+    .celda-nombre-espacio small {
+        font-size: 0.58rem;
+    }
+
+
+    /* ========================================================
+       TABLAS GENERALES
+       ======================================================== */
+
+    .tabla-general {
+        min-width: 650px;
+    }
+
+
+    .tabla-general th,
+    .tabla-general td {
+        padding:
+            8px 9px;
+
+        font-size: 0.68rem;
+    }
+
+
+    .tabla-general thead th {
+        font-size: 0.62rem;
+    }
+
+
+    /* ========================================================
+       RESUMEN
+       ======================================================== */
+
+    .tarjetas-resumen {
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+
+        gap: 6px;
+    }
+
+
+    .tarjeta-resumen {
+        gap: 6px;
+
+        padding: 9px 7px;
+    }
+
+
+    .resumen-icono {
+        width: 29px;
+        height: 29px;
+
+        flex:
+            0 0 29px;
+
+        font-size: 0.8rem;
+    }
+
+
+    .tarjeta-resumen > div > span {
+        font-size: 0.56rem;
+    }
+
+
+    .tarjeta-resumen strong {
+        font-size: 1rem;
+    }
+
+
+    /* ========================================================
+       FILTROS
+       ======================================================== */
+
+    .filtros-asignaciones,
+    .filtros-observaciones {
+        align-items: stretch;
+
+        flex-direction: column;
+
+        padding: 12px;
+    }
+
+
+    .filtros-asignaciones
+    .campo,
+    .filtros-observaciones
+    .campo {
+        width: 100%;
+
+        min-width: 0;
+
+        flex: none;
+    }
+
+
+    /* ========================================================
+       GESTIÓN
+       ======================================================== */
+
+    .info-gestion-contenido {
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+
+    .info-gestion-fechas {
+        width: 100%;
+
+        display: grid;
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 8px;
+    }
+
+
+    /* ========================================================
+       OBSERVACIONES
+       ======================================================== */
+
+    .observacion-datos {
+        grid-template-columns: 1fr;
+    }
+
+
+    .observacion-acciones {
+        align-items: stretch;
+
+        flex-direction: column;
+    }
+
+
+    .observacion-acciones button {
+        width: 100%;
+    }
+
+
+    /* ========================================================
+       MODALES
+       ======================================================== */
+
+    .modal {
+        padding: 9px;
+
+        align-items: flex-end;
+    }
+
+
+    .modal-contenido,
+    .modal-contenido-ancho,
+    .modal-confirmacion {
+        width: 100%;
+
+        max-height:
+            calc(100vh - 18px);
+
+        padding: 15px;
+
+        border-radius:
+            14px 14px 8px 8px;
+    }
+
+
+    .modal-cabecera {
+        margin-bottom: 14px;
+
+        padding-bottom: 10px;
+    }
+
+
+    .modal-cabecera h3 {
+        font-size: 0.9rem;
+    }
+
+
+    .detalle-observacion-modal {
+        grid-template-columns: 1fr;
+    }
+
+
+    .modal-acciones {
+        align-items: stretch;
+
+        flex-direction: column-reverse;
+    }
+
+
+    .modal-acciones button {
+        width: 100%;
+    }
+
+
+    /* ========================================================
+       MENSAJE GLOBAL
+       ======================================================== */
+
+    .mensaje-global {
+        right: 10px;
+        bottom: 10px;
+
+        width: calc(100% - 20px);
+    }
+
+
+    /* ========================================================
+       FOOTER
+       ======================================================== */
+
+    .footer-panel {
+        min-height: auto;
+
+        flex-direction: column;
+
+        align-items: center;
+
+        gap: 5px;
+
+        padding: 13px;
+
+        text-align: center;
     }
 
 }
 
 
 /* ============================================================
-   66. PANTALLAS GRANDES
+   83. CELULARES PEQUEÑOS
+   ============================================================ */
+
+@media (max-width: 470px) {
+
+    /* LOGIN */
+
+    .login-container {
+        padding:
+            20px 13px;
+    }
+
+
+    .login-card {
+        max-width: 390px;
+
+        padding:
+            24px 18px 20px;
+    }
+
+
+    .login-logo {
+        width: 88px;
+
+        margin-bottom: 13px;
+    }
+
+
+    .login-titulo {
+        margin-bottom: 19px;
+    }
+
+
+    .login-titulo h1 {
+        font-size: 1.28rem;
+    }
+
+
+    .login-descripcion {
+        font-size: 0.75rem;
+    }
+
+
+    .login-footer {
+        margin-top: 18px;
+
+        padding-top: 14px;
+    }
+
+
+    /* CABECERA */
+
+    .marca-logo {
+        width: 39px;
+        height: 39px;
+
+        flex:
+            0 0 39px;
+    }
+
+
+    .marca-texto h1 {
+        max-width: 155px;
+
+        font-size: 0.72rem;
+    }
+
+
+    .marca-panel {
+        display: none;
+    }
+
+
+    .marca-instituto {
+        font-size: 0.54rem;
+    }
+
+
+    .btn-cerrar-sesion {
+        padding:
+            6px 7px;
+
+        font-size: 0.61rem;
+    }
+
+
+    /* NAVEGACIÓN */
+
+    .btn-tab {
+        padding:
+            7px 8px;
+
+        font-size: 0.65rem;
+    }
+
+
+    /* CONTENIDO */
+
+    .contenido-principal {
+        width: calc(100% - 14px);
+    }
+
+
+    /* RESÚMENES */
+
+    .tarjetas-resumen {
+        grid-template-columns: 1fr;
+    }
+
+
+    .tarjeta-resumen {
+        padding:
+            10px 12px;
+    }
+
+
+    .tarjeta-resumen strong {
+        font-size: 1.1rem;
+    }
+
+
+    /* SEMANA */
+
+    .selector-semana {
+        grid-template-columns:
+            36px minmax(0, 1fr) 36px;
+    }
+
+
+    /* GESTIÓN */
+
+    .info-gestion-fechas {
+        grid-template-columns: 1fr;
+    }
+
+
+    /* AVISO */
+
+    .aviso-informativo {
+        padding: 11px;
+    }
+
+
+    .aviso-icono {
+        width: 28px;
+        height: 28px;
+
+        flex:
+            0 0 28px;
+    }
+
+}
+
+
+/* ============================================================
+   84. PANTALLAS MUY PEQUEÑAS
+   ============================================================ */
+
+@media (max-width: 360px) {
+
+    .marca-texto h1 {
+        max-width: 125px;
+
+        font-size: 0.66rem;
+    }
+
+
+    .marca-instituto {
+        display: none;
+    }
+
+
+    .btn-cerrar-sesion {
+        font-size: 0;
+
+        width: 35px;
+        height: 35px;
+
+        padding: 0;
+    }
+
+
+    .btn-cerrar-sesion::after {
+        content: "↪";
+
+        font-size: 1rem;
+    }
+
+
+    .login-titulo h1 {
+        font-size: 1.16rem;
+    }
+
+}
+
+
+/* ============================================================
+   85. PANTALLAS GRANDES
    ============================================================ */
 
 @media (min-width: 1500px) {
 
     .contenido-principal {
-
-        padding-top:
-            28px;
-
+        padding-top: 28px;
     }
 
 
-    .tabla-semanal {
-
-        min-width:
-            1100px;
-
+    .tabla-disponibilidad {
+        min-width: 1080px;
     }
 
 
     .celda-disponibilidad {
-
-        min-width:
-            165px;
-
+        min-width: 155px;
     }
 
 }
 
 
 /* ============================================================
-   67. ACCESIBILIDAD - REDUCIR ANIMACIONES
+   86. REDUCIR MOVIMIENTO
    ============================================================ */
 
 @media (prefers-reduced-motion: reduce) {
@@ -5215,12 +4580,7 @@ body.modo-oscuro
     *,
     *::before,
     *::after {
-
-        scroll-behavior:
-            auto !important;
-
-        transition-duration:
-            0.01ms !important;
+        scroll-behavior: auto !important;
 
         animation-duration:
             0.01ms !important;
@@ -5228,13 +4588,15 @@ body.modo-oscuro
         animation-iteration-count:
             1 !important;
 
+        transition-duration:
+            0.01ms !important;
     }
 
 }
 
 
 /* ============================================================
-   68. IMPRESIÓN
+   87. IMPRESIÓN
    ============================================================ */
 
 @media print {
@@ -5243,87 +4605,64 @@ body.modo-oscuro
     .btn-cerrar-sesion,
     .acciones-semana,
     .acciones-tabla,
+    .btn-modo,
     #btnModoOscuro,
     .footer-panel,
     .mensaje-global,
     #cargandoGlobal {
-
-        display:
-            none !important;
-
+        display: none !important;
     }
 
 
     body {
+        background: #ffffff !important;
 
-        background:
-            #ffffff !important;
-
-        color:
-            #000000 !important;
-
+        color: #000000 !important;
     }
 
 
     .fondo-institucional {
-
-        display:
-            none;
-
+        display: none !important;
     }
 
 
     .contenido-principal {
+        width: 100%;
 
-        width:
-            100%;
-
-        padding:
-            0;
-
+        padding: 0;
     }
 
 
-    .bloque-horario,
-    .tarjeta,
-    .controles-semana {
+    .panel,
+    .bloque-horario {
+        box-shadow: none;
 
-        box-shadow:
-            none;
-
-        border-color:
-            #bbbbbb;
-
+        border-color: #bbbbbb;
     }
 
 
     .tabla-responsive {
-
-        overflow:
-            visible;
-
+        overflow: visible;
     }
 
 
-    .tabla-semanal {
-
-        min-width:
-            100%;
-
+    .tabla-disponibilidad {
+        min-width: 100%;
     }
 
 
-    .celda-nombre-espacio {
-
-        position:
-            static;
-
+    .tabla-disponibilidad
+    tbody td:first-child,
+    .tabla-disponibilidad
+    .columna-espacio {
+        position: static;
     }
 
 }
 
 
 /* ============================================================
-   FIN DE css/estilos.css
+   FIN DEL ARCHIVO
    CETA - RESERVAS DE AULAS Y LABORATORIOS
+   Desarrollado por Andres Vega
    ============================================================ */
