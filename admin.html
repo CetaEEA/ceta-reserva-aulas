@@ -2,6 +2,7 @@
 <html lang="es">
 
 <head>
+
     <meta charset="UTF-8">
 
     <meta
@@ -9,44 +10,3248 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>CETA | Administrador</title>
+    <meta
+        name="theme-color"
+        content="#0f172a"
+    >
+
+    <title>
+        CETA | Administración de Aulas y Laboratorios
+    </title>
+
+
+    <!-- =====================================================
+         FUENTES
+    ====================================================== -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- =====================================================
+         ESTILOS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="css/estilos.css?v=2"
+    >
+
 </head>
 
-<body>
 
-    <h1>Reservas de Aulas y Laboratorios</h1>
-
-    <h2>Panel Administrador</h2>
-
-    <p>Acceso administrador correcto.</p>
-
-    <button id="btnCerrarSesion">
-        Cerrar sesión
-    </button>
+<body class="admin-page">
 
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- =====================================================
+         FONDO INSTITUCIONAL
+    ====================================================== -->
 
-    <script src="js/supabase.js?v=1"></script>
+    <div
+        class="fondo-institucional"
+        aria-hidden="true"
+    ></div>
 
-    <script>
-        const btnCerrarSesion =
-            document.getElementById("btnCerrarSesion");
 
-        btnCerrarSesion.addEventListener("click", async () => {
 
-            const { error } =
-                await supabaseClient.auth.signOut();
+    <!-- =====================================================
+         CABECERA
+    ====================================================== -->
 
-            if (error) {
-                alert("No se pudo cerrar la sesión.");
-                console.error(error);
-                return;
-            }
+    <header class="cabecera-principal">
 
-            window.location.href = "index.html";
-        });
-    </script>
+        <div class="cabecera-contenido">
+
+
+            <!-- LOGO + TÍTULO -->
+
+            <div class="marca-ceta">
+
+                <div class="marca-logo">
+
+                    <img
+                        src="img/logo-ceta-transparente.png"
+                        alt="CETA"
+                    >
+
+                </div>
+
+
+                <div class="marca-texto">
+
+                    <span class="marca-instituto">
+                        Instituto CETA
+                    </span>
+
+                    <h1>
+                        Reserva de Aulas y Laboratorios
+                    </h1>
+
+                    <span class="marca-panel">
+                        Panel de administración
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- USUARIO -->
+
+            <div class="cabecera-usuario">
+
+                <div class="datos-usuario">
+
+                    <span class="usuario-etiqueta">
+                        Administrador
+                    </span>
+
+                    <strong id="nombreAdministrador">
+                        Cargando...
+                    </strong>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    id="btnCerrarSesion"
+                    class="btn-cerrar-sesion"
+                >
+                    Cerrar sesión
+                </button>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         NAVEGACIÓN
+    ====================================================== -->
+
+    <nav class="navegacion-panel">
+
+        <div class="navegacion-contenido">
+
+
+            <button
+                type="button"
+                class="btn-tab activo"
+                data-tab="reservas"
+            >
+                <span class="tab-icono">
+                    📅
+                </span>
+
+                <span>
+                    Reservas
+                </span>
+            </button>
+
+
+            <button
+                type="button"
+                class="btn-tab"
+                data-tab="espacios"
+            >
+                <span class="tab-icono">
+                    🏫
+                </span>
+
+                <span>
+                    Aulas y laboratorios
+                </span>
+            </button>
+
+
+            <button
+                type="button"
+                class="btn-tab"
+                data-tab="gestion"
+            >
+                <span class="tab-icono">
+                    🗓️
+                </span>
+
+                <span>
+                    Gestión
+                </span>
+            </button>
+
+
+            <button
+                type="button"
+                class="btn-tab"
+                data-tab="observaciones"
+            >
+                <span class="tab-icono">
+                    ⚠️
+                </span>
+
+                <span>
+                    Observaciones
+                </span>
+
+                <span
+                    id="contadorObservaciones"
+                    class="contador-tab oculto"
+                >
+                    0
+                </span>
+            </button>
+
+
+            <button
+                type="button"
+                id="btnModoOscuro"
+                class="btn-modo"
+                title="Cambiar modo de visualización"
+                aria-label="Cambiar modo de visualización"
+            >
+                🌙
+            </button>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- =====================================================
+         CONTENIDO PRINCIPAL
+    ====================================================== -->
+
+    <main class="contenido-principal">
+
+
+
+        <!-- =================================================
+             TAB 1
+             RESERVAS
+        ================================================== -->
+
+        <section
+            id="tab-reservas"
+            class="seccion-tab activa"
+        >
+
+
+            <!-- ENCABEZADO -->
+
+            <div class="encabezado-seccion">
+
+                <div>
+
+                    <span class="seccion-etiqueta">
+                        Disponibilidad semanal
+                    </span>
+
+                    <h2>
+                        Reservas de aulas y laboratorios
+                    </h2>
+
+                    <p>
+                        Consulte la disponibilidad de todos los
+                        espacios académicos durante la semana.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =============================================
+                 SELECTOR DE SEMANA
+            ============================================== -->
+
+            <div class="panel panel-semana">
+
+                <div class="selector-semana">
+
+
+                    <button
+                        type="button"
+                        id="btnSemanaAnterior"
+                        class="btn-secundario btn-semana"
+                    >
+                        ← Semana anterior
+                    </button>
+
+
+
+                    <div class="semana-centro">
+
+                        <label for="fechaSemana">
+                            Seleccionar semana
+                        </label>
+
+                        <input
+                            type="date"
+                            id="fechaSemana"
+                        >
+
+                        <strong id="textoSemana">
+                            Cargando semana...
+                        </strong>
+
+                    </div>
+
+
+
+                    <button
+                        type="button"
+                        id="btnSemanaSiguiente"
+                        class="btn-secundario btn-semana"
+                    >
+                        Semana siguiente →
+                    </button>
+
+                </div>
+
+
+                <div class="acciones-semana">
+
+                    <button
+                        type="button"
+                        id="btnSemanaActual"
+                        class="btn-secundario"
+                    >
+                        Ir a semana actual
+                    </button>
+
+
+                    <button
+                        type="button"
+                        id="btnActualizarReservas"
+                        class="btn-primario"
+                    >
+                        Actualizar
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =============================================
+                 LEYENDA
+            ============================================== -->
+
+            <div class="leyenda-disponibilidad">
+
+                <div class="leyenda-item">
+
+                    <span class="indicador indicador-libre"></span>
+
+                    <span>
+                        Libre
+                    </span>
+
+                </div>
+
+
+                <div class="leyenda-item">
+
+                    <span class="indicador indicador-reserva"></span>
+
+                    <span>
+                        Reserva puntual
+                    </span>
+
+                </div>
+
+
+                <div class="leyenda-item">
+
+                    <span class="indicador indicador-asignacion"></span>
+
+                    <span>
+                        Asignación fija
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =============================================
+                 HORARIO 09:00 - 12:00
+            ============================================== -->
+
+            <div class="bloque-horario">
+
+                <div class="titulo-horario">
+
+                    <div>
+
+                        <span class="horario-icono">
+                            ☀️
+                        </span>
+
+                        <div>
+
+                            <h3>
+                                Turno mañana
+                            </h3>
+
+                            <span>
+                                09:00 - 12:00
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="tabla-responsive">
+
+                    <table class="tabla-disponibilidad">
+
+                        <thead>
+
+                            <tr>
+
+                                <th class="columna-espacio">
+                                    Aula / Laboratorio
+                                </th>
+
+                                <th id="cabecera-manana-lunes">
+                                    Lunes
+                                </th>
+
+                                <th id="cabecera-manana-martes">
+                                    Martes
+                                </th>
+
+                                <th id="cabecera-manana-miercoles">
+                                    Miércoles
+                                </th>
+
+                                <th id="cabecera-manana-jueves">
+                                    Jueves
+                                </th>
+
+                                <th id="cabecera-manana-viernes">
+                                    Viernes
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="tablaManana">
+
+                            <tr>
+
+                                <td
+                                    colspan="6"
+                                    class="tabla-cargando"
+                                >
+                                    Cargando disponibilidad...
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =============================================
+                 HORARIO 14:00 - 17:00
+            ============================================== -->
+
+            <div class="bloque-horario">
+
+                <div class="titulo-horario">
+
+                    <div>
+
+                        <span class="horario-icono">
+                            🌤️
+                        </span>
+
+                        <div>
+
+                            <h3>
+                                Turno tarde
+                            </h3>
+
+                            <span>
+                                14:00 - 17:00
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="tabla-responsive">
+
+                    <table class="tabla-disponibilidad">
+
+                        <thead>
+
+                            <tr>
+
+                                <th class="columna-espacio">
+                                    Aula / Laboratorio
+                                </th>
+
+                                <th id="cabecera-tarde-lunes">
+                                    Lunes
+                                </th>
+
+                                <th id="cabecera-tarde-martes">
+                                    Martes
+                                </th>
+
+                                <th id="cabecera-tarde-miercoles">
+                                    Miércoles
+                                </th>
+
+                                <th id="cabecera-tarde-jueves">
+                                    Jueves
+                                </th>
+
+                                <th id="cabecera-tarde-viernes">
+                                    Viernes
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="tablaTarde">
+
+                            <tr>
+
+                                <td
+                                    colspan="6"
+                                    class="tabla-cargando"
+                                >
+                                    Cargando disponibilidad...
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =============================================
+                 HORARIO 19:00 - 21:30
+            ============================================== -->
+
+            <div class="bloque-horario">
+
+                <div class="titulo-horario">
+
+                    <div>
+
+                        <span class="horario-icono">
+                            🌙
+                        </span>
+
+                        <div>
+
+                            <h3>
+                                Turno noche
+                            </h3>
+
+                            <span>
+                                19:00 - 21:30
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="tabla-responsive">
+
+                    <table class="tabla-disponibilidad">
+
+                        <thead>
+
+                            <tr>
+
+                                <th class="columna-espacio">
+                                    Aula / Laboratorio
+                                </th>
+
+                                <th id="cabecera-noche-lunes">
+                                    Lunes
+                                </th>
+
+                                <th id="cabecera-noche-martes">
+                                    Martes
+                                </th>
+
+                                <th id="cabecera-noche-miercoles">
+                                    Miércoles
+                                </th>
+
+                                <th id="cabecera-noche-jueves">
+                                    Jueves
+                                </th>
+
+                                <th id="cabecera-noche-viernes">
+                                    Viernes
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="tablaNoche">
+
+                            <tr>
+
+                                <td
+                                    colspan="6"
+                                    class="tabla-cargando"
+                                >
+                                    Cargando disponibilidad...
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =============================================
+                 RESERVAS PUNTUALES
+            ============================================== -->
+
+            <div class="panel panel-listado">
+
+                <div class="panel-cabecera">
+
+                    <div>
+
+                        <span class="seccion-etiqueta">
+                            Administración
+                        </span>
+
+                        <h3>
+                            Reservas puntuales de la semana
+                        </h3>
+
+                        <p>
+                            Desde este listado podrá editar o
+                            cancelar las reservas realizadas
+                            por los docentes.
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        id="btnRecargarListadoReservas"
+                        class="btn-secundario"
+                    >
+                        Actualizar listado
+                    </button>
+
+                </div>
+
+
+                <div class="tabla-responsive">
+
+                    <table class="tabla-general">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Fecha
+                                </th>
+
+                                <th>
+                                    Horario
+                                </th>
+
+                                <th>
+                                    Espacio
+                                </th>
+
+                                <th>
+                                    Docente
+                                </th>
+
+                                <th>
+                                    Estado
+                                </th>
+
+                                <th>
+                                    Acciones
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="tablaReservasAdmin">
+
+                            <tr>
+
+                                <td
+                                    colspan="6"
+                                    class="tabla-cargando"
+                                >
+                                    Cargando reservas...
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             TAB 2
+             AULAS Y LABORATORIOS
+        ================================================== -->
+
+        <section
+            id="tab-espacios"
+            class="seccion-tab"
+        >
+
+
+            <div class="encabezado-seccion">
+
+                <div>
+
+                    <span class="seccion-etiqueta">
+                        Configuración
+                    </span>
+
+                    <h2>
+                        Aulas y laboratorios
+                    </h2>
+
+                    <p>
+                        Registre y administre los espacios
+                        académicos disponibles en el instituto.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="grid-dos-columnas">
+
+
+                <!-- =========================================
+                     CREAR ESPACIO
+                ========================================== -->
+
+                <div class="panel">
+
+                    <div class="panel-cabecera">
+
+                        <div>
+
+                            <h3>
+                                Nuevo espacio
+                            </h3>
+
+                            <p>
+                                Agregue una nueva aula o
+                                laboratorio.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <form
+                        id="formNuevoEspacio"
+                        class="formulario-panel"
+                    >
+
+
+                        <div class="campo">
+
+                            <label for="nuevoEspacioTipo">
+                                Tipo
+                            </label>
+
+                            <select
+                                id="nuevoEspacioTipo"
+                                required
+                            >
+
+                                <option value="aula">
+                                    Aula
+                                </option>
+
+                                <option value="laboratorio">
+                                    Laboratorio
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+
+                        <div class="campo">
+
+                            <label for="nuevoEspacioNombre">
+                                Nombre
+                            </label>
+
+                            <input
+                                type="text"
+                                id="nuevoEspacioNombre"
+                                placeholder="Ej.: Aula 3A"
+                                maxlength="100"
+                                required
+                            >
+
+                        </div>
+
+
+
+                        <button
+                            type="submit"
+                            id="btnCrearEspacio"
+                            class="btn-primario"
+                        >
+                            Crear espacio
+                        </button>
+
+
+                        <p
+                            id="mensajeNuevoEspacio"
+                            class="mensaje-formulario"
+                        ></p>
+
+                    </form>
+
+                </div>
+
+
+
+                <!-- =========================================
+                     INFORMACIÓN
+                ========================================== -->
+
+                <div class="panel panel-informacion">
+
+                    <div class="panel-cabecera">
+
+                        <div>
+
+                            <h3>
+                                Organización de espacios
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="tarjetas-resumen">
+
+
+                        <div class="tarjeta-resumen">
+
+                            <span class="resumen-icono">
+                                🏫
+                            </span>
+
+                            <div>
+
+                                <span>
+                                    Aulas
+                                </span>
+
+                                <strong id="totalAulas">
+                                    0
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="tarjeta-resumen">
+
+                            <span class="resumen-icono">
+                                🔬
+                            </span>
+
+                            <div>
+
+                                <span>
+                                    Laboratorios
+                                </span>
+
+                                <strong id="totalLaboratorios">
+                                    0
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="tarjeta-resumen">
+
+                            <span class="resumen-icono">
+                                ✅
+                            </span>
+
+                            <div>
+
+                                <span>
+                                    Habilitados
+                                </span>
+
+                                <strong id="totalEspaciosActivos">
+                                    0
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =============================================
+                 LISTADO DE ESPACIOS
+            ============================================== -->
+
+            <div class="panel panel-listado">
+
+                <div class="panel-cabecera">
+
+                    <div>
+
+                        <h3>
+                            Espacios registrados
+                        </h3>
+
+                        <p>
+                            Puede editar el nombre, tipo o
+                            disponibilidad de cada espacio.
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        id="btnActualizarEspacios"
+                        class="btn-secundario"
+                    >
+                        Actualizar
+                    </button>
+
+                </div>
+
+
+                <div class="tabla-responsive">
+
+                    <table class="tabla-general">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Tipo
+                                </th>
+
+                                <th>
+                                    Nombre
+                                </th>
+
+                                <th>
+                                    Estado
+                                </th>
+
+                                <th>
+                                    Acciones
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="tablaEspacios">
+
+                            <tr>
+
+                                <td
+                                    colspan="4"
+                                    class="tabla-cargando"
+                                >
+                                    Cargando espacios...
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+
+        </section>
+        <!-- =================================================
+             TAB 3
+             GESTIÓN
+        ================================================== -->
+
+        <section
+            id="tab-gestion"
+            class="seccion-tab"
+        >
+
+            <!-- =============================================
+                 ENCABEZADO
+            ============================================== -->
+
+            <div class="encabezado-seccion">
+
+                <div>
+
+                    <span class="seccion-etiqueta">
+                        Organización académica
+                    </span>
+
+                    <h2>
+                        Gestión y asignaciones fijas
+                    </h2>
+
+                    <p>
+                        Configure el periodo académico y las
+                        aulas o laboratorios asignados de forma
+                        recurrente durante el semestre.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =============================================
+                 GESTIÓN ACTUAL
+            ============================================== -->
+
+            <div class="grid-dos-columnas">
+
+
+                <!-- =========================================
+                     CREAR GESTIÓN
+                ========================================== -->
+
+                <div class="panel">
+
+                    <div class="panel-cabecera">
+
+                        <div>
+
+                            <span class="seccion-etiqueta">
+                                Periodo académico
+                            </span>
+
+                            <h3>
+                                Nueva gestión
+                            </h3>
+
+                            <p>
+                                Ejemplo:
+                                Gestión 2-2026
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <form
+                        id="formNuevaGestion"
+                        class="formulario-panel"
+                    >
+
+
+                        <div class="campo">
+
+                            <label for="nuevaGestionNombre">
+                                Nombre de la gestión
+                            </label>
+
+                            <input
+                                type="text"
+                                id="nuevaGestionNombre"
+                                placeholder="Ej.: 2-2026"
+                                maxlength="100"
+                                required
+                            >
+
+                        </div>
+
+
+
+                        <div class="grid-formulario">
+
+
+                            <div class="campo">
+
+                                <label for="nuevaGestionInicio">
+                                    Fecha de inicio
+                                </label>
+
+                                <input
+                                    type="date"
+                                    id="nuevaGestionInicio"
+                                    required
+                                >
+
+                            </div>
+
+
+
+                            <div class="campo">
+
+                                <label for="nuevaGestionFin">
+                                    Fecha de finalización
+                                </label>
+
+                                <input
+                                    type="date"
+                                    id="nuevaGestionFin"
+                                    required
+                                >
+
+                            </div>
+
+
+                        </div>
+
+
+
+                        <button
+                            type="submit"
+                            id="btnCrearGestion"
+                            class="btn-primario"
+                        >
+                            Crear gestión
+                        </button>
+
+
+                        <p
+                            id="mensajeNuevaGestion"
+                            class="mensaje-formulario"
+                        ></p>
+
+                    </form>
+
+                </div>
+
+
+
+                <!-- =========================================
+                     GESTIÓN SELECCIONADA
+                ========================================== -->
+
+                <div class="panel">
+
+                    <div class="panel-cabecera">
+
+                        <div>
+
+                            <span class="seccion-etiqueta">
+                                Gestión de trabajo
+                            </span>
+
+                            <h3>
+                                Gestión seleccionada
+                            </h3>
+
+                            <p>
+                                Las asignaciones mostradas
+                                corresponderán a esta gestión.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="formulario-panel">
+
+
+                        <div class="campo">
+
+                            <label for="selectGestion">
+                                Gestión
+                            </label>
+
+                            <select id="selectGestion">
+
+                                <option value="">
+                                    Cargando gestiones...
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+
+                        <div
+                            id="infoGestionSeleccionada"
+                            class="info-gestion"
+                        >
+
+                            <div class="info-gestion-vacia">
+
+                                Seleccione una gestión.
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="acciones-inline">
+
+                            <button
+                                type="button"
+                                id="btnEditarGestion"
+                                class="btn-secundario"
+                                disabled
+                            >
+                                Editar gestión
+                            </button>
+
+
+                            <button
+                                type="button"
+                                id="btnActualizarGestiones"
+                                class="btn-secundario"
+                            >
+                                Actualizar
+                            </button>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =============================================
+                 ASIGNACIÓN FIJA
+            ============================================== -->
+
+            <div class="panel">
+
+                <div class="panel-cabecera">
+
+                    <div>
+
+                        <span class="seccion-etiqueta">
+                            Horario recurrente
+                        </span>
+
+                        <h3>
+                            Nueva asignación fija
+                        </h3>
+
+                        <p>
+                            Una asignación fija bloqueará el
+                            espacio seleccionado durante todos
+                            los días equivalentes de la gestión.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <form
+                    id="formNuevaAsignacion"
+                    class="formulario-panel"
+                >
+
+
+                    <div class="grid-formulario grid-cuatro">
+
+
+                        <!-- ESPACIO -->
+
+                        <div class="campo">
+
+                            <label for="asignacionEspacio">
+                                Aula / Laboratorio
+                            </label>
+
+                            <select
+                                id="asignacionEspacio"
+                                required
+                            >
+
+                                <option value="">
+                                    Seleccione un espacio
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+
+                        <!-- DOCENTE -->
+
+                        <div class="campo">
+
+                            <label for="asignacionDocente">
+                                Docente
+                            </label>
+
+                            <select
+                                id="asignacionDocente"
+                                required
+                            >
+
+                                <option value="">
+                                    Seleccione un docente
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+
+                        <!-- DÍA -->
+
+                        <div class="campo">
+
+                            <label for="asignacionDia">
+                                Día
+                            </label>
+
+                            <select
+                                id="asignacionDia"
+                                required
+                            >
+
+                                <option value="">
+                                    Seleccione
+                                </option>
+
+                                <option value="1">
+                                    Lunes
+                                </option>
+
+                                <option value="2">
+                                    Martes
+                                </option>
+
+                                <option value="3">
+                                    Miércoles
+                                </option>
+
+                                <option value="4">
+                                    Jueves
+                                </option>
+
+                                <option value="5">
+                                    Viernes
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+
+                        <!-- HORARIO -->
+
+                        <div class="campo">
+
+                            <label for="asignacionHorario">
+                                Horario
+                            </label>
+
+                            <select
+                                id="asignacionHorario"
+                                required
+                            >
+
+                                <option value="">
+                                    Seleccione
+                                </option>
+
+                                <option value="09:00-12:00">
+                                    09:00 - 12:00
+                                </option>
+
+                                <option value="14:00-17:00">
+                                    14:00 - 17:00
+                                </option>
+
+                                <option value="19:00-21:30">
+                                    19:00 - 21:30
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <div class="acciones-formulario">
+
+                        <button
+                            type="submit"
+                            id="btnCrearAsignacion"
+                            class="btn-primario"
+                        >
+                            Crear asignación fija
+                        </button>
+
+                    </div>
+
+
+                    <p
+                        id="mensajeNuevaAsignacion"
+                        class="mensaje-formulario"
+                    ></p>
+
+                </form>
+
+            </div>
+
+
+
+            <!-- =============================================
+                 EXPLICACIÓN DE ASIGNACIÓN FIJA
+            ============================================== -->
+
+            <div class="aviso-informativo">
+
+                <div class="aviso-icono">
+                    ℹ️
+                </div>
+
+                <div>
+
+                    <strong>
+                        ¿Cómo funciona una asignación fija?
+                    </strong>
+
+                    <p>
+                        Si durante la gestión se asigna
+                        <strong>Aula 3A</strong> al docente
+                        <strong>Juan Pérez</strong> los
+                        miércoles de
+                        <strong>09:00 a 12:00</strong>,
+                        ese espacio aparecerá ocupado todos
+                        los miércoles de esa gestión en dicho
+                        horario y no podrá reservarse nuevamente.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =============================================
+                 LISTADO DE ASIGNACIONES
+            ============================================== -->
+
+            <div class="panel panel-listado">
+
+                <div class="panel-cabecera">
+
+                    <div>
+
+                        <span class="seccion-etiqueta">
+                            Horario académico
+                        </span>
+
+                        <h3>
+                            Asignaciones fijas registradas
+                        </h3>
+
+                        <p>
+                            Puede modificar el espacio,
+                            docente, día u horario de una
+                            asignación existente.
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        id="btnActualizarAsignaciones"
+                        class="btn-secundario"
+                    >
+                        Actualizar
+                    </button>
+
+                </div>
+
+
+
+                <div class="filtros-asignaciones">
+
+
+                    <div class="campo">
+
+                        <label for="filtroAsignacionDia">
+                            Día
+                        </label>
+
+                        <select id="filtroAsignacionDia">
+
+                            <option value="">
+                                Todos
+                            </option>
+
+                            <option value="1">
+                                Lunes
+                            </option>
+
+                            <option value="2">
+                                Martes
+                            </option>
+
+                            <option value="3">
+                                Miércoles
+                            </option>
+
+                            <option value="4">
+                                Jueves
+                            </option>
+
+                            <option value="5">
+                                Viernes
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <div class="campo">
+
+                        <label for="filtroAsignacionHorario">
+                            Horario
+                        </label>
+
+                        <select id="filtroAsignacionHorario">
+
+                            <option value="">
+                                Todos
+                            </option>
+
+                            <option value="09:00-12:00">
+                                09:00 - 12:00
+                            </option>
+
+                            <option value="14:00-17:00">
+                                14:00 - 17:00
+                            </option>
+
+                            <option value="19:00-21:30">
+                                19:00 - 21:30
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="tabla-responsive">
+
+                    <table class="tabla-general">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Espacio
+                                </th>
+
+                                <th>
+                                    Tipo
+                                </th>
+
+                                <th>
+                                    Docente
+                                </th>
+
+                                <th>
+                                    Día
+                                </th>
+
+                                <th>
+                                    Horario
+                                </th>
+
+                                <th>
+                                    Acciones
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="tablaAsignaciones">
+
+                            <tr>
+
+                                <td
+                                    colspan="6"
+                                    class="tabla-cargando"
+                                >
+                                    Seleccione una gestión.
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             TAB 4
+             OBSERVACIONES
+        ================================================== -->
+
+        <section
+            id="tab-observaciones"
+            class="seccion-tab"
+        >
+
+
+            <div class="encabezado-seccion">
+
+                <div>
+
+                    <span class="seccion-etiqueta">
+                        Reportes de docentes
+                    </span>
+
+                    <h2>
+                        Observaciones de aulas y laboratorios
+                    </h2>
+
+                    <p>
+                        Consulte los problemas o novedades
+                        reportados por los docentes.
+                    </p>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    id="btnActualizarObservaciones"
+                    class="btn-secundario"
+                >
+                    Actualizar
+                </button>
+
+            </div>
+
+
+
+            <!-- =============================================
+                 RESUMEN DE OBSERVACIONES
+            ============================================== -->
+
+            <div class="tarjetas-resumen resumen-observaciones">
+
+
+                <div class="tarjeta-resumen">
+
+                    <span class="resumen-icono">
+                        ⚠️
+                    </span>
+
+                    <div>
+
+                        <span>
+                            Pendientes
+                        </span>
+
+                        <strong id="totalObservacionesPendientes">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="tarjeta-resumen">
+
+                    <span class="resumen-icono">
+                        ✅
+                    </span>
+
+                    <div>
+
+                        <span>
+                            Atendidas
+                        </span>
+
+                        <strong id="totalObservacionesAtendidas">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="tarjeta-resumen">
+
+                    <span class="resumen-icono">
+                        📋
+                    </span>
+
+                    <div>
+
+                        <span>
+                            Total
+                        </span>
+
+                        <strong id="totalObservaciones">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =============================================
+                 FILTROS
+            ============================================== -->
+
+            <div class="panel">
+
+                <div class="filtros-observaciones">
+
+
+                    <div class="campo">
+
+                        <label for="filtroObservacionEstado">
+                            Estado
+                        </label>
+
+                        <select id="filtroObservacionEstado">
+
+                            <option value="">
+                                Todas
+                            </option>
+
+                            <option value="pendiente">
+                                Pendientes
+                            </option>
+
+                            <option value="atendida">
+                                Atendidas
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <div class="campo">
+
+                        <label for="filtroObservacionEspacio">
+                            Espacio
+                        </label>
+
+                        <select id="filtroObservacionEspacio">
+
+                            <option value="">
+                                Todos los espacios
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =============================================
+                 LISTADO DE OBSERVACIONES
+            ============================================== -->
+
+            <div
+                id="listaObservaciones"
+                class="lista-observaciones"
+            >
+
+                <div class="estado-vacio">
+
+                    Cargando observaciones...
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+
+    </main>
+
+
+
+    <!-- =====================================================
+         MODAL
+         EDITAR ESPACIO
+    ====================================================== -->
+
+    <div
+        id="modalEditarEspacio"
+        class="modal"
+        aria-hidden="true"
+    >
+
+        <div
+            class="modal-fondo"
+            data-cerrar-modal="modalEditarEspacio"
+        ></div>
+
+
+        <div class="modal-contenido">
+
+
+            <div class="modal-cabecera">
+
+                <div>
+
+                    <span class="seccion-etiqueta">
+                        Configuración
+                    </span>
+
+                    <h3>
+                        Editar espacio
+                    </h3>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="btn-cerrar-modal"
+                    data-cerrar-modal="modalEditarEspacio"
+                    aria-label="Cerrar"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+
+            <form
+                id="formEditarEspacio"
+                class="formulario-panel"
+            >
+
+                <input
+                    type="hidden"
+                    id="editarEspacioId"
+                >
+
+
+
+                <div class="campo">
+
+                    <label for="editarEspacioTipo">
+                        Tipo
+                    </label>
+
+                    <select
+                        id="editarEspacioTipo"
+                        required
+                    >
+
+                        <option value="aula">
+                            Aula
+                        </option>
+
+                        <option value="laboratorio">
+                            Laboratorio
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <div class="campo">
+
+                    <label for="editarEspacioNombre">
+                        Nombre
+                    </label>
+
+                    <input
+                        type="text"
+                        id="editarEspacioNombre"
+                        maxlength="100"
+                        required
+                    >
+
+                </div>
+
+
+
+                <div class="campo">
+
+                    <label for="editarEspacioActivo">
+                        Estado
+                    </label>
+
+                    <select
+                        id="editarEspacioActivo"
+                        required
+                    >
+
+                        <option value="true">
+                            Habilitado
+                        </option>
+
+                        <option value="false">
+                            Deshabilitado
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <div class="modal-acciones">
+
+                    <button
+                        type="button"
+                        class="btn-secundario"
+                        data-cerrar-modal="modalEditarEspacio"
+                    >
+                        Cancelar
+                    </button>
+
+
+                    <button
+                        type="submit"
+                        id="btnGuardarEspacio"
+                        class="btn-primario"
+                    >
+                        Guardar cambios
+                    </button>
+
+                </div>
+
+
+                <p
+                    id="mensajeEditarEspacio"
+                    class="mensaje-formulario"
+                ></p>
+
+            </form>
+
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         MODAL
+         EDITAR GESTIÓN
+    ====================================================== -->
+
+    <div
+        id="modalEditarGestion"
+        class="modal"
+        aria-hidden="true"
+    >
+
+        <div
+            class="modal-fondo"
+            data-cerrar-modal="modalEditarGestion"
+        ></div>
+
+
+        <div class="modal-contenido">
+
+
+            <div class="modal-cabecera">
+
+                <div>
+
+                    <span class="seccion-etiqueta">
+                        Periodo académico
+                    </span>
+
+                    <h3>
+                        Editar gestión
+                    </h3>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="btn-cerrar-modal"
+                    data-cerrar-modal="modalEditarGestion"
+                    aria-label="Cerrar"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+
+            <form
+                id="formEditarGestion"
+                class="formulario-panel"
+            >
+
+                <input
+                    type="hidden"
+                    id="editarGestionId"
+                >
+
+
+
+                <div class="campo">
+
+                    <label for="editarGestionNombre">
+                        Nombre
+                    </label>
+
+                    <input
+                        type="text"
+                        id="editarGestionNombre"
+                        maxlength="100"
+                        required
+                    >
+
+                </div>
+
+
+
+                <div class="grid-formulario">
+
+
+                    <div class="campo">
+
+                        <label for="editarGestionInicio">
+                            Fecha de inicio
+                        </label>
+
+                        <input
+                            type="date"
+                            id="editarGestionInicio"
+                            required
+                        >
+
+                    </div>
+
+
+
+                    <div class="campo">
+
+                        <label for="editarGestionFin">
+                            Fecha de finalización
+                        </label>
+
+                        <input
+                            type="date"
+                            id="editarGestionFin"
+                            required
+                        >
+
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="campo">
+
+                    <label for="editarGestionActiva">
+                        Estado
+                    </label>
+
+                    <select
+                        id="editarGestionActiva"
+                        required
+                    >
+
+                        <option value="true">
+                            Activa
+                        </option>
+
+                        <option value="false">
+                            Inactiva
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <div class="modal-acciones">
+
+                    <button
+                        type="button"
+                        class="btn-secundario"
+                        data-cerrar-modal="modalEditarGestion"
+                    >
+                        Cancelar
+                    </button>
+
+
+                    <button
+                        type="submit"
+                        id="btnGuardarGestion"
+                        class="btn-primario"
+                    >
+                        Guardar cambios
+                    </button>
+
+                </div>
+
+
+                <p
+                    id="mensajeEditarGestion"
+                    class="mensaje-formulario"
+                ></p>
+
+            </form>
+
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         MODAL
+         EDITAR ASIGNACIÓN FIJA
+    ====================================================== -->
+
+    <div
+        id="modalEditarAsignacion"
+        class="modal"
+        aria-hidden="true"
+    >
+
+        <div
+            class="modal-fondo"
+            data-cerrar-modal="modalEditarAsignacion"
+        ></div>
+
+
+        <div class="modal-contenido modal-contenido-ancho">
+
+
+            <div class="modal-cabecera">
+
+                <div>
+
+                    <span class="seccion-etiqueta">
+                        Horario recurrente
+                    </span>
+
+                    <h3>
+                        Editar asignación fija
+                    </h3>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="btn-cerrar-modal"
+                    data-cerrar-modal="modalEditarAsignacion"
+                    aria-label="Cerrar"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+
+            <form
+                id="formEditarAsignacion"
+                class="formulario-panel"
+            >
+
+                <input
+                    type="hidden"
+                    id="editarAsignacionId"
+                >
+
+
+
+                <div class="grid-formulario">
+
+
+                    <div class="campo">
+
+                        <label for="editarAsignacionEspacio">
+                            Aula / Laboratorio
+                        </label>
+
+                        <select
+                            id="editarAsignacionEspacio"
+                            required
+                        ></select>
+
+                    </div>
+
+
+
+                    <div class="campo">
+
+                        <label for="editarAsignacionDocente">
+                            Docente
+                        </label>
+
+                        <select
+                            id="editarAsignacionDocente"
+                            required
+                        ></select>
+
+                    </div>
+
+
+
+                    <div class="campo">
+
+                        <label for="editarAsignacionDia">
+                            Día
+                        </label>
+
+                        <select
+                            id="editarAsignacionDia"
+                            required
+                        >
+
+                            <option value="1">
+                                Lunes
+                            </option>
+
+                            <option value="2">
+                                Martes
+                            </option>
+
+                            <option value="3">
+                                Miércoles
+                            </option>
+
+                            <option value="4">
+                                Jueves
+                            </option>
+
+                            <option value="5">
+                                Viernes
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <div class="campo">
+
+                        <label for="editarAsignacionHorario">
+                            Horario
+                        </label>
+
+                        <select
+                            id="editarAsignacionHorario"
+                            required
+                        >
+
+                            <option value="09:00-12:00">
+                                09:00 - 12:00
+                            </option>
+
+                            <option value="14:00-17:00">
+                                14:00 - 17:00
+                            </option>
+
+                            <option value="19:00-21:30">
+                                19:00 - 21:30
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="modal-acciones">
+
+                    <button
+                        type="button"
+                        class="btn-secundario"
+                        data-cerrar-modal="modalEditarAsignacion"
+                    >
+                        Cancelar
+                    </button>
+
+
+                    <button
+                        type="submit"
+                        id="btnGuardarAsignacion"
+                        class="btn-primario"
+                    >
+                        Guardar cambios
+                    </button>
+
+                </div>
+
+
+                <p
+                    id="mensajeEditarAsignacion"
+                    class="mensaje-formulario"
+                ></p>
+
+            </form>
+
+
+        </div>
+
+    </div>
+    <!-- =====================================================
+         MODAL
+         EDITAR RESERVA PUNTUAL
+    ====================================================== -->
+
+    <div
+        id="modalEditarReserva"
+        class="modal"
+        aria-hidden="true"
+    >
+
+        <div
+            class="modal-fondo"
+            data-cerrar-modal="modalEditarReserva"
+        ></div>
+
+
+        <div class="modal-contenido">
+
+
+            <div class="modal-cabecera">
+
+                <div>
+
+                    <span class="seccion-etiqueta">
+                        Reserva puntual
+                    </span>
+
+                    <h3>
+                        Editar reserva
+                    </h3>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="btn-cerrar-modal"
+                    data-cerrar-modal="modalEditarReserva"
+                    aria-label="Cerrar"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+
+            <form
+                id="formEditarReserva"
+                class="formulario-panel"
+            >
+
+                <input
+                    type="hidden"
+                    id="editarReservaId"
+                >
+
+
+                <div
+                    id="editarReservaDocenteInfo"
+                    class="info-reserva-docente"
+                >
+                    Docente: —
+                </div>
+
+
+
+                <div class="campo">
+
+                    <label for="editarReservaEspacio">
+                        Aula / Laboratorio
+                    </label>
+
+                    <select
+                        id="editarReservaEspacio"
+                        required
+                    >
+
+                        <option value="">
+                            Seleccione un espacio
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <div class="grid-formulario">
+
+
+                    <div class="campo">
+
+                        <label for="editarReservaFecha">
+                            Fecha
+                        </label>
+
+                        <input
+                            type="date"
+                            id="editarReservaFecha"
+                            required
+                        >
+
+                    </div>
+
+
+
+                    <div class="campo">
+
+                        <label for="editarReservaHorario">
+                            Horario
+                        </label>
+
+                        <select
+                            id="editarReservaHorario"
+                            required
+                        >
+
+                            <option value="09:00-12:00">
+                                09:00 - 12:00
+                            </option>
+
+                            <option value="14:00-17:00">
+                                14:00 - 17:00
+                            </option>
+
+                            <option value="19:00-21:30">
+                                19:00 - 21:30
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="modal-acciones">
+
+                    <button
+                        type="button"
+                        class="btn-secundario"
+                        data-cerrar-modal="modalEditarReserva"
+                    >
+                        Cancelar
+                    </button>
+
+
+                    <button
+                        type="submit"
+                        id="btnGuardarReserva"
+                        class="btn-primario"
+                    >
+                        Guardar cambios
+                    </button>
+
+                </div>
+
+
+                <p
+                    id="mensajeEditarReserva"
+                    class="mensaje-formulario"
+                ></p>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         MODAL
+         CANCELAR RESERVA
+    ====================================================== -->
+
+    <div
+        id="modalCancelarReserva"
+        class="modal"
+        aria-hidden="true"
+    >
+
+        <div
+            class="modal-fondo"
+            data-cerrar-modal="modalCancelarReserva"
+        ></div>
+
+
+        <div class="modal-contenido modal-confirmacion">
+
+
+            <div class="modal-cabecera">
+
+                <div>
+
+                    <span class="seccion-etiqueta">
+                        Confirmación
+                    </span>
+
+                    <h3>
+                        Cancelar reserva
+                    </h3>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="btn-cerrar-modal"
+                    data-cerrar-modal="modalCancelarReserva"
+                    aria-label="Cerrar"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+
+            <div class="confirmacion-contenido">
+
+                <div class="confirmacion-icono">
+                    ⚠️
+                </div>
+
+
+                <p>
+                    ¿Está seguro de cancelar esta reserva?
+                </p>
+
+
+                <div
+                    id="infoCancelarReserva"
+                    class="detalle-confirmacion"
+                ></div>
+
+            </div>
+
+
+            <input
+                type="hidden"
+                id="cancelarReservaId"
+            >
+
+
+            <div class="modal-acciones">
+
+                <button
+                    type="button"
+                    class="btn-secundario"
+                    data-cerrar-modal="modalCancelarReserva"
+                >
+                    Volver
+                </button>
+
+
+                <button
+                    type="button"
+                    id="btnConfirmarCancelarReserva"
+                    class="btn-peligro"
+                >
+                    Sí, cancelar reserva
+                </button>
+
+            </div>
+
+
+            <p
+                id="mensajeCancelarReserva"
+                class="mensaje-formulario"
+            ></p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         MODAL
+         ELIMINAR ASIGNACIÓN FIJA
+    ====================================================== -->
+
+    <div
+        id="modalEliminarAsignacion"
+        class="modal"
+        aria-hidden="true"
+    >
+
+        <div
+            class="modal-fondo"
+            data-cerrar-modal="modalEliminarAsignacion"
+        ></div>
+
+
+        <div class="modal-contenido modal-confirmacion">
+
+
+            <div class="modal-cabecera">
+
+                <div>
+
+                    <span class="seccion-etiqueta">
+                        Confirmación
+                    </span>
+
+                    <h3>
+                        Eliminar asignación fija
+                    </h3>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="btn-cerrar-modal"
+                    data-cerrar-modal="modalEliminarAsignacion"
+                    aria-label="Cerrar"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+
+            <div class="confirmacion-contenido">
+
+                <div class="confirmacion-icono">
+                    🗑️
+                </div>
+
+
+                <p>
+                    ¿Desea eliminar esta asignación fija?
+                </p>
+
+
+                <div
+                    id="infoEliminarAsignacion"
+                    class="detalle-confirmacion"
+                ></div>
+
+
+                <small>
+                    El espacio dejará de estar bloqueado
+                    recurrentemente para ese día y horario.
+                </small>
+
+            </div>
+
+
+            <input
+                type="hidden"
+                id="eliminarAsignacionId"
+            >
+
+
+            <div class="modal-acciones">
+
+                <button
+                    type="button"
+                    class="btn-secundario"
+                    data-cerrar-modal="modalEliminarAsignacion"
+                >
+                    Volver
+                </button>
+
+
+                <button
+                    type="button"
+                    id="btnConfirmarEliminarAsignacion"
+                    class="btn-peligro"
+                >
+                    Eliminar asignación
+                </button>
+
+            </div>
+
+
+            <p
+                id="mensajeEliminarAsignacion"
+                class="mensaje-formulario"
+            ></p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         MODAL
+         ATENDER OBSERVACIÓN
+    ====================================================== -->
+
+    <div
+        id="modalObservacion"
+        class="modal"
+        aria-hidden="true"
+    >
+
+        <div
+            class="modal-fondo"
+            data-cerrar-modal="modalObservacion"
+        ></div>
+
+
+        <div class="modal-contenido modal-contenido-ancho">
+
+
+            <div class="modal-cabecera">
+
+                <div>
+
+                    <span class="seccion-etiqueta">
+                        Reporte de docente
+                    </span>
+
+                    <h3>
+                        Gestionar observación
+                    </h3>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="btn-cerrar-modal"
+                    data-cerrar-modal="modalObservacion"
+                    aria-label="Cerrar"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+
+            <input
+                type="hidden"
+                id="observacionId"
+            >
+
+
+
+            <div class="detalle-observacion-modal">
+
+
+                <div class="detalle-observacion-item">
+
+                    <span>
+                        Espacio
+                    </span>
+
+                    <strong id="observacionEspacio">
+                        —
+                    </strong>
+
+                </div>
+
+
+
+                <div class="detalle-observacion-item">
+
+                    <span>
+                        Docente
+                    </span>
+
+                    <strong id="observacionDocente">
+                        —
+                    </strong>
+
+                </div>
+
+
+
+                <div class="detalle-observacion-item">
+
+                    <span>
+                        Fecha
+                    </span>
+
+                    <strong id="observacionFecha">
+                        —
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+
+            <div class="observacion-texto-modal">
+
+                <span>
+                    Observación reportada
+                </span>
+
+                <p id="observacionTexto">
+                    —
+                </p>
+
+            </div>
+
+
+
+            <form
+                id="formActualizarObservacion"
+                class="formulario-panel"
+            >
+
+
+                <div class="campo">
+
+                    <label for="observacionEstado">
+                        Estado
+                    </label>
+
+                    <select
+                        id="observacionEstado"
+                        required
+                    >
+
+                        <option value="pendiente">
+                            Pendiente
+                        </option>
+
+                        <option value="atendida">
+                            Atendida
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <div class="campo">
+
+                    <label for="observacionRespuesta">
+                        Respuesta / detalle administrativo
+                    </label>
+
+                    <textarea
+                        id="observacionRespuesta"
+                        rows="5"
+                        maxlength="1000"
+                        placeholder="Ej.: Se realizó la revisión y el ventilador fue reparado."
+                    ></textarea>
+
+                </div>
+
+
+
+                <div class="modal-acciones">
+
+                    <button
+                        type="button"
+                        class="btn-secundario"
+                        data-cerrar-modal="modalObservacion"
+                    >
+                        Cancelar
+                    </button>
+
+
+                    <button
+                        type="submit"
+                        id="btnGuardarObservacion"
+                        class="btn-primario"
+                    >
+                        Guardar
+                    </button>
+
+                </div>
+
+
+                <p
+                    id="mensajeObservacion"
+                    class="mensaje-formulario"
+                ></p>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         MODAL
+         ELIMINAR OBSERVACIÓN
+    ====================================================== -->
+
+    <div
+        id="modalEliminarObservacion"
+        class="modal"
+        aria-hidden="true"
+    >
+
+        <div
+            class="modal-fondo"
+            data-cerrar-modal="modalEliminarObservacion"
+        ></div>
+
+
+        <div class="modal-contenido modal-confirmacion">
+
+
+            <div class="modal-cabecera">
+
+                <div>
+
+                    <span class="seccion-etiqueta">
+                        Confirmación
+                    </span>
+
+                    <h3>
+                        Eliminar observación
+                    </h3>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="btn-cerrar-modal"
+                    data-cerrar-modal="modalEliminarObservacion"
+                    aria-label="Cerrar"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+
+            <div class="confirmacion-contenido">
+
+                <div class="confirmacion-icono">
+                    🗑️
+                </div>
+
+
+                <p>
+                    ¿Está seguro de eliminar esta observación?
+                </p>
+
+
+                <small>
+                    Esta acción eliminará definitivamente
+                    el reporte registrado.
+                </small>
+
+            </div>
+
+
+            <input
+                type="hidden"
+                id="eliminarObservacionId"
+            >
+
+
+            <div class="modal-acciones">
+
+                <button
+                    type="button"
+                    class="btn-secundario"
+                    data-cerrar-modal="modalEliminarObservacion"
+                >
+                    Volver
+                </button>
+
+
+                <button
+                    type="button"
+                    id="btnConfirmarEliminarObservacion"
+                    class="btn-peligro"
+                >
+                    Eliminar
+                </button>
+
+            </div>
+
+
+            <p
+                id="mensajeEliminarObservacion"
+                class="mensaje-formulario"
+            ></p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         MENSAJE GLOBAL
+    ====================================================== -->
+
+    <div
+        id="mensajeGlobal"
+        class="mensaje-global"
+        aria-live="polite"
+    ></div>
+
+
+
+    <!-- =====================================================
+         CARGANDO GLOBAL
+    ====================================================== -->
+
+    <div
+        id="cargandoGlobal"
+        class="cargando-global oculto"
+    >
+
+        <div class="cargando-caja">
+
+            <div class="spinner"></div>
+
+            <span>
+                Procesando...
+            </span>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="footer-panel">
+
+        <div>
+
+            <strong>
+                Instituto CETA
+            </strong>
+
+            <span>
+                Sistema de Reserva de Aulas y Laboratorios
+            </span>
+
+        </div>
+
+
+        <span>
+            Desarrollado por Andres Vega
+        </span>
+
+    </footer>
+
+
+
+    <!-- =====================================================
+         SUPABASE
+    ====================================================== -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+    ></script>
+
+
+    <script
+        src="js/supabase.js?v=1"
+    ></script>
+
+
+    <!-- =====================================================
+         PANEL ADMINISTRADOR
+    ====================================================== -->
+
+    <script
+        src="js/admin.js?v=1"
+    ></script>
+
 
 </body>
 
