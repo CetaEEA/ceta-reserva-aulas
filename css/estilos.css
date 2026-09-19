@@ -5211,3 +5211,78 @@ body.modal-abierto {
     }
 
 }
+/* ============================================================
+   100. BOTÓN ELIMINAR OBSERVACIÓN
+   ============================================================ */
+
+.lista-observaciones .btn-peligro {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 6px;
+
+    min-height: 38px;
+
+    padding: 8px 14px;
+
+    border: none;
+    border-radius: 9px;
+
+    background: #dc2626;
+    color: #ffffff;
+
+    font-family: inherit;
+    font-size: 0.85rem;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.15s ease,
+        background 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+
+.lista-observaciones .btn-peligro:hover {
+    background: #b91c1c;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 5px 14px rgba(220, 38, 38, 0.25);
+}
+
+
+.lista-observaciones .btn-peligro:active {
+    transform: translateY(0);
+}
+
+
+.lista-observaciones .btn-peligro:disabled {
+    opacity: 0.55;
+
+    cursor: not-allowed;
+
+    transform: none;
+
+    box-shadow: none;
+}
+
+
+/* Modo oscuro */
+
+body.modo-oscuro
+.lista-observaciones
+.btn-peligro {
+    background: #dc2626;
+    color: #ffffff;
+}
+
+
+body.modo-oscuro
+.lista-observaciones
+.btn-peligro:hover {
+    background: #ef4444;
+}
