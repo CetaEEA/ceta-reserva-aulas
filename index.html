@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>CETA | Reservas de Aulas y Laboratorios</title>
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/estilos.css?v=1"
+    >
+
+</head>
+
+
+<body class="login-page">
+
+    <main class="login-container">
+
+        <section class="login-card">
+
+            <div class="login-logo">
+
+                <img
+                    src="img/logo-ceta-transparente.png"
+                    alt="CETA"
+                >
+
+            </div>
+
+
+            <div class="login-titulo">
+
+                <p class="login-instituto">
+                    Instituto CETA
+                </p>
+
+                <h1>
+                    Reservas de Aulas
+                    <span>y Laboratorios</span>
+                </h1>
+
+                <p class="login-descripcion">
+                    Sistema de administración y reserva de espacios académicos
+                </p>
+
+            </div>
+
+
+            <form id="formLogin" class="login-form">
+
+                <div class="campo">
+
+                    <label for="usuario">
+                        Usuario
+                    </label>
+
+                    <input
+                        type="text"
+                        id="usuario"
+                        autocomplete="username"
+                        placeholder="Ingrese su usuario"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label for="password">
+                        Contraseña
+                    </label>
+
+                    <div class="password-container">
+
+                        <input
+                            type="password"
+                            id="password"
+                            autocomplete="current-password"
+                            placeholder="Ingrese su contraseña"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            id="btnMostrarPassword"
+                            class="btn-ver-password"
+                            aria-label="Mostrar contraseña"
+                        >
+                            👁
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    id="btnIngresar"
+                    class="btn-login"
+                >
+                    Ingresar
+                </button>
+
+
+                <p
+                    id="mensajeLogin"
+                    class="mensaje-login"
+                ></p>
+
+            </form>
+
+
+            <div class="login-footer">
+
+                <p>
+                    Uso exclusivo del personal autorizado
+                </p>
+
+                <span>
+                    Instituto de enseñanza técnico automotriz
+                </span>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer class="footer-desarrollador">
+        Desarrollado por Andres Vega
+    </footer>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="js/supabase.js?v=1"></script>
+
+    <script src="js/login.js?v=1"></script>
+
+</body>
+
+</html>
