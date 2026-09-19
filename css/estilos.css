@@ -4666,3 +4666,285 @@ textarea:focus-visible {
    CETA - RESERVAS DE AULAS Y LABORATORIOS
    Desarrollado por Andres Vega
    ============================================================ */
+/* ============================================================
+   88. PANEL DOCENTE - SELECTOR DE TURNOS
+   ============================================================ */
+
+.selector-turnos {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 10px;
+
+    margin-bottom: 14px;
+}
+
+
+.btn-turno {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+
+    min-height: 66px;
+
+    padding: 10px 14px;
+
+    border:
+        1px solid var(--borde);
+
+    border-radius: 10px;
+
+    background: var(--superficie);
+
+    color: var(--texto);
+
+    box-shadow: var(--sombra);
+
+    transition:
+        border-color 0.15s ease,
+        background 0.15s ease,
+        transform 0.15s ease;
+}
+
+
+.btn-turno:hover {
+    border-color: var(--azul-claro);
+
+    transform: translateY(-1px);
+}
+
+
+.btn-turno.activo {
+    border-color: var(--azul-claro);
+
+    background: #eef6fc;
+
+    color: var(--azul);
+}
+
+
+.turno-icono {
+    font-size: 1.3rem;
+}
+
+
+.turno-contenido {
+    display: flex;
+
+    flex-direction: column;
+
+    text-align: left;
+}
+
+
+.turno-contenido strong {
+    font-size: 0.8rem;
+}
+
+
+.turno-contenido small {
+    margin-top: 2px;
+
+    color: var(--texto-suave);
+
+    font-size: 0.65rem;
+}
+
+
+/* ============================================================
+   89. MI RESERVA
+   ============================================================ */
+
+.indicador-mi-reserva {
+    background: var(--azul-claro);
+
+    box-shadow:
+        0 0 0 3px rgba(40, 117, 183, 0.12);
+}
+
+
+.celda-mi-reserva
+.estado-disponibilidad {
+    background: #eaf4fd;
+
+    border:
+        1px solid rgba(40, 117, 183, 0.25);
+
+    color: var(--azul);
+}
+
+
+/* ============================================================
+   90. BOTÓN RESERVAR EN CELDA
+   ============================================================ */
+
+.btn-reservar-rapido {
+    margin-top: 3px;
+
+    padding: 4px 9px;
+
+    border: 0;
+
+    border-radius: 6px;
+
+    background: var(--verde);
+
+    color: #ffffff;
+
+    font-size: 0.62rem;
+
+    font-weight: 800;
+
+    cursor: pointer;
+}
+
+
+.btn-reservar-rapido:hover {
+    filter: brightness(0.94);
+}
+
+
+/* ============================================================
+   91. DETALLE RESERVA RÁPIDA
+   ============================================================ */
+
+.detalle-reserva-rapida {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding: 7px 0;
+
+    border-bottom:
+        1px solid var(--borde);
+}
+
+
+.detalle-reserva-rapida:last-child {
+    border-bottom: 0;
+}
+
+
+.detalle-reserva-rapida span {
+    color: var(--texto-suave);
+
+    font-size: 0.68rem;
+}
+
+
+.detalle-reserva-rapida strong {
+    color: var(--texto);
+
+    font-size: 0.73rem;
+
+    text-align: right;
+}
+
+
+.reserva-icono-confirmacion {
+    background: var(--verde-fondo);
+
+    color: var(--verde);
+
+    border-color:
+        rgba(25, 135, 84, 0.18);
+}
+
+
+/* ============================================================
+   92. MODO OSCURO DOCENTE
+   ============================================================ */
+
+body.modo-oscuro
+.btn-turno {
+    background: var(--superficie);
+
+    border-color: var(--borde);
+}
+
+
+body.modo-oscuro
+.btn-turno.activo {
+    background:
+        rgba(40, 117, 183, 0.16);
+
+    border-color: var(--azul-claro);
+}
+
+
+body.modo-oscuro
+.celda-mi-reserva
+.estado-disponibilidad {
+    background:
+        rgba(40, 117, 183, 0.13);
+
+    border-color:
+        rgba(88, 169, 235, 0.25);
+}
+
+
+/* ============================================================
+   93. RESPONSIVE DOCENTE
+   ============================================================ */
+
+@media (max-width: 700px) {
+
+    .selector-turnos {
+        gap: 6px;
+    }
+
+
+    .btn-turno {
+        min-height: 58px;
+
+        gap: 5px;
+
+        padding: 7px 5px;
+    }
+
+
+    .turno-icono {
+        font-size: 1rem;
+    }
+
+
+    .turno-contenido strong {
+        font-size: 0.67rem;
+    }
+
+
+    .turno-contenido small {
+        font-size: 0.55rem;
+    }
+
+
+    .btn-reservar-rapido {
+        padding:
+            4px 7px;
+
+        font-size: 0.57rem;
+    }
+
+}
+
+
+@media (max-width: 430px) {
+
+    .turno-icono {
+        display: none;
+    }
+
+
+    .turno-contenido {
+        text-align: center;
+    }
+
+}
