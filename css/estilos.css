@@ -1,375 +1,5109 @@
 /* ============================================================
    CETA - RESERVAS DE AULAS Y LABORATORIOS
-   LOGIN
-============================================================ */
+   HOJA DE ESTILOS GENERAL
+   ============================================================ */
+
+
+/* ============================================================
+   1. VARIABLES
+   ============================================================ */
+
+:root {
+
+    --color-principal: #163d68;
+    --color-principal-oscuro: #0e2b4b;
+    --color-principal-claro: #245d96;
+
+    --color-secundario: #2875b7;
+
+    --color-exito: #198754;
+    --color-exito-fondo: #e9f7ef;
+
+    --color-advertencia: #d89400;
+    --color-advertencia-fondo: #fff7dc;
+
+    --color-error: #c0392b;
+    --color-error-fondo: #fceceb;
+
+    --color-reservado: #b54b3e;
+    --color-reservado-fondo: #fff0ee;
+
+    --color-asignacion: #7653a6;
+    --color-asignacion-fondo: #f3edfb;
+
+    --color-libre: #198754;
+    --color-libre-fondo: #eaf8f0;
+
+    --color-fondo: #f3f6fa;
+    --color-superficie: #ffffff;
+    --color-superficie-secundaria: #f8fafc;
+
+    --color-texto: #1f2937;
+    --color-texto-secundario: #64748b;
+
+    --color-borde: #dce3eb;
+    --color-borde-fuerte: #c7d1dc;
+
+    --sombra-suave:
+        0 4px 16px rgba(15, 39, 65, 0.08);
+
+    --sombra-media:
+        0 8px 28px rgba(15, 39, 65, 0.13);
+
+    --radio-pequeno: 8px;
+    --radio-medio: 12px;
+    --radio-grande: 18px;
+
+    --transicion: 0.2s ease;
+}
+
+
+/* ============================================================
+   2. RESET GENERAL
+   ============================================================ */
 
 * {
+
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+
 }
 
 
-html,
-body {
+html {
+
     min-height: 100%;
+    scroll-behavior: smooth;
+
 }
 
 
 body {
-    font-family: "Inter", sans-serif;
-    background: #f4f6f8;
-    color: #172033;
+
+    min-height: 100vh;
+
+    font-family:
+        "Inter",
+        Arial,
+        sans-serif;
+
+    color: var(--color-texto);
+
+    background:
+        var(--color-fondo);
+
+    line-height: 1.5;
+
 }
 
+
+button,
+input,
+select,
+textarea {
+
+    font: inherit;
+
+}
+
+
+button {
+
+    cursor: pointer;
+
+}
+
+
+button:disabled {
+
+    cursor: not-allowed;
+    opacity: 0.6;
+
+}
+
+
+input,
+select,
+textarea {
+
+    width: 100%;
+
+}
+
+
+a {
+
+    color: inherit;
+    text-decoration: none;
+
+}
+
+
+img {
+
+    max-width: 100%;
+    display: block;
+
+}
+
+
+/* ============================================================
+   3. FONDO INSTITUCIONAL
+   ============================================================ */
+
+.fondo-institucional {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: -2;
+
+    pointer-events: none;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(245, 248, 252, 0.98),
+            rgba(231, 238, 247, 0.96)
+        );
+
+}
+
+
+.fondo-institucional::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: min(620px, 78vw);
+    height: min(620px, 78vw);
+
+    left: 50%;
+    top: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    background-image:
+        url("../img/logo-ceta-transparente.png");
+
+    background-repeat: no-repeat;
+
+    background-position: center;
+
+    background-size: contain;
+
+    opacity: 0.035;
+
+}
+
+
+/* ============================================================
+   4. LOGIN
+   ============================================================ */
 
 .login-page {
+
     min-height: 100vh;
 
     display: flex;
     flex-direction: column;
 
-    background-color: #f4f6f8;
-
-    background-image:
-        linear-gradient(
-            rgba(244, 246, 248, 0.88),
-            rgba(244, 246, 248, 0.88)
-        ),
-        url("../img/logo-ceta-transparente.png");
-
-    background-repeat:
-        no-repeat,
-        no-repeat;
-
-    background-position:
-        center,
-        center;
-
-    background-size:
-        cover,
-        520px;
-
-    background-attachment:
-        fixed,
-        fixed;
 }
 
 
-.login-container {
+.login-contenedor {
+
     flex: 1;
 
     display: flex;
 
-    align-items: center;
     justify-content: center;
+    align-items: center;
 
-    padding: 30px 16px;
+    padding: 35px 18px;
+
 }
 
 
 .login-card {
+
     width: 100%;
-    max-width: 440px;
+    max-width: 430px;
 
     background:
-        rgba(255, 255, 255, 0.95);
+        rgba(255, 255, 255, 0.96);
 
     border:
-        1px solid #dfe5ec;
+        1px solid var(--color-borde);
 
-    border-radius: 20px;
+    border-radius:
+        var(--radio-grande);
 
-    padding: 32px;
+    padding:
+        32px;
 
     box-shadow:
-        0 18px 45px
-        rgba(15, 23, 42, 0.14);
+        var(--sombra-media);
+
+    backdrop-filter:
+        blur(6px);
+
 }
 
 
 .login-logo {
-    text-align: center;
 
-    margin-bottom: 18px;
-}
+    width: 115px;
 
+    margin:
+        0 auto 20px;
 
-.login-logo img {
-    width: 125px;
-    max-width: 100%;
 }
 
 
 .login-titulo {
-    text-align: center;
 
-    margin-bottom: 28px;
-}
-
-
-.login-instituto {
-    font-size: 0.82rem;
-    font-weight: 800;
-
-    text-transform: uppercase;
-
-    letter-spacing: 1.5px;
-
-    color: #2563eb;
-
-    margin-bottom: 8px;
-}
-
-
-.login-titulo h1 {
     font-family:
         "Poppins",
+        "Inter",
         sans-serif;
 
-    font-size: 1.8rem;
+    text-align: center;
 
-    line-height: 1.2;
+    font-size: 1.55rem;
 
-    color: #0f172a;
+    color:
+        var(--color-principal);
+
+    margin-bottom:
+        5px;
+
 }
 
 
-.login-titulo h1 span {
-    display: block;
+.login-subtitulo {
 
-    color: #2563eb;
-}
+    text-align: center;
 
+    color:
+        var(--color-texto-secundario);
 
-.login-descripcion {
-    margin-top: 12px;
+    font-size:
+        0.92rem;
 
-    color: #64748b;
+    margin-bottom:
+        28px;
 
-    font-size: 0.92rem;
-
-    line-height: 1.5;
 }
 
 
 .login-form {
+
     display: flex;
 
     flex-direction: column;
 
-    gap: 18px;
+    gap: 17px;
+
 }
 
 
 .campo {
+
     display: flex;
 
     flex-direction: column;
 
-    gap: 7px;
+    gap: 6px;
+
 }
 
 
 .campo label {
-    font-weight: 700;
 
-    font-size: 0.9rem;
+    font-size:
+        0.88rem;
 
-    color: #334155;
+    font-weight:
+        700;
+
+    color:
+        var(--color-texto);
+
 }
 
 
-.campo input {
-    width: 100%;
-
-    padding: 13px 14px;
+.campo input,
+.campo select,
+.campo textarea {
 
     border:
-        1px solid #cbd5e1;
+        1px solid var(--color-borde-fuerte);
 
-    border-radius: 10px;
+    border-radius:
+        var(--radio-pequeno);
 
-    background: #ffffff;
+    background:
+        var(--color-superficie);
 
-    color: #0f172a;
+    color:
+        var(--color-texto);
 
-    font-family: inherit;
+    padding:
+        11px 12px;
 
-    font-size: 0.95rem;
+    outline:
+        none;
 
-    outline: none;
+    transition:
+        border-color var(--transicion),
+        box-shadow var(--transicion),
+        background var(--transicion);
 
-    transition: 0.2s;
 }
 
 
-.campo input:focus {
-    border-color: #2563eb;
+.campo textarea {
+
+    min-height:
+        110px;
+
+    resize:
+        vertical;
+
+}
+
+
+.campo input:focus,
+.campo select:focus,
+.campo textarea:focus {
+
+    border-color:
+        var(--color-secundario);
 
     box-shadow:
         0 0 0 3px
-        rgba(37, 99, 235, 0.12);
+        rgba(40, 117, 183, 0.13);
+
 }
 
 
-.password-container {
+.password-contenedor {
+
     position: relative;
+
 }
 
 
-.password-container input {
-    padding-right: 52px;
+.password-contenedor input {
+
+    padding-right:
+        48px;
+
 }
 
 
 .btn-ver-password {
+
     position: absolute;
 
-    right: 6px;
     top: 50%;
+    right: 7px;
 
     transform:
         translateY(-50%);
 
-    width: 40px;
-    height: 38px;
+    width: 36px;
+    height: 36px;
 
-    border: none;
+    border: 0;
 
-    background: transparent;
+    background:
+        transparent;
 
-    cursor: pointer;
+    border-radius:
+        7px;
 
-    border-radius: 8px;
+    color:
+        var(--color-texto-secundario);
 
-    font-size: 1rem;
 }
 
 
 .btn-ver-password:hover {
-    background: #f1f5f9;
+
+    background:
+        var(--color-superficie-secundaria);
+
 }
 
 
 .btn-login {
-    width: 100%;
 
-    border: none;
+    border: 0;
 
-    border-radius: 10px;
+    border-radius:
+        var(--radio-pequeno);
 
-    padding: 13px 18px;
+    padding:
+        12px 18px;
 
-    background: #2563eb;
+    background:
+        var(--color-principal);
 
-    color: #ffffff;
+    color:
+        #ffffff;
 
-    font-family: inherit;
+    font-weight:
+        800;
 
-    font-weight: 800;
+    transition:
+        background var(--transicion),
+        transform var(--transicion);
 
-    font-size: 0.98rem;
-
-    cursor: pointer;
-
-    transition: 0.2s;
 }
 
 
 .btn-login:hover {
-    background: #1d4ed8;
+
+    background:
+        var(--color-principal-claro);
+
+}
+
+
+.btn-login:active {
+
+    transform:
+        scale(0.99);
+
+}
+
+
+.login-mensaje {
+
+    min-height:
+        22px;
+
+    text-align:
+        center;
+
+    font-size:
+        0.88rem;
+
+    font-weight:
+        600;
+
+    color:
+        var(--color-error);
+
+}
+
+
+/* ============================================================
+   5. PANEL ADMINISTRADOR
+   ============================================================ */
+
+.admin-page {
+
+    min-height: 100vh;
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+
+/* ============================================================
+   6. ENCABEZADO DEL PANEL
+   ============================================================ */
+
+.encabezado-panel {
+
+    position: relative;
+
+    z-index: 20;
+
+    background:
+        rgba(255, 255, 255, 0.97);
+
+    border-bottom:
+        1px solid var(--color-borde);
+
+    box-shadow:
+        0 2px 12px rgba(15, 39, 65, 0.06);
+
+}
+
+
+.encabezado-contenido {
+
+    width: min(1500px, calc(100% - 32px));
+
+    min-height:
+        78px;
+
+    margin:
+        0 auto;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap:
+        20px;
+
+}
+
+
+.marca-panel {
+
+    display: flex;
+
+    align-items: center;
+
+    gap:
+        14px;
+
+}
+
+
+.logo-panel {
+
+    width:
+        60px;
+
+    height:
+        60px;
+
+    object-fit:
+        contain;
+
+}
+
+
+.marca-textos {
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+
+.marca-textos h1 {
+
+    font-family:
+        "Poppins",
+        "Inter",
+        sans-serif;
+
+    font-size:
+        1.08rem;
+
+    line-height:
+        1.25;
+
+    color:
+        var(--color-principal);
+
+}
+
+
+.marca-textos span {
+
+    margin-top:
+        3px;
+
+    font-size:
+        0.82rem;
+
+    color:
+        var(--color-texto-secundario);
+
+}
+
+
+.usuario-panel {
+
+    display: flex;
+
+    align-items: center;
+
+    gap:
+        12px;
+
+}
+
+
+.usuario-datos {
+
+    text-align: right;
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+
+.usuario-datos small {
+
+    color:
+        var(--color-texto-secundario);
+
+    font-size:
+        0.73rem;
+
+}
+
+
+#nombreAdministrador {
+
+    font-size:
+        0.9rem;
+
+    font-weight:
+        800;
+
+}
+
+
+/* ============================================================
+   7. BOTÓN CERRAR SESIÓN
+   ============================================================ */
+
+.btn-cerrar-sesion {
+
+    border:
+        1px solid var(--color-borde-fuerte);
+
+    background:
+        var(--color-superficie);
+
+    color:
+        var(--color-principal);
+
+    padding:
+        9px 13px;
+
+    border-radius:
+        var(--radio-pequeno);
+
+    font-weight:
+        700;
+
+    transition:
+        background var(--transicion),
+        border-color var(--transicion),
+        color var(--transicion);
+
+}
+
+
+.btn-cerrar-sesion:hover {
+
+    background:
+        var(--color-error-fondo);
+
+    border-color:
+        rgba(192, 57, 43, 0.35);
+
+    color:
+        var(--color-error);
+
+}
+
+
+/* ============================================================
+   8. NAVEGACIÓN PRINCIPAL
+   ============================================================ */
+
+.navegacion-panel {
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 15;
+
+    background:
+        rgba(255, 255, 255, 0.96);
+
+    border-bottom:
+        1px solid var(--color-borde);
+
+    backdrop-filter:
+        blur(8px);
+
+}
+
+
+.navegacion-contenido {
+
+    width:
+        min(1500px, calc(100% - 32px));
+
+    margin:
+        0 auto;
+
+    display: flex;
+
+    align-items: center;
+
+    gap:
+        5px;
+
+    overflow-x:
+        auto;
+
+    scrollbar-width:
+        thin;
+
+    padding:
+        7px 0;
+
+}
+
+
+.btn-tab {
+
+    position: relative;
+
+    flex:
+        0 0 auto;
+
+    border: 0;
+
+    background:
+        transparent;
+
+    color:
+        var(--color-texto-secundario);
+
+    padding:
+        10px 14px;
+
+    border-radius:
+        var(--radio-pequeno);
+
+    font-size:
+        0.88rem;
+
+    font-weight:
+        750;
+
+    white-space:
+        nowrap;
+
+    transition:
+        background var(--transicion),
+        color var(--transicion);
+
+}
+
+
+.btn-tab:hover {
+
+    background:
+        var(--color-superficie-secundaria);
+
+    color:
+        var(--color-principal);
+
+}
+
+
+.btn-tab.activo {
+
+    background:
+        var(--color-principal);
+
+    color:
+        #ffffff;
+
+}
+
+
+/* ============================================================
+   9. CONTADOR DE OBSERVACIONES
+   ============================================================ */
+
+#contadorObservaciones {
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    min-width:
+        21px;
+
+    height:
+        21px;
+
+    margin-left:
+        5px;
+
+    padding:
+        0 5px;
+
+    border-radius:
+        20px;
+
+    background:
+        var(--color-error);
+
+    color:
+        #ffffff;
+
+    font-size:
+        0.7rem;
+
+    font-weight:
+        800;
+
+}
+
+
+.btn-tab.activo
+#contadorObservaciones {
+
+    background:
+        #ffffff;
+
+    color:
+        var(--color-error);
+
+}
+
+
+/* ============================================================
+   10. BOTÓN MODO OSCURO
+   ============================================================ */
+
+#btnModoOscuro {
+
+    margin-left:
+        auto;
+
+    width:
+        42px;
+
+    min-width:
+        42px;
+
+    height:
+        40px;
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    border:
+        1px solid var(--color-borde);
+
+    border-radius:
+        var(--radio-pequeno);
+
+    background:
+        var(--color-superficie);
+
+    font-size:
+        1rem;
+
+    transition:
+        background var(--transicion),
+        transform var(--transicion);
+
+}
+
+
+#btnModoOscuro:hover {
+
+    background:
+        var(--color-superficie-secundaria);
 
     transform:
         translateY(-1px);
+
 }
 
 
-.btn-login:disabled {
-    opacity: 0.65;
+/* ============================================================
+   11. CONTENIDO PRINCIPAL
+   ============================================================ */
 
-    cursor: not-allowed;
+.contenido-principal {
 
-    transform: none;
+    flex: 1;
+
+    width:
+        min(1500px, calc(100% - 32px));
+
+    margin:
+        0 auto;
+
+    padding:
+        24px 0 42px;
+
 }
 
 
-.mensaje-login {
-    min-height: 22px;
+.seccion-tab {
 
-    text-align: center;
+    display:
+        none;
 
-    font-size: 0.9rem;
+}
 
-    font-weight: 600;
+
+.seccion-tab.activa {
+
+    display:
+        block;
+
+}
+
+
+.encabezado-seccion {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap:
+        18px;
+
+    margin-bottom:
+        20px;
+
+}
+
+
+.encabezado-seccion h2 {
+
+    font-family:
+        "Poppins",
+        "Inter",
+        sans-serif;
+
+    color:
+        var(--color-principal);
+
+    font-size:
+        1.35rem;
+
+}
+
+
+.encabezado-seccion p {
+
+    margin-top:
+        4px;
+
+    color:
+        var(--color-texto-secundario);
+
+    font-size:
+        0.9rem;
+
+}
+
+
+/* ============================================================
+   12. TARJETAS GENERALES
+   ============================================================ */
+
+.tarjeta {
+
+    background:
+        rgba(255, 255, 255, 0.96);
+
+    border:
+        1px solid var(--color-borde);
+
+    border-radius:
+        var(--radio-medio);
+
+    box-shadow:
+        var(--sombra-suave);
+
+    padding:
+        20px;
+
+}
+
+
+.tarjeta + .tarjeta {
+
+    margin-top:
+        20px;
+
+}
+
+
+.tarjeta-titulo {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap:
+        12px;
+
+    margin-bottom:
+        16px;
+
+}
+
+
+.tarjeta-titulo h3 {
+
+    font-family:
+        "Poppins",
+        "Inter",
+        sans-serif;
+
+    font-size:
+        1rem;
+
+    color:
+        var(--color-principal);
+
+}
+
+
+.tarjeta-titulo p {
+
+    color:
+        var(--color-texto-secundario);
+
+    font-size:
+        0.84rem;
+
+}
+
+
+/* ============================================================
+   13. BOTONES GENERALES
+   ============================================================ */
+
+.btn-principal,
+.btn-secundario,
+.btn-peligro,
+.btn-peligro-suave {
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    gap:
+        6px;
+
+    min-height:
+        39px;
+
+    padding:
+        8px 14px;
+
+    border-radius:
+        var(--radio-pequeno);
+
+    font-weight:
+        750;
+
+    font-size:
+        0.86rem;
+
+    transition:
+        background var(--transicion),
+        color var(--transicion),
+        border-color var(--transicion),
+        transform var(--transicion);
+
+}
+
+
+.btn-principal {
+
+    border:
+        1px solid var(--color-principal);
+
+    background:
+        var(--color-principal);
+
+    color:
+        #ffffff;
+
+}
+
+
+.btn-principal:hover {
+
+    background:
+        var(--color-principal-claro);
+
+    border-color:
+        var(--color-principal-claro);
+
+}
+
+
+.btn-secundario {
+
+    border:
+        1px solid var(--color-borde-fuerte);
+
+    background:
+        var(--color-superficie);
+
+    color:
+        var(--color-principal);
+
+}
+
+
+.btn-secundario:hover {
+
+    border-color:
+        var(--color-secundario);
+
+    background:
+        #f0f6fb;
+
+}
+
+
+.btn-peligro {
+
+    border:
+        1px solid var(--color-error);
+
+    background:
+        var(--color-error);
+
+    color:
+        #ffffff;
+
+}
+
+
+.btn-peligro:hover {
+
+    filter:
+        brightness(0.93);
+
+}
+
+
+.btn-peligro-suave {
+
+    border:
+        1px solid rgba(192, 57, 43, 0.25);
+
+    background:
+        var(--color-error-fondo);
+
+    color:
+        var(--color-error);
+
+}
+
+
+.btn-peligro-suave:hover {
+
+    border-color:
+        var(--color-error);
+
+}
+
+
+/* ============================================================
+   14. FORMULARIOS GENERALES DEL PANEL
+   ============================================================ */
+
+.form-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap:
+        16px;
+
+}
+
+
+.form-grid-3 {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap:
+        16px;
+
+}
+
+
+.form-grid-4 {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap:
+        16px;
+
+}
+
+
+.grupo-formulario {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap:
+        6px;
+
+}
+
+
+.grupo-formulario label {
+
+    color:
+        var(--color-texto);
+
+    font-size:
+        0.82rem;
+
+    font-weight:
+        750;
+
+}
+
+
+.grupo-formulario input,
+.grupo-formulario select,
+.grupo-formulario textarea {
+
+    min-height:
+        42px;
+
+    border:
+        1px solid var(--color-borde-fuerte);
+
+    border-radius:
+        var(--radio-pequeno);
+
+    padding:
+        9px 11px;
+
+    background:
+        var(--color-superficie);
+
+    color:
+        var(--color-texto);
+
+    outline:
+        none;
+
+    transition:
+        border-color var(--transicion),
+        box-shadow var(--transicion);
+
+}
+
+
+.grupo-formulario textarea {
+
+    min-height:
+        110px;
+
+    resize:
+        vertical;
+
+}
+
+
+.grupo-formulario input:focus,
+.grupo-formulario select:focus,
+.grupo-formulario textarea:focus {
+
+    border-color:
+        var(--color-secundario);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(40, 117, 183, 0.12);
+
+}
+
+
+.acciones-formulario {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-end;
+
+    gap:
+        10px;
+
+    margin-top:
+        18px;
+
+}
+
+
+/* ============================================================
+   15. MENSAJES DE FORMULARIO
+   ============================================================ */
+
+.mensaje-formulario {
+
+    min-height:
+        20px;
+
+    margin-top:
+        10px;
+
+    font-size:
+        0.84rem;
+
+    font-weight:
+        650;
+
+}
+
+
+.mensaje-formulario:empty {
+
+    display:
+        none;
+
 }
 
 
 .mensaje-error {
-    color: #dc2626;
+
+    color:
+        var(--color-error);
+
 }
 
 
 .mensaje-exito {
-    color: #16a34a;
+
+    color:
+        var(--color-exito);
+
 }
 
 
-.mensaje-info {
-    color: #2563eb;
+/* ============================================================
+   16. CLASES AUXILIARES
+   ============================================================ */
+
+.oculto {
+
+    display:
+        none !important;
+
 }
 
 
-.login-footer {
-    margin-top: 25px;
+.texto-secundario {
 
-    padding-top: 20px;
+    color:
+        var(--color-texto-secundario);
 
-    border-top:
-        1px solid #e2e8f0;
+    font-size:
+        0.82rem;
 
-    text-align: center;
 }
 
 
-.login-footer p {
-    font-size: 0.8rem;
+.estado-vacio {
 
-    font-weight: 700;
+    padding:
+        28px 18px;
 
-    color: #475569;
+    text-align:
+        center;
+
+    color:
+        var(--color-texto-secundario);
+
+    background:
+        var(--color-superficie-secundaria);
+
+    border:
+        1px dashed var(--color-borde-fuerte);
+
+    border-radius:
+        var(--radio-medio);
+
 }
 
 
-.login-footer span {
+.estado-error {
+
+    color:
+        var(--color-error);
+
+    background:
+        var(--color-error-fondo);
+
+    border-color:
+        rgba(192, 57, 43, 0.25);
+
+}
+/* ============================================================
+   17. CONTROL DE SEMANA
+   ============================================================ */
+
+.controles-semana {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    flex-wrap: wrap;
+
+    gap: 14px;
+
+    margin-bottom: 20px;
+
+    padding: 16px;
+
+    background:
+        rgba(255, 255, 255, 0.96);
+
+    border:
+        1px solid var(--color-borde);
+
+    border-radius:
+        var(--radio-medio);
+
+    box-shadow:
+        var(--sombra-suave);
+
+}
+
+
+.selector-semana {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    flex-wrap: wrap;
+
+}
+
+
+.selector-semana input[type="date"] {
+
+    width: auto;
+
+    min-height: 40px;
+
+    padding: 8px 10px;
+
+    border:
+        1px solid var(--color-borde-fuerte);
+
+    border-radius:
+        var(--radio-pequeno);
+
+    background:
+        var(--color-superficie);
+
+    color:
+        var(--color-texto);
+
+    outline: none;
+
+}
+
+
+.selector-semana input[type="date"]:focus {
+
+    border-color:
+        var(--color-secundario);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(40, 117, 183, 0.12);
+
+}
+
+
+#textoSemana {
+
+    font-size: 0.9rem;
+
+    font-weight: 750;
+
+    color:
+        var(--color-principal);
+
+}
+
+
+.acciones-semana {
+
+    display: flex;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+}
+
+
+/* ============================================================
+   18. BOTONES DE NAVEGACIÓN DE SEMANA
+   ============================================================ */
+
+.btn-semana {
+
+    min-height: 39px;
+
+    padding: 8px 12px;
+
+    border:
+        1px solid var(--color-borde-fuerte);
+
+    border-radius:
+        var(--radio-pequeno);
+
+    background:
+        var(--color-superficie);
+
+    color:
+        var(--color-principal);
+
+    font-size: 0.84rem;
+
+    font-weight: 750;
+
+    transition:
+        background var(--transicion),
+        border-color var(--transicion),
+        transform var(--transicion);
+
+}
+
+
+.btn-semana:hover {
+
+    background:
+        #f0f6fb;
+
+    border-color:
+        var(--color-secundario);
+
+}
+
+
+.btn-semana:active {
+
+    transform:
+        scale(0.98);
+
+}
+
+
+/* ============================================================
+   19. BLOQUES DE HORARIO
+   ============================================================ */
+
+.bloque-horario {
+
+    margin-bottom: 22px;
+
+    background:
+        rgba(255, 255, 255, 0.96);
+
+    border:
+        1px solid var(--color-borde);
+
+    border-radius:
+        var(--radio-medio);
+
+    box-shadow:
+        var(--sombra-suave);
+
+    overflow: hidden;
+
+}
+
+
+.bloque-horario-cabecera {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 14px;
+
+    padding:
+        15px 18px;
+
+    background:
+        var(--color-superficie-secundaria);
+
+    border-bottom:
+        1px solid var(--color-borde);
+
+}
+
+
+.bloque-horario-cabecera h3 {
+
+    font-family:
+        "Poppins",
+        "Inter",
+        sans-serif;
+
+    font-size:
+        1rem;
+
+    color:
+        var(--color-principal);
+
+}
+
+
+.bloque-horario-cabecera span {
+
+    color:
+        var(--color-texto-secundario);
+
+    font-size:
+        0.82rem;
+
+}
+
+
+/* ============================================================
+   20. CONTENEDOR DE TABLAS
+   ============================================================ */
+
+.tabla-responsive {
+
+    width: 100%;
+
+    overflow-x: auto;
+
+    scrollbar-width: thin;
+
+}
+
+
+.tabla-responsive::-webkit-scrollbar {
+
+    height: 8px;
+
+}
+
+
+.tabla-responsive::-webkit-scrollbar-thumb {
+
+    background:
+        var(--color-borde-fuerte);
+
+    border-radius: 20px;
+
+}
+
+
+/* ============================================================
+   21. TABLAS GENERALES
+   ============================================================ */
+
+.tabla-panel {
+
+    width: 100%;
+
+    min-width: 760px;
+
+    border-collapse: collapse;
+
+    background:
+        var(--color-superficie);
+
+}
+
+
+.tabla-panel th,
+.tabla-panel td {
+
+    padding:
+        11px 12px;
+
+    border-bottom:
+        1px solid var(--color-borde);
+
+    vertical-align: middle;
+
+    text-align: left;
+
+    font-size:
+        0.82rem;
+
+}
+
+
+.tabla-panel thead th {
+
+    background:
+        var(--color-principal);
+
+    color:
+        #ffffff;
+
+    font-weight:
+        750;
+
+    position: relative;
+
+}
+
+
+.tabla-panel thead th span,
+.tabla-panel thead th small {
+
     display: block;
 
-    margin-top: 5px;
+}
+
+
+.tabla-panel thead th small {
+
+    margin-top: 2px;
+
+    font-size:
+        0.69rem;
+
+    font-weight: 500;
+
+    opacity: 0.82;
+
+}
+
+
+.tabla-panel tbody tr:last-child td,
+.tabla-panel tbody tr:last-child th {
+
+    border-bottom: 0;
+
+}
+
+
+.tabla-panel tbody tr:hover {
+
+    background:
+        rgba(40, 117, 183, 0.025);
+
+}
+
+
+/* ============================================================
+   22. TABLA SEMANAL
+   ============================================================ */
+
+.tabla-semanal {
+
+    table-layout: fixed;
+
+    min-width: 1000px;
+
+}
+
+
+.tabla-semanal thead th:first-child {
+
+    width: 190px;
+
+}
+
+
+.tabla-semanal thead th:not(:first-child) {
+
+    width: 160px;
+
+    text-align: center;
+
+}
+
+
+.tabla-semanal td {
+
+    text-align: center;
+
+    padding: 8px;
+
+}
+
+
+.celda-nombre-espacio {
+
+    position: sticky;
+
+    left: 0;
+
+    z-index: 4;
+
+    min-width: 190px;
+
+    background:
+        var(--color-superficie);
+
+    color:
+        var(--color-texto);
+
+    text-align: left !important;
+
+    border-right:
+        1px solid var(--color-borde);
+
+}
+
+
+.tabla-semanal thead th:first-child {
+
+    position: sticky;
+
+    left: 0;
+
+    z-index: 7;
+
+    background:
+        var(--color-principal);
+
+}
+
+
+.celda-nombre-espacio {
+
+    display: table-cell;
+
+}
+
+
+.celda-nombre-espacio > div {
+
+    display: inline-flex;
+
+    flex-direction: column;
+
+    vertical-align: middle;
+
+}
+
+
+.espacio-icono-tabla {
+
+    display: inline-block;
+
+    margin-right: 8px;
+
+    font-size: 1.05rem;
+
+    vertical-align: middle;
+
+}
+
+
+.celda-nombre-espacio strong {
+
+    font-size: 0.84rem;
+
+}
+
+
+.celda-nombre-espacio small {
+
+    margin-top: 2px;
+
+    color:
+        var(--color-texto-secundario);
+
+    font-size: 0.7rem;
+
+    font-weight: 500;
+
+}
+
+
+/* ============================================================
+   23. CELDAS DE DISPONIBILIDAD
+   ============================================================ */
+
+.celda-disponibilidad {
+
+    min-width: 150px;
+
+    transition:
+        background var(--transicion);
+
+}
+
+
+.estado-disponibilidad {
+
+    min-height: 62px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 3px;
+
+    padding: 7px;
+
+    border-radius:
+        var(--radio-pequeno);
+
+}
+
+
+.estado-disponibilidad strong {
+
+    font-size: 0.73rem;
+
+    letter-spacing: 0.015em;
+
+}
+
+
+.estado-disponibilidad small {
+
+    font-size: 0.67rem;
+
+    opacity: 0.85;
+
+}
+
+
+.docente-disponibilidad {
+
+    display: block;
+
+    max-width: 100%;
+
+    margin-top: 2px;
+
+    font-size: 0.69rem;
+
+    font-weight: 650;
+
+    line-height: 1.25;
+
+    overflow-wrap: anywhere;
+
+}
+
+
+/* ============================================================
+   24. ESTADO LIBRE
+   ============================================================ */
+
+.celda-libre
+.estado-disponibilidad {
+
+    background:
+        var(--color-libre-fondo);
+
+    border:
+        1px solid
+        rgba(25, 135, 84, 0.18);
+
+    color:
+        var(--color-libre);
+
+}
+
+
+.celda-libre:hover
+.estado-disponibilidad {
+
+    border-color:
+        rgba(25, 135, 84, 0.42);
+
+}
+
+
+/* ============================================================
+   25. ESTADO RESERVADO
+   ============================================================ */
+
+.celda-reservada
+.estado-disponibilidad {
+
+    background:
+        var(--color-reservado-fondo);
+
+    border:
+        1px solid
+        rgba(181, 75, 62, 0.22);
+
+    color:
+        var(--color-reservado);
+
+}
+
+
+/* ============================================================
+   26. ASIGNACIÓN FIJA
+   ============================================================ */
+
+.celda-asignacion
+.estado-disponibilidad {
+
+    background:
+        var(--color-asignacion-fondo);
+
+    border:
+        1px solid
+        rgba(118, 83, 166, 0.22);
+
+    color:
+        var(--color-asignacion);
+
+}
+
+
+/* ============================================================
+   27. OCUPADO
+   ============================================================ */
+
+.celda-ocupada
+.estado-disponibilidad {
+
+    background:
+        #f4f4f5;
+
+    border:
+        1px solid #dedee3;
+
+    color:
+        #52525b;
+
+}
+
+
+/* ============================================================
+   28. SIN GESTIÓN
+   ============================================================ */
+
+.celda-sin-gestion
+.estado-disponibilidad {
+
+    background:
+        #f3f4f6;
+
+    border:
+        1px dashed #cbd0d8;
+
+    color:
+        #7a8491;
+
+}
+
+
+.celda-sin-gestion
+.estado-disponibilidad strong {
+
+    font-size: 0.69rem;
+
+}
+
+
+/* ============================================================
+   29. TABLAS VACÍAS / CARGANDO / ERROR
+   ============================================================ */
+
+.tabla-vacia,
+.tabla-cargando,
+.tabla-error {
+
+    padding:
+        28px 16px !important;
+
+    text-align:
+        center !important;
+
+    font-size:
+        0.84rem !important;
+
+}
+
+
+.tabla-vacia,
+.tabla-cargando {
+
+    color:
+        var(--color-texto-secundario);
+
+}
+
+
+.tabla-error {
+
+    color:
+        var(--color-error);
+
+    background:
+        var(--color-error-fondo);
+
+}
+
+
+/* ============================================================
+   30. BADGES DE ESTADO
+   ============================================================ */
+
+.estado-badge {
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    min-height:
+        25px;
+
+    padding:
+        4px 9px;
+
+    border-radius:
+        20px;
+
+    font-size:
+        0.69rem;
+
+    font-weight:
+        800;
+
+    white-space:
+        nowrap;
+
+}
+
+
+.estado-activo {
+
+    background:
+        var(--color-exito-fondo);
+
+    color:
+        var(--color-exito);
+
+}
+
+
+.estado-inactivo {
+
+    background:
+        #eef0f3;
+
+    color:
+        #667085;
+
+}
+
+
+.estado-reservado {
+
+    background:
+        var(--color-reservado-fondo);
+
+    color:
+        var(--color-reservado);
+
+}
+
+
+.estado-pendiente {
+
+    background:
+        var(--color-advertencia-fondo);
+
+    color:
+        #9a6500;
+
+}
+
+
+/* ============================================================
+   31. ACCIONES DE TABLAS
+   ============================================================ */
+
+.acciones-tabla {
+
+    display: flex;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 6px;
+
+}
+
+
+.btn-tabla {
+
+    min-height: 31px;
+
+    padding:
+        5px 9px;
+
+    border-radius:
+        6px;
+
+    font-size:
+        0.72rem;
+
+    font-weight:
+        750;
+
+    transition:
+        background var(--transicion),
+        border-color var(--transicion),
+        color var(--transicion);
+
+}
+
+
+.btn-tabla.btn-editar {
+
+    border:
+        1px solid
+        rgba(40, 117, 183, 0.3);
+
+    background:
+        #eef6fc;
+
+    color:
+        var(--color-secundario);
+
+}
+
+
+.btn-tabla.btn-editar:hover {
+
+    border-color:
+        var(--color-secundario);
+
+    background:
+        #e3f1fb;
+
+}
+
+
+.btn-tabla.btn-eliminar {
+
+    border:
+        1px solid
+        rgba(192, 57, 43, 0.25);
+
+    background:
+        var(--color-error-fondo);
+
+    color:
+        var(--color-error);
+
+}
+
+
+.btn-tabla.btn-eliminar:hover {
+
+    border-color:
+        var(--color-error);
+
+}
+
+
+/* ============================================================
+   32. TABLAS DE LISTADOS ADMINISTRATIVOS
+   ============================================================ */
+
+.tabla-listado {
+
+    width: 100%;
+
+    min-width: 720px;
+
+    border-collapse: collapse;
+
+}
+
+
+.tabla-listado th,
+.tabla-listado td {
+
+    padding:
+        11px 12px;
+
+    border-bottom:
+        1px solid var(--color-borde);
+
+    text-align: left;
+
+    vertical-align: middle;
+
+    font-size:
+        0.82rem;
+
+}
+
+
+.tabla-listado thead th {
+
+    background:
+        var(--color-superficie-secundaria);
+
+    color:
+        var(--color-principal);
+
+    font-size:
+        0.76rem;
+
+    font-weight:
+        800;
+
+    border-bottom:
+        1px solid var(--color-borde-fuerte);
+
+}
+
+
+.tabla-listado tbody tr:hover {
+
+    background:
+        rgba(40, 117, 183, 0.035);
+
+}
+
+
+/* ============================================================
+   33. CELDA TIPO DE ESPACIO
+   ============================================================ */
+
+.celda-tipo-espacio {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+}
+
+
+.celda-tipo-espacio span {
+
+    font-size: 1rem;
+
+}
+
+
+/* ============================================================
+   34. CONTADORES / RESÚMENES
+   ============================================================ */
+
+.resumen-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 14px;
+
+    margin-bottom: 20px;
+
+}
+
+
+.tarjeta-resumen {
+
+    background:
+        rgba(255, 255, 255, 0.96);
+
+    border:
+        1px solid var(--color-borde);
+
+    border-radius:
+        var(--radio-medio);
+
+    padding:
+        17px;
+
+    box-shadow:
+        var(--sombra-suave);
+
+}
+
+
+.tarjeta-resumen span {
+
+    display: block;
+
+    color:
+        var(--color-texto-secundario);
 
     font-size: 0.76rem;
 
-    color: #94a3b8;
+    font-weight: 650;
+
 }
 
 
-.footer-desarrollador {
+.tarjeta-resumen strong {
+
+    display: block;
+
+    margin-top: 4px;
+
+    color:
+        var(--color-principal);
+
+    font-family:
+        "Poppins",
+        "Inter",
+        sans-serif;
+
+    font-size:
+        1.55rem;
+
+}
+
+
+/* ============================================================
+   35. FILTROS
+   ============================================================ */
+
+.barra-filtros {
+
+    display: flex;
+
+    align-items: flex-end;
+
+    flex-wrap: wrap;
+
+    gap: 12px;
+
+    margin-bottom: 16px;
+
+}
+
+
+.filtro {
+
+    min-width: 180px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+
+}
+
+
+.filtro label {
+
+    font-size: 0.74rem;
+
+    font-weight: 750;
+
+    color:
+        var(--color-texto-secundario);
+
+}
+
+
+.filtro select,
+.filtro input {
+
+    min-height: 38px;
+
+    padding: 7px 10px;
+
+    border:
+        1px solid var(--color-borde-fuerte);
+
+    border-radius:
+        var(--radio-pequeno);
+
+    background:
+        var(--color-superficie);
+
+    color:
+        var(--color-texto);
+
+    outline: none;
+
+}
+
+
+.filtro select:focus,
+.filtro input:focus {
+
+    border-color:
+        var(--color-secundario);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(40, 117, 183, 0.1);
+
+}
+
+
+/* ============================================================
+   36. SEPARADORES Y SUBSECCIONES
+   ============================================================ */
+
+.subseccion {
+
+    margin-top: 24px;
+
+}
+
+
+.subseccion-cabecera {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    flex-wrap: wrap;
+
+    gap: 12px;
+
+    margin-bottom: 13px;
+
+}
+
+
+.subseccion-cabecera h3 {
+
+    color:
+        var(--color-principal);
+
+    font-family:
+        "Poppins",
+        "Inter",
+        sans-serif;
+
+    font-size: 1rem;
+
+}
+
+
+.subseccion-cabecera p {
+
+    color:
+        var(--color-texto-secundario);
+
+    font-size: 0.82rem;
+
+}
+
+
+/* ============================================================
+   37. GRUPOS DE ACCIONES
+   ============================================================ */
+
+.grupo-botones {
+
+    display: flex;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+}
+
+
+/* ============================================================
+   38. TABLA DE RESERVAS ADMIN
+   ============================================================ */
+
+#tablaReservasAdmin td:first-child {
+
+    white-space: nowrap;
+
+}
+
+
+#tablaReservasAdmin td:nth-child(2) {
+
+    white-space: nowrap;
+
+}
+
+
+/* ============================================================
+   39. TABLA DE ASIGNACIONES
+   ============================================================ */
+
+#tablaAsignaciones td:nth-child(4),
+#tablaAsignaciones td:nth-child(5) {
+
+    white-space: nowrap;
+
+}
+
+
+/* ============================================================
+   40. EFECTO VISUAL DE TABLAS
+   ============================================================ */
+
+.tabla-panel tbody tr,
+.tabla-listado tbody tr {
+
+    transition:
+        background var(--transicion);
+
+}
+
+
+/* ============================================================
+   41. MEJORAR VISIBILIDAD DEL PRIMER CAMPO
+   ============================================================ */
+
+.tabla-panel tbody th {
+
+    font-weight: 600;
+
+}
+
+
+/* ============================================================
+   42. INDICADOR DE ESTADO EN CELDAS
+   ============================================================ */
+
+.celda-libre {
+
+    background:
+        rgba(25, 135, 84, 0.015);
+
+}
+
+
+.celda-reservada {
+
+    background:
+        rgba(181, 75, 62, 0.015);
+
+}
+
+
+.celda-asignacion {
+
+    background:
+        rgba(118, 83, 166, 0.015);
+
+}
+
+
+/* ============================================================
+   43. LEYENDA DE DISPONIBILIDAD
+   ============================================================ */
+
+.leyenda-disponibilidad {
+
+    display: flex;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+    margin:
+        10px 0 18px;
+
+}
+
+
+.leyenda-item {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    color:
+        var(--color-texto-secundario);
+
+    font-size: 0.75rem;
+
+}
+
+
+.leyenda-color {
+
+    width: 12px;
+    height: 12px;
+
+    border-radius: 4px;
+
+}
+
+
+.leyenda-libre {
+
+    background:
+        var(--color-libre-fondo);
+
+    border:
+        1px solid
+        rgba(25, 135, 84, 0.35);
+
+}
+
+
+.leyenda-reservada {
+
+    background:
+        var(--color-reservado-fondo);
+
+    border:
+        1px solid
+        rgba(181, 75, 62, 0.35);
+
+}
+
+
+.leyenda-asignacion {
+
+    background:
+        var(--color-asignacion-fondo);
+
+    border:
+        1px solid
+        rgba(118, 83, 166, 0.35);
+
+}
+/* ============================================================
+   44. INFORMACIÓN DE GESTIÓN SELECCIONADA
+   ============================================================ */
+
+#infoGestionSeleccionada {
+
+    margin-top: 14px;
+
+}
+
+
+.info-gestion-vacia {
+
     padding: 16px;
+
+    color:
+        var(--color-texto-secundario);
+
+    background:
+        var(--color-superficie-secundaria);
+
+    border:
+        1px dashed var(--color-borde-fuerte);
+
+    border-radius:
+        var(--radio-pequeno);
 
     text-align: center;
 
-    color: #64748b;
+    font-size: 0.82rem;
 
-    font-size: 0.8rem;
 }
 
 
+.info-gestion-contenido {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    flex-wrap: wrap;
+
+    gap: 16px;
+
+    padding: 16px;
+
+    background:
+        var(--color-superficie-secundaria);
+
+    border:
+        1px solid var(--color-borde);
+
+    border-radius:
+        var(--radio-medio);
+
+}
+
+
+.info-gestion-principal {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 2px;
+
+}
+
+
+.info-gestion-principal span,
+.info-gestion-fechas span {
+
+    color:
+        var(--color-texto-secundario);
+
+    font-size: 0.7rem;
+
+    font-weight: 650;
+
+}
+
+
+.info-gestion-principal strong {
+
+    color:
+        var(--color-principal);
+
+    font-family:
+        "Poppins",
+        "Inter",
+        sans-serif;
+
+    font-size: 1rem;
+
+}
+
+
+.info-gestion-fechas {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 22px;
+
+}
+
+
+.info-gestion-fechas > div {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 2px;
+
+}
+
+
+.info-gestion-fechas strong {
+
+    font-size: 0.8rem;
+
+}
+
+
+/* ============================================================
+   45. OBSERVACIONES
+   ============================================================ */
+
+#listaObservaciones {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(310px, 1fr)
+        );
+
+    gap: 16px;
+
+}
+
+
+.tarjeta-observacion {
+
+    position: relative;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 15px;
+
+    padding: 18px;
+
+    background:
+        var(--color-superficie);
+
+    border:
+        1px solid var(--color-borde);
+
+    border-radius:
+        var(--radio-medio);
+
+    box-shadow:
+        var(--sombra-suave);
+
+    overflow: hidden;
+
+}
+
+
+.tarjeta-observacion::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+    bottom: 0;
+
+    width: 4px;
+
+}
+
+
+.tarjeta-observacion.observacion-pendiente::before {
+
+    background:
+        var(--color-advertencia);
+
+}
+
+
+.tarjeta-observacion.observacion-atendida::before {
+
+    background:
+        var(--color-exito);
+
+}
+
+
+.observacion-cabecera {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 12px;
+
+}
+
+
+.observacion-titulo {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    min-width: 0;
+
+}
+
+
+.observacion-icono {
+
+    flex:
+        0 0 auto;
+
+    font-size: 1.25rem;
+
+}
+
+
+.observacion-titulo > div {
+
+    min-width: 0;
+
+}
+
+
+.observacion-tipo {
+
+    display: block;
+
+    color:
+        var(--color-texto-secundario);
+
+    font-size: 0.68rem;
+
+    font-weight: 650;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.035em;
+
+}
+
+
+.observacion-titulo h3 {
+
+    margin-top: 2px;
+
+    color:
+        var(--color-principal);
+
+    font-family:
+        "Poppins",
+        "Inter",
+        sans-serif;
+
+    font-size: 0.95rem;
+
+    overflow-wrap: anywhere;
+
+}
+
+
+.observacion-datos {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 10px;
+
+}
+
+
+.observacion-datos > div {
+
+    padding: 10px;
+
+    background:
+        var(--color-superficie-secundaria);
+
+    border-radius:
+        var(--radio-pequeno);
+
+}
+
+
+.observacion-datos span {
+
+    display: block;
+
+    color:
+        var(--color-texto-secundario);
+
+    font-size: 0.67rem;
+
+}
+
+
+.observacion-datos strong {
+
+    display: block;
+
+    margin-top: 2px;
+
+    font-size: 0.77rem;
+
+    overflow-wrap: anywhere;
+
+}
+
+
+.observacion-contenido {
+
+    padding-top: 2px;
+
+}
+
+
+.observacion-contenido > span {
+
+    display: block;
+
+    margin-bottom: 5px;
+
+    color:
+        var(--color-texto-secundario);
+
+    font-size: 0.7rem;
+
+    font-weight: 700;
+
+}
+
+
+.observacion-contenido p {
+
+    font-size: 0.84rem;
+
+    line-height: 1.55;
+
+    white-space: pre-wrap;
+
+    overflow-wrap: anywhere;
+
+}
+
+
+.respuesta-observacion {
+
+    padding: 11px 12px;
+
+    background:
+        #eef6fc;
+
+    border-left:
+        3px solid var(--color-secundario);
+
+    border-radius:
+        0 var(--radio-pequeno)
+        var(--radio-pequeno) 0;
+
+}
+
+
+.respuesta-observacion span {
+
+    display: block;
+
+    margin-bottom: 4px;
+
+    color:
+        var(--color-secundario);
+
+    font-size: 0.68rem;
+
+    font-weight: 800;
+
+}
+
+
+.respuesta-observacion p {
+
+    color:
+        var(--color-texto);
+
+    font-size: 0.8rem;
+
+    white-space: pre-wrap;
+
+    overflow-wrap: anywhere;
+
+}
+
+
+.observacion-acciones {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-end;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    margin-top: auto;
+
+    padding-top: 3px;
+
+}
+
+
+/* ============================================================
+   46. MODALES
+   ============================================================ */
+
+.modal {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 1000;
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+
+    background:
+        rgba(8, 18, 31, 0.58);
+
+    backdrop-filter:
+        blur(3px);
+
+}
+
+
+.modal.abierto {
+
+    display: flex;
+
+}
+
+
+body.modal-abierto {
+
+    overflow: hidden;
+
+}
+
+
+.modal-contenido {
+
+    width: 100%;
+
+    max-width: 570px;
+
+    max-height:
+        calc(100vh - 40px);
+
+    overflow-y: auto;
+
+    background:
+        var(--color-superficie);
+
+    color:
+        var(--color-texto);
+
+    border:
+        1px solid var(--color-borde);
+
+    border-radius:
+        var(--radio-grande);
+
+    box-shadow:
+        0 22px 65px
+        rgba(0, 0, 0, 0.25);
+
+}
+
+
+.modal-contenido.modal-pequeno {
+
+    max-width: 450px;
+
+}
+
+
+.modal-cabecera {
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 2;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 12px;
+
+    padding:
+        17px 20px;
+
+    background:
+        var(--color-superficie);
+
+    border-bottom:
+        1px solid var(--color-borde);
+
+}
+
+
+.modal-cabecera h3 {
+
+    color:
+        var(--color-principal);
+
+    font-family:
+        "Poppins",
+        "Inter",
+        sans-serif;
+
+    font-size: 1rem;
+
+}
+
+
+.btn-cerrar-modal {
+
+    flex:
+        0 0 auto;
+
+    width: 34px;
+    height: 34px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border: 0;
+
+    border-radius:
+        50%;
+
+    background:
+        var(--color-superficie-secundaria);
+
+    color:
+        var(--color-texto-secundario);
+
+    font-size: 1.15rem;
+
+    line-height: 1;
+
+}
+
+
+.btn-cerrar-modal:hover {
+
+    background:
+        var(--color-error-fondo);
+
+    color:
+        var(--color-error);
+
+}
+
+
+.modal-cuerpo {
+
+    padding:
+        20px;
+
+}
+
+
+.modal-pie {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-end;
+
+    flex-wrap: wrap;
+
+    gap: 9px;
+
+    padding:
+        15px 20px;
+
+    border-top:
+        1px solid var(--color-borde);
+
+    background:
+        var(--color-superficie-secundaria);
+
+}
+
+
+/* ============================================================
+   47. INFORMACIÓN DENTRO DE MODALES
+   ============================================================ */
+
+.info-modal {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+
+    padding: 12px;
+
+    margin-bottom: 15px;
+
+    background:
+        var(--color-superficie-secundaria);
+
+    border:
+        1px solid var(--color-borde);
+
+    border-radius:
+        var(--radio-pequeno);
+
+}
+
+
+.info-modal strong {
+
+    color:
+        var(--color-principal);
+
+}
+
+
+.info-modal span {
+
+    color:
+        var(--color-texto-secundario);
+
+    font-size: 0.8rem;
+
+}
+
+
+#infoCancelarReserva,
+#infoEliminarAsignacion {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+
+    margin:
+        12px 0;
+
+    padding: 13px;
+
+    background:
+        var(--color-superficie-secundaria);
+
+    border:
+        1px solid var(--color-borde);
+
+    border-radius:
+        var(--radio-pequeno);
+
+}
+
+
+#infoCancelarReserva strong,
+#infoEliminarAsignacion strong {
+
+    color:
+        var(--color-principal);
+
+}
+
+
+#infoCancelarReserva span,
+#infoEliminarAsignacion span {
+
+    color:
+        var(--color-texto-secundario);
+
+    font-size: 0.8rem;
+
+}
+
+
+/* ============================================================
+   48. DETALLE DE OBSERVACIÓN EN MODAL
+   ============================================================ */
+
+#observacionEspacio {
+
+    color:
+        var(--color-principal);
+
+    font-weight: 800;
+
+}
+
+
+#observacionDocente,
+#observacionFecha {
+
+    color:
+        var(--color-texto-secundario);
+
+}
+
+
+#observacionTexto {
+
+    padding: 13px;
+
+    margin:
+        10px 0 16px;
+
+    background:
+        var(--color-superficie-secundaria);
+
+    border:
+        1px solid var(--color-borde);
+
+    border-radius:
+        var(--radio-pequeno);
+
+    white-space: pre-wrap;
+
+    overflow-wrap: anywhere;
+
+    font-size: 0.84rem;
+
+}
+
+
+/* ============================================================
+   49. MENSAJE GLOBAL
+   ============================================================ */
+
+.mensaje-global {
+
+    position: fixed;
+
+    left: 50%;
+    bottom: 24px;
+
+    z-index: 2000;
+
+    width:
+        min(430px, calc(100% - 30px));
+
+    padding:
+        12px 16px;
+
+    border-radius:
+        var(--radio-pequeno);
+
+    box-shadow:
+        var(--sombra-media);
+
+    text-align: center;
+
+    font-size: 0.84rem;
+
+    font-weight: 750;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transform:
+        translate(-50%, 20px);
+
+    transition:
+        opacity 0.22s ease,
+        transform 0.22s ease,
+        visibility 0.22s ease;
+
+}
+
+
+.mensaje-global.visible {
+
+    opacity: 1;
+
+    visibility: visible;
+
+    transform:
+        translate(-50%, 0);
+
+}
+
+
+.mensaje-global-exito {
+
+    background:
+        #157347;
+
+    color:
+        #ffffff;
+
+}
+
+
+.mensaje-global-error {
+
+    background:
+        #b02a37;
+
+    color:
+        #ffffff;
+
+}
+
+
+/* ============================================================
+   50. CARGANDO GLOBAL
+   ============================================================ */
+
+#cargandoGlobal {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 3000;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        rgba(245, 248, 252, 0.76);
+
+    backdrop-filter:
+        blur(3px);
+
+}
+
+
+.cargando-contenido {
+
+    min-width: 190px;
+
+    padding: 22px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    background:
+        var(--color-superficie);
+
+    border:
+        1px solid var(--color-borde);
+
+    border-radius:
+        var(--radio-medio);
+
+    box-shadow:
+        var(--sombra-media);
+
+    color:
+        var(--color-principal);
+
+    font-size: 0.83rem;
+
+    font-weight: 700;
+
+}
+
+
+.spinner {
+
+    width: 34px;
+    height: 34px;
+
+    border:
+        4px solid
+        rgba(22, 61, 104, 0.15);
+
+    border-top-color:
+        var(--color-principal);
+
+    border-radius:
+        50%;
+
+    animation:
+        girar-spinner 0.8s linear infinite;
+
+}
+
+
+@keyframes girar-spinner {
+
+    to {
+
+        transform:
+            rotate(360deg);
+
+    }
+
+}
+
+
+/* ============================================================
+   51. FOOTER
+   ============================================================ */
+
+.footer-panel,
+.footer-login {
+
+    margin-top: auto;
+
+    padding:
+        17px 20px;
+
+    text-align: center;
+
+    color:
+        var(--color-texto-secundario);
+
+    font-size:
+        0.75rem;
+
+    border-top:
+        1px solid var(--color-borde);
+
+    background:
+        rgba(255, 255, 255, 0.72);
+
+}
+
+
+.footer-panel strong,
+.footer-login strong {
+
+    color:
+        var(--color-principal);
+
+}
+
+
+/* ============================================================
+   52. MODO OSCURO - VARIABLES
+   ============================================================ */
+
+body.modo-oscuro {
+
+    --color-principal: #82b8e8;
+    --color-principal-oscuro: #a9cff0;
+    --color-principal-claro: #6ca8dc;
+
+    --color-secundario: #70b6ee;
+
+    --color-exito: #65d59a;
+    --color-exito-fondo: #153c2c;
+
+    --color-advertencia: #f0b846;
+    --color-advertencia-fondo: #493916;
+
+    --color-error: #ff8d84;
+    --color-error-fondo: #472321;
+
+    --color-reservado: #ff9b90;
+    --color-reservado-fondo: #482723;
+
+    --color-asignacion: #c5a8ed;
+    --color-asignacion-fondo: #352b46;
+
+    --color-libre: #72dda5;
+    --color-libre-fondo: #173c2d;
+
+    --color-fondo: #101820;
+    --color-superficie: #18232d;
+    --color-superficie-secundaria: #202d38;
+
+    --color-texto: #edf3f8;
+    --color-texto-secundario: #aebdca;
+
+    --color-borde: #30404d;
+    --color-borde-fuerte: #405362;
+
+    --sombra-suave:
+        0 4px 16px rgba(0, 0, 0, 0.18);
+
+    --sombra-media:
+        0 8px 28px rgba(0, 0, 0, 0.28);
+
+}
+
+
+/* ============================================================
+   53. FONDO MODO OSCURO
+   ============================================================ */
+
+body.modo-oscuro
+.fondo-institucional {
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(15, 24, 32, 0.99),
+            rgba(19, 31, 42, 0.98)
+        );
+
+}
+
+
+body.modo-oscuro
+.fondo-institucional::after {
+
+    opacity: 0.025;
+
+}
+
+
+/* ============================================================
+   54. SUPERFICIES MODO OSCURO
+   ============================================================ */
+
+body.modo-oscuro
+.encabezado-panel,
+body.modo-oscuro
+.navegacion-panel,
+body.modo-oscuro
+.tarjeta,
+body.modo-oscuro
+.bloque-horario,
+body.modo-oscuro
+.controles-semana,
+body.modo-oscuro
+.tarjeta-resumen,
+body.modo-oscuro
+.login-card {
+
+    background:
+        rgba(24, 35, 45, 0.97);
+
+}
+
+
+body.modo-oscuro
+.footer-panel,
+body.modo-oscuro
+.footer-login {
+
+    background:
+        rgba(24, 35, 45, 0.78);
+
+}
+
+
+/* ============================================================
+   55. TABLAS MODO OSCURO
+   ============================================================ */
+
+body.modo-oscuro
+.tabla-panel,
+body.modo-oscuro
+.tabla-listado {
+
+    background:
+        var(--color-superficie);
+
+}
+
+
+body.modo-oscuro
+.tabla-panel thead th {
+
+    background:
+        #244a6d;
+
+    color:
+        #ffffff;
+
+}
+
+
+body.modo-oscuro
+.tabla-semanal thead th:first-child {
+
+    background:
+        #244a6d;
+
+}
+
+
+body.modo-oscuro
+.celda-nombre-espacio {
+
+    background:
+        var(--color-superficie);
+
+}
+
+
+body.modo-oscuro
+.tabla-panel tbody tr:hover,
+body.modo-oscuro
+.tabla-listado tbody tr:hover {
+
+    background:
+        rgba(112, 182, 238, 0.06);
+
+}
+
+
+/* ============================================================
+   56. CAMPOS MODO OSCURO
+   ============================================================ */
+
+body.modo-oscuro
+input,
+body.modo-oscuro
+select,
+body.modo-oscuro
+textarea {
+
+    color-scheme: dark;
+
+}
+
+
+body.modo-oscuro
+.btn-secundario:hover,
+body.modo-oscuro
+.btn-semana:hover {
+
+    background:
+        #243745;
+
+}
+
+
+/* ============================================================
+   57. OBSERVACIONES MODO OSCURO
+   ============================================================ */
+
+body.modo-oscuro
+.respuesta-observacion {
+
+    background:
+        #1b3447;
+
+}
+
+
+body.modo-oscuro
+.celda-ocupada
+.estado-disponibilidad {
+
+    background:
+        #29343d;
+
+    border-color:
+        #3a4752;
+
+    color:
+        #c3ccd4;
+
+}
+
+
+body.modo-oscuro
+.celda-sin-gestion
+.estado-disponibilidad {
+
+    background:
+        #222c34;
+
+    border-color:
+        #45525d;
+
+    color:
+        #9caab5;
+
+}
+
+
+/* ============================================================
+   58. MODALES MODO OSCURO
+   ============================================================ */
+
+body.modo-oscuro
+.modal {
+
+    background:
+        rgba(0, 0, 0, 0.72);
+
+}
+
+
+body.modo-oscuro
+#cargandoGlobal {
+
+    background:
+        rgba(10, 16, 22, 0.78);
+
+}
+
+
+/* ============================================================
+   59. SCROLLBAR MODO OSCURO
+   ============================================================ */
+
+body.modo-oscuro
+.tabla-responsive::-webkit-scrollbar-thumb {
+
+    background:
+        #526473;
+
+}
+
+
+/* ============================================================
+   60. SELECCIÓN DE TEXTO
+   ============================================================ */
+
+::selection {
+
+    background:
+        rgba(40, 117, 183, 0.24);
+
+}
+/* ============================================================
+   61. TABLETS Y PANTALLAS MEDIANAS
+   ============================================================ */
+
+@media (max-width: 1100px) {
+
+    .contenido-principal,
+    .encabezado-contenido,
+    .navegacion-contenido {
+
+        width:
+            min(100% - 24px, 1500px);
+
+    }
+
+
+    .form-grid-4 {
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+    }
+
+
+    .tabla-semanal {
+
+        min-width:
+            940px;
+
+    }
+
+}
+
+
+/* ============================================================
+   62. TABLETS PEQUEÑAS
+   ============================================================ */
+
+@media (max-width: 850px) {
+
+    .encabezado-contenido {
+
+        min-height:
+            70px;
+
+    }
+
+
+    .logo-panel {
+
+        width:
+            52px;
+
+        height:
+            52px;
+
+    }
+
+
+    .marca-textos h1 {
+
+        font-size:
+            0.98rem;
+
+    }
+
+
+    .marca-textos span {
+
+        font-size:
+            0.74rem;
+
+    }
+
+
+    .usuario-datos {
+
+        display:
+            none;
+
+    }
+
+
+    .form-grid-3 {
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+    }
+
+
+    .resumen-grid {
+
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+
+    }
+
+
+    .encabezado-seccion {
+
+        flex-direction:
+            column;
+
+    }
+
+
+    .info-gestion-contenido {
+
+        align-items:
+            flex-start;
+
+    }
+
+
+    .info-gestion-fechas {
+
+        width:
+            100%;
+
+    }
+
+}
+
+
+/* ============================================================
+   63. CELULARES
+   ============================================================ */
+
+@media (max-width: 650px) {
+
+    body {
+
+        font-size:
+            14px;
+
+    }
+
+
+    /* --------------------------------------------------------
+       CONTENEDORES
+       -------------------------------------------------------- */
+
+    .contenido-principal,
+    .encabezado-contenido,
+    .navegacion-contenido {
+
+        width:
+            calc(100% - 20px);
+
+    }
+
+
+    .contenido-principal {
+
+        padding:
+            16px 0 30px;
+
+    }
+
+
+    /* --------------------------------------------------------
+       HEADER
+       -------------------------------------------------------- */
+
+    .encabezado-contenido {
+
+        min-height:
+            64px;
+
+        gap:
+            8px;
+
+    }
+
+
+    .marca-panel {
+
+        gap:
+            8px;
+
+        min-width:
+            0;
+
+    }
+
+
+    .logo-panel {
+
+        width:
+            45px;
+
+        height:
+            45px;
+
+        flex:
+            0 0 45px;
+
+    }
+
+
+    .marca-textos {
+
+        min-width:
+            0;
+
+    }
+
+
+    .marca-textos h1 {
+
+        font-size:
+            0.85rem;
+
+        white-space:
+            nowrap;
+
+        overflow:
+            hidden;
+
+        text-overflow:
+            ellipsis;
+
+    }
+
+
+    .marca-textos span {
+
+        font-size:
+            0.66rem;
+
+    }
+
+
+    .btn-cerrar-sesion {
+
+        padding:
+            7px 9px;
+
+        font-size:
+            0.72rem;
+
+        white-space:
+            nowrap;
+
+    }
+
+
+    /* --------------------------------------------------------
+       NAVEGACIÓN
+       -------------------------------------------------------- */
+
+    .navegacion-contenido {
+
+        gap:
+            4px;
+
+        padding:
+            6px 0;
+
+    }
+
+
+    .btn-tab {
+
+        padding:
+            8px 10px;
+
+        font-size:
+            0.75rem;
+
+    }
+
+
+    #btnModoOscuro {
+
+        width:
+            36px;
+
+        min-width:
+            36px;
+
+        height:
+            36px;
+
+        font-size:
+            0.9rem;
+
+    }
+
+
+    #contadorObservaciones {
+
+        min-width:
+            18px;
+
+        height:
+            18px;
+
+        padding:
+            0 4px;
+
+        font-size:
+            0.62rem;
+
+    }
+
+
+    /* --------------------------------------------------------
+       ENCABEZADOS DE SECCIÓN
+       -------------------------------------------------------- */
+
+    .encabezado-seccion {
+
+        margin-bottom:
+            14px;
+
+    }
+
+
+    .encabezado-seccion h2 {
+
+        font-size:
+            1.12rem;
+
+    }
+
+
+    .encabezado-seccion p {
+
+        font-size:
+            0.78rem;
+
+    }
+
+
+    /* --------------------------------------------------------
+       TARJETAS
+       -------------------------------------------------------- */
+
+    .tarjeta {
+
+        padding:
+            14px;
+
+        border-radius:
+            10px;
+
+    }
+
+
+    .tarjeta-titulo {
+
+        align-items:
+            flex-start;
+
+        flex-direction:
+            column;
+
+        margin-bottom:
+            13px;
+
+    }
+
+
+    .tarjeta-titulo h3 {
+
+        font-size:
+            0.92rem;
+
+    }
+
+
+    /* --------------------------------------------------------
+       FORMULARIOS
+       -------------------------------------------------------- */
+
+    .form-grid,
+    .form-grid-3,
+    .form-grid-4 {
+
+        grid-template-columns:
+            1fr;
+
+        gap:
+            12px;
+
+    }
+
+
+    .grupo-formulario input,
+    .grupo-formulario select,
+    .grupo-formulario textarea {
+
+        min-height:
+            44px;
+
+        font-size:
+            0.86rem;
+
+    }
+
+
+    .acciones-formulario {
+
+        flex-direction:
+            column;
+
+        align-items:
+            stretch;
+
+    }
+
+
+    .acciones-formulario button {
+
+        width:
+            100%;
+
+    }
+
+
+    /* --------------------------------------------------------
+       CONTROL DE SEMANA
+       -------------------------------------------------------- */
+
+    .controles-semana {
+
+        padding:
+            12px;
+
+        gap:
+            11px;
+
+    }
+
+
+    .selector-semana {
+
+        width:
+            100%;
+
+    }
+
+
+    .selector-semana input[type="date"] {
+
+        flex:
+            1;
+
+        min-width:
+            150px;
+
+    }
+
+
+    #textoSemana {
+
+        width:
+            100%;
+
+        font-size:
+            0.77rem;
+
+    }
+
+
+    .acciones-semana {
+
+        width:
+            100%;
+
+        display:
+            grid;
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+    }
+
+
+    .acciones-semana button {
+
+        width:
+            100%;
+
+    }
+
+
+    /* --------------------------------------------------------
+       HORARIOS
+       -------------------------------------------------------- */
+
+    .bloque-horario {
+
+        margin-bottom:
+            16px;
+
+        border-radius:
+            10px;
+
+    }
+
+
+    .bloque-horario-cabecera {
+
+        padding:
+            12px 14px;
+
+        align-items:
+            flex-start;
+
+        flex-direction:
+            column;
+
+        gap:
+            3px;
+
+    }
+
+
+    .bloque-horario-cabecera h3 {
+
+        font-size:
+            0.9rem;
+
+    }
+
+
+    .bloque-horario-cabecera span {
+
+        font-size:
+            0.72rem;
+
+    }
+
+
+    /* --------------------------------------------------------
+       TABLA SEMANAL EN CELULAR
+       -------------------------------------------------------- */
+
+    .tabla-semanal {
+
+        min-width:
+            830px;
+
+    }
+
+
+    .tabla-semanal thead th:first-child {
+
+        width:
+            145px;
+
+    }
+
+
+    .tabla-semanal thead th:not(:first-child) {
+
+        width:
+            137px;
+
+    }
+
+
+    .celda-nombre-espacio {
+
+        min-width:
+            145px;
+
+    }
+
+
+    .tabla-panel th,
+    .tabla-panel td {
+
+        padding:
+            8px;
+
+        font-size:
+            0.75rem;
+
+    }
+
+
+    .estado-disponibilidad {
+
+        min-height:
+            58px;
+
+        padding:
+            6px 4px;
+
+    }
+
+
+    .estado-disponibilidad strong {
+
+        font-size:
+            0.66rem;
+
+    }
+
+
+    .docente-disponibilidad {
+
+        font-size:
+            0.63rem;
+
+    }
+
+
+    .celda-nombre-espacio strong {
+
+        font-size:
+            0.75rem;
+
+    }
+
+
+    .celda-nombre-espacio small {
+
+        font-size:
+            0.63rem;
+
+    }
+
+
+    /* --------------------------------------------------------
+       RESÚMENES
+       -------------------------------------------------------- */
+
+    .resumen-grid {
+
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+
+        gap:
+            7px;
+
+    }
+
+
+    .tarjeta-resumen {
+
+        padding:
+            11px 8px;
+
+        text-align:
+            center;
+
+    }
+
+
+    .tarjeta-resumen span {
+
+        font-size:
+            0.62rem;
+
+    }
+
+
+    .tarjeta-resumen strong {
+
+        font-size:
+            1.2rem;
+
+    }
+
+
+    /* --------------------------------------------------------
+       FILTROS
+       -------------------------------------------------------- */
+
+    .barra-filtros {
+
+        align-items:
+            stretch;
+
+    }
+
+
+    .filtro {
+
+        width:
+            100%;
+
+        min-width:
+            0;
+
+    }
+
+
+    /* --------------------------------------------------------
+       BOTONES
+       -------------------------------------------------------- */
+
+    .grupo-botones {
+
+        width:
+            100%;
+
+    }
+
+
+    .grupo-botones .btn-principal,
+    .grupo-botones .btn-secundario {
+
+        flex:
+            1;
+
+    }
+
+
+    /* --------------------------------------------------------
+       GESTIÓN
+       -------------------------------------------------------- */
+
+    .info-gestion-contenido {
+
+        flex-direction:
+            column;
+
+    }
+
+
+    .info-gestion-fechas {
+
+        display:
+            grid;
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap:
+            10px;
+
+    }
+
+
+    /* --------------------------------------------------------
+       OBSERVACIONES
+       -------------------------------------------------------- */
+
+    #listaObservaciones {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .tarjeta-observacion {
+
+        padding:
+            15px;
+
+    }
+
+
+    .observacion-datos {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .observacion-acciones {
+
+        align-items:
+            stretch;
+
+        flex-direction:
+            column;
+
+    }
+
+
+    .observacion-acciones button {
+
+        width:
+            100%;
+
+    }
+
+
+    /* --------------------------------------------------------
+       MODALES
+       -------------------------------------------------------- */
+
+    .modal {
+
+        padding:
+            10px;
+
+        align-items:
+            flex-end;
+
+    }
+
+
+    .modal-contenido,
+    .modal-contenido.modal-pequeno {
+
+        max-width:
+            none;
+
+        max-height:
+            calc(100vh - 20px);
+
+        border-radius:
+            15px 15px 8px 8px;
+
+    }
+
+
+    .modal-cabecera {
+
+        padding:
+            14px 15px;
+
+    }
+
+
+    .modal-cuerpo {
+
+        padding:
+            15px;
+
+    }
+
+
+    .modal-pie {
+
+        padding:
+            12px 15px;
+
+        flex-direction:
+            column-reverse;
+
+        align-items:
+            stretch;
+
+    }
+
+
+    .modal-pie button {
+
+        width:
+            100%;
+
+    }
+
+
+    /* --------------------------------------------------------
+       FOOTER
+       -------------------------------------------------------- */
+
+    .footer-panel,
+    .footer-login {
+
+        padding:
+            14px 10px;
+
+        font-size:
+            0.67rem;
+
+    }
+
+}
+
+
+/* ============================================================
+   64. CELULARES PEQUEÑOS
+   ============================================================ */
+
+@media (max-width: 420px) {
+
+    .marca-textos span {
+
+        display:
+            none;
+
+    }
+
+
+    .marca-textos h1 {
+
+        max-width:
+            145px;
+
+    }
+
+
+    .btn-cerrar-sesion {
+
+        padding:
+            7px 8px;
+
+        font-size:
+            0.68rem;
+
+    }
+
+
+    .acciones-semana {
+
+        grid-template-columns:
+            1fr 1fr;
+
+    }
+
+
+    .btn-semana {
+
+        font-size:
+            0.72rem;
+
+        padding:
+            7px 8px;
+
+    }
+
+
+    .resumen-grid {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .tarjeta-resumen {
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: space-between;
+
+        text-align:
+            left;
+
+    }
+
+
+    .tarjeta-resumen strong {
+
+        margin-top:
+            0;
+
+    }
+
+
+    .info-gestion-fechas {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .observacion-cabecera {
+
+        flex-direction:
+            column;
+
+    }
+
+}
+
+
+/* ============================================================
+   65. LOGIN EN CELULAR
+   ============================================================ */
+
 @media (max-width: 520px) {
 
-    .login-page {
+    .login-contenedor {
 
-        background-size:
-            cover,
-            300px;
+        padding:
+            20px 14px;
 
     }
 
@@ -377,27 +5111,219 @@ body {
     .login-card {
 
         padding:
-            26px 20px;
+            24px 18px;
 
         border-radius:
-            16px;
+            14px;
 
     }
 
 
-    .login-logo img {
+    .login-logo {
 
         width:
-            105px;
+            95px;
 
     }
 
 
-    .login-titulo h1 {
+    .login-titulo {
 
         font-size:
-            1.5rem;
+            1.3rem;
+
+    }
+
+
+    .login-subtitulo {
+
+        font-size:
+            0.82rem;
+
+        margin-bottom:
+            22px;
+
+    }
+
+
+    .login-form {
+
+        gap:
+            14px;
+
+    }
+
+
+    .campo input,
+    .campo select,
+    .campo textarea {
+
+        min-height:
+            45px;
+
+    }
+
+
+    .btn-login {
+
+        min-height:
+            45px;
 
     }
 
 }
+
+
+/* ============================================================
+   66. PANTALLAS GRANDES
+   ============================================================ */
+
+@media (min-width: 1500px) {
+
+    .contenido-principal {
+
+        padding-top:
+            28px;
+
+    }
+
+
+    .tabla-semanal {
+
+        min-width:
+            1100px;
+
+    }
+
+
+    .celda-disponibilidad {
+
+        min-width:
+            165px;
+
+    }
+
+}
+
+
+/* ============================================================
+   67. ACCESIBILIDAD - REDUCIR ANIMACIONES
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+
+        scroll-behavior:
+            auto !important;
+
+        transition-duration:
+            0.01ms !important;
+
+        animation-duration:
+            0.01ms !important;
+
+        animation-iteration-count:
+            1 !important;
+
+    }
+
+}
+
+
+/* ============================================================
+   68. IMPRESIÓN
+   ============================================================ */
+
+@media print {
+
+    .navegacion-panel,
+    .btn-cerrar-sesion,
+    .acciones-semana,
+    .acciones-tabla,
+    #btnModoOscuro,
+    .footer-panel,
+    .mensaje-global,
+    #cargandoGlobal {
+
+        display:
+            none !important;
+
+    }
+
+
+    body {
+
+        background:
+            #ffffff !important;
+
+        color:
+            #000000 !important;
+
+    }
+
+
+    .fondo-institucional {
+
+        display:
+            none;
+
+    }
+
+
+    .contenido-principal {
+
+        width:
+            100%;
+
+        padding:
+            0;
+
+    }
+
+
+    .bloque-horario,
+    .tarjeta,
+    .controles-semana {
+
+        box-shadow:
+            none;
+
+        border-color:
+            #bbbbbb;
+
+    }
+
+
+    .tabla-responsive {
+
+        overflow:
+            visible;
+
+    }
+
+
+    .tabla-semanal {
+
+        min-width:
+            100%;
+
+    }
+
+
+    .celda-nombre-espacio {
+
+        position:
+            static;
+
+    }
+
+}
+
+
+/* ============================================================
+   FIN DE css/estilos.css
+   CETA - RESERVAS DE AULAS Y LABORATORIOS
+   ============================================================ */
