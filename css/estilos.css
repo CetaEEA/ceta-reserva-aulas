@@ -4948,3 +4948,266 @@ body.modo-oscuro
     }
 
 }
+/* ============================================================
+   94. CORRECCIÓN MODALES PANEL DOCENTE
+   ============================================================ */
+
+.modal {
+    position: fixed;
+    inset: 0;
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    z-index: 9999;
+}
+
+
+/* Modal abierto */
+
+.modal.activo {
+    display: flex;
+}
+
+
+/* Fondo oscuro */
+
+.modal-fondo {
+    position: absolute;
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.55);
+
+    backdrop-filter: blur(2px);
+}
+
+
+/* Caja del modal */
+
+.modal-contenido {
+    position: relative;
+
+    z-index: 2;
+
+    width: min(100%, 500px);
+
+    max-height: calc(100vh - 40px);
+
+    overflow-y: auto;
+
+    background: var(--superficie);
+
+    color: var(--texto);
+
+    border: 1px solid var(--borde);
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.28);
+}
+
+
+/* Modal de confirmación más compacto */
+
+.modal-confirmacion {
+    width: min(100%, 440px);
+}
+
+
+/* Evita mover la página mientras está abierto */
+
+body.modal-abierto {
+    overflow: hidden;
+}
+
+
+/* ============================================================
+   95. CABECERA DEL MODAL
+   ============================================================ */
+
+.modal-cabecera {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding: 16px 18px;
+
+    border-bottom: 1px solid var(--borde);
+}
+
+
+.modal-cabecera h3 {
+    margin: 0;
+
+    font-size: 1rem;
+}
+
+
+.btn-cerrar-modal {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 34px;
+    height: 34px;
+
+    flex-shrink: 0;
+
+    border: 0;
+
+    border-radius: 8px;
+
+    background: transparent;
+
+    color: var(--texto);
+
+    font-size: 1.5rem;
+
+    line-height: 1;
+
+    cursor: pointer;
+}
+
+
+.btn-cerrar-modal:hover {
+    background: rgba(128, 128, 128, 0.12);
+}
+
+
+/* ============================================================
+   96. CONTENIDO CONFIRMACIÓN
+   ============================================================ */
+
+.confirmacion-contenido {
+    padding: 20px;
+
+    text-align: center;
+}
+
+
+.confirmacion-icono {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 54px;
+    height: 54px;
+
+    margin: 0 auto 14px;
+
+    border-radius: 50%;
+
+    font-size: 1.5rem;
+}
+
+
+.confirmacion-contenido > p {
+    margin: 0 0 16px;
+
+    font-weight: 700;
+}
+
+
+.confirmacion-contenido > small {
+    display: block;
+
+    margin-top: 14px;
+
+    color: var(--texto-suave);
+
+    line-height: 1.5;
+}
+
+
+.detalle-confirmacion {
+    padding: 10px 14px;
+
+    border: 1px solid var(--borde);
+
+    border-radius: 10px;
+
+    background: rgba(128, 128, 128, 0.05);
+
+    text-align: left;
+}
+
+
+/* ============================================================
+   97. ACCIONES DEL MODAL
+   ============================================================ */
+
+.modal-acciones {
+    display: flex;
+
+    justify-content: flex-end;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 14px 18px;
+
+    border-top: 1px solid var(--borde);
+}
+
+
+/* ============================================================
+   98. FORMULARIOS DENTRO DE MODAL
+   ============================================================ */
+
+.modal-contenido .formulario-panel {
+    padding: 18px;
+}
+
+
+.modal-contenido .formulario-panel
+.modal-acciones {
+    margin:
+        18px -18px -18px;
+
+    padding:
+        14px 18px;
+}
+
+
+/* ============================================================
+   99. MÓVIL
+   ============================================================ */
+
+@media (max-width: 600px) {
+
+    .modal {
+        padding: 12px;
+    }
+
+
+    .modal-contenido {
+        width: 100%;
+
+        max-height:
+            calc(100vh - 24px);
+
+        border-radius: 12px;
+    }
+
+
+    .modal-acciones {
+        flex-direction: column-reverse;
+    }
+
+
+    .modal-acciones button {
+        width: 100%;
+    }
+
+}
