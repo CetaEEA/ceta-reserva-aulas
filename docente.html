@@ -2,6 +2,7 @@
 <html lang="es">
 
 <head>
+
     <meta charset="UTF-8">
 
     <meta
@@ -9,44 +10,1365 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>CETA | Docente</title>
+    <meta
+        name="theme-color"
+        content="#163d68"
+    >
+
+    <title>
+        Panel Docente | Reserva de Aulas y Laboratorios
+    </title>
+
+    <!-- Fuentes -->
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Estilos -->
+    <link
+        rel="stylesheet"
+        href="css/estilos.css?v=4"
+    >
+
 </head>
 
-<body>
 
-    <h1>Reservas de Aulas y Laboratorios</h1>
-
-    <h2>Panel Docente</h2>
-
-    <p>Acceso docente correcto.</p>
-
-    <button id="btnCerrarSesion">
-        Cerrar sesión
-    </button>
+<body class="admin-page docente-page">
 
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- ======================================================
+         FONDO INSTITUCIONAL
+         ====================================================== -->
+
+    <div
+        class="fondo-institucional"
+        aria-hidden="true"
+    ></div>
+
+
+
+    <!-- ======================================================
+         CABECERA
+         ====================================================== -->
+
+    <header class="cabecera-principal">
+
+        <div class="cabecera-contenido">
+
+
+            <div class="marca-ceta">
+
+                <div class="marca-logo">
+
+                    <img
+                        src="img/logo-ceta-transparente.png"
+                        alt="Instituto CETA"
+                    >
+
+                </div>
+
+
+                <div class="marca-texto">
+
+                    <span class="marca-instituto">
+                        Instituto CETA
+                    </span>
+
+                    <h1>
+                        Reserva de Aulas y Laboratorios
+                    </h1>
+
+                    <span class="marca-panel">
+                        Panel docente
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="cabecera-usuario">
+
+                <div class="datos-usuario">
+
+                    <span class="usuario-etiqueta">
+                        Docente
+                    </span>
+
+                    <strong id="nombreDocente">
+                        Cargando...
+                    </strong>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    id="btnCerrarSesion"
+                    class="btn-cerrar-sesion"
+                >
+                    Cerrar sesión
+                </button>
+
+            </div>
+
+
+        </div>
+
+    </header>
+
+
+
+    <!-- ======================================================
+         NAVEGACIÓN PRINCIPAL
+         ====================================================== -->
+
+    <nav class="navegacion-panel">
+
+        <div class="navegacion-contenido">
+
+
+            <button
+                type="button"
+                class="btn-tab activo"
+                data-tab="reservar"
+            >
+                <span class="tab-icono">📅</span>
+                Reservar
+            </button>
+
+
+            <button
+                type="button"
+                class="btn-tab"
+                data-tab="mis-reservas"
+            >
+                <span class="tab-icono">📋</span>
+                Mis reservas
+            </button>
+
+
+            <button
+                type="button"
+                class="btn-tab"
+                data-tab="observaciones"
+            >
+                <span class="tab-icono">⚠️</span>
+                Observaciones
+            </button>
+
+
+            <button
+                type="button"
+                id="btnModoOscuro"
+                class="btn-modo"
+                title="Cambiar modo de visualización"
+                aria-label="Cambiar modo de visualización"
+            >
+                🌙
+            </button>
+
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- ======================================================
+         CONTENIDO PRINCIPAL
+         ====================================================== -->
+
+    <main class="contenido-principal">
+
+
+        <!-- ==================================================
+             TAB: RESERVAR
+             ================================================== -->
+
+        <section
+            id="tab-reservar"
+            class="seccion-tab activa"
+        >
+
+
+            <div class="encabezado-seccion">
+
+                <div>
+
+                    <span class="seccion-etiqueta">
+                        Disponibilidad semanal
+                    </span>
+
+                    <h2>
+                        Reserva de aulas y laboratorios
+                    </h2>
+
+                    <p>
+                        Selecciona el turno y pulsa Reservar
+                        sobre cualquier espacio disponible.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ==============================================
+                 SELECTOR DE SEMANA
+                 ============================================== -->
+
+            <div class="panel panel-semana">
+
+                <div class="selector-semana">
+
+
+                    <button
+                        type="button"
+                        id="btnSemanaAnterior"
+                        class="btn-secundario btn-semana"
+                    >
+                        ← Anterior
+                    </button>
+
+
+                    <div class="semana-centro">
+
+                        <label for="fechaSemana">
+                            Semana
+                        </label>
+
+                        <input
+                            type="date"
+                            id="fechaSemana"
+                        >
+
+                        <strong id="textoSemana">
+                            Cargando semana...
+                        </strong>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        id="btnSemanaSiguiente"
+                        class="btn-secundario btn-semana"
+                    >
+                        Siguiente →
+                    </button>
+
+
+                </div>
+
+
+                <div class="acciones-semana">
+
+                    <button
+                        type="button"
+                        id="btnSemanaActual"
+                        class="btn-secundario"
+                    >
+                        Semana actual
+                    </button>
+
+
+                    <button
+                        type="button"
+                        id="btnActualizarDisponibilidad"
+                        class="btn-primario"
+                    >
+                        ↻ Actualizar
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ==============================================
+                 PESTAÑAS DE TURNO
+                 ============================================== -->
+
+            <div class="selector-turnos">
+
+
+                <button
+                    type="button"
+                    class="btn-turno activo"
+                    data-turno="09:00-12:00"
+                >
+
+                    <span class="turno-icono">
+                        ☀️
+                    </span>
+
+                    <span class="turno-contenido">
+
+                        <strong>
+                            Mañana
+                        </strong>
+
+                        <small>
+                            09:00 - 12:00
+                        </small>
+
+                    </span>
+
+                </button>
+
+
+
+                <button
+                    type="button"
+                    class="btn-turno"
+                    data-turno="14:00-17:00"
+                >
+
+                    <span class="turno-icono">
+                        🌤️
+                    </span>
+
+                    <span class="turno-contenido">
+
+                        <strong>
+                            Tarde
+                        </strong>
+
+                        <small>
+                            14:00 - 17:00
+                        </small>
+
+                    </span>
+
+                </button>
+
+
+
+                <button
+                    type="button"
+                    class="btn-turno"
+                    data-turno="19:00-21:30"
+                >
+
+                    <span class="turno-icono">
+                        🌙
+                    </span>
+
+                    <span class="turno-contenido">
+
+                        <strong>
+                            Noche
+                        </strong>
+
+                        <small>
+                            19:00 - 21:30
+                        </small>
+
+                    </span>
+
+                </button>
+
+
+            </div>
+
+
+
+            <!-- ==============================================
+                 LEYENDA
+                 ============================================== -->
+
+            <div class="leyenda-disponibilidad">
+
+
+                <div class="leyenda-item">
+
+                    <span
+                        class="indicador indicador-libre"
+                    ></span>
+
+                    Disponible
+
+                </div>
+
+
+                <div class="leyenda-item">
+
+                    <span
+                        class="indicador indicador-reserva"
+                    ></span>
+
+                    Reservado
+
+                </div>
+
+
+                <div class="leyenda-item">
+
+                    <span
+                        class="indicador indicador-asignacion"
+                    ></span>
+
+                    Asignación fija
+
+                </div>
+
+
+                <div class="leyenda-item">
+
+                    <span
+                        class="indicador indicador-mi-reserva"
+                    ></span>
+
+                    Mi reserva
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- ==============================================
+                 INFORMACIÓN DEL TURNO ACTUAL
+                 ============================================== -->
+
+            <section class="bloque-horario bloque-turno-docente">
+
+
+                <div class="titulo-horario">
+
+                    <div>
+
+                        <span
+                            id="iconoTurnoActual"
+                            class="horario-icono"
+                        >
+                            ☀️
+                        </span>
+
+
+                        <div>
+
+                            <h3 id="nombreTurnoActual">
+                                Turno mañana
+                            </h3>
+
+                            <span id="horarioTurnoActual">
+                                09:00 - 12:00
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- ==========================================
+                     TABLA ÚNICA
+                     El JS cambia su contenido según el turno.
+                     ========================================== -->
+
+                <div class="tabla-responsive">
+
+                    <table class="tabla-disponibilidad">
+
+                        <thead>
+
+                            <tr>
+
+                                <th class="columna-espacio">
+                                    Aula / Laboratorio
+                                </th>
+
+                                <th id="cabeceraLunes">
+                                    Lunes
+                                </th>
+
+                                <th id="cabeceraMartes">
+                                    Martes
+                                </th>
+
+                                <th id="cabeceraMiercoles">
+                                    Miércoles
+                                </th>
+
+                                <th id="cabeceraJueves">
+                                    Jueves
+                                </th>
+
+                                <th id="cabeceraViernes">
+                                    Viernes
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="tablaDisponibilidadDocente">
+
+                            <tr>
+
+                                <td
+                                    colspan="6"
+                                    class="tabla-cargando"
+                                >
+                                    Cargando disponibilidad...
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+            </section>
+
+
+        </section>
+
+
+
+        <!-- ==================================================
+             TAB: MIS RESERVAS
+             ================================================== -->
+
+        <section
+            id="tab-mis-reservas"
+            class="seccion-tab"
+        >
+
+
+            <div class="encabezado-seccion">
+
+                <div>
+
+                    <span class="seccion-etiqueta">
+                        Reservas personales
+                    </span>
+
+                    <h2>
+                        Mis reservas
+                    </h2>
+
+                    <p>
+                        Consulta, modifica o cancela tus
+                        reservas de aulas y laboratorios.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="panel panel-listado">
+
+
+                <div class="panel-cabecera">
+
+                    <div>
+
+                        <h3>
+                            📋 Reservas realizadas
+                        </h3>
+
+                        <p>
+                            Las reservas cuya fecha ya pasó
+                            permanecerán como historial.
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        id="btnActualizarMisReservas"
+                        class="btn-secundario"
+                    >
+                        ↻ Actualizar
+                    </button>
+
+                </div>
+
+
+
+                <div class="tabla-responsive">
+
+                    <table class="tabla-general">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Fecha
+                                </th>
+
+                                <th>
+                                    Espacio
+                                </th>
+
+                                <th>
+                                    Tipo
+                                </th>
+
+                                <th>
+                                    Horario
+                                </th>
+
+                                <th>
+                                    Estado
+                                </th>
+
+                                <th>
+                                    Acciones
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="tablaMisReservas">
+
+                            <tr>
+
+                                <td
+                                    colspan="6"
+                                    class="tabla-cargando"
+                                >
+                                    Cargando tus reservas...
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+        <!-- ==================================================
+             TAB: OBSERVACIONES
+             ================================================== -->
+
+        <section
+            id="tab-observaciones"
+            class="seccion-tab"
+        >
+
+            <div class="encabezado-seccion">
+
+                <div>
+
+                    <span class="seccion-etiqueta">
+                        Reporte de problemas
+                    </span>
+
+                    <h2>
+                        Observaciones
+                    </h2>
+
+                    <p>
+                        Informa al administrador sobre cualquier
+                        problema encontrado en un aula o laboratorio.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="grid-dos-columnas">
+
+
+                <!-- ==========================================
+                     FORMULARIO DE OBSERVACIÓN
+                     ========================================== -->
+
+                <div class="panel">
+
+                    <div class="panel-cabecera">
+
+                        <div>
+
+                            <h3>
+                                ⚠️ Nueva observación
+                            </h3>
+
+                            <p>
+                                Selecciona el espacio y describe
+                                el problema encontrado.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <form
+                        id="formObservacion"
+                        class="formulario-panel"
+                    >
+
+                        <div class="campo">
+
+                            <label for="observacionEspacio">
+                                Aula o laboratorio
+                            </label>
+
+                            <select
+                                id="observacionEspacio"
+                                required
+                            >
+
+                                <option value="">
+                                    Seleccionar espacio
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="campo">
+
+                            <label for="observacionTexto">
+                                Observación
+                            </label>
+
+                            <textarea
+                                id="observacionTexto"
+                                rows="6"
+                                maxlength="1000"
+                                placeholder="Ej.: El ventilador del aula no funciona."
+                                required
+                            ></textarea>
+
+                        </div>
+
+
+                        <div
+                            id="mensajeObservacion"
+                            class="mensaje-formulario oculto"
+                        ></div>
+
+
+                        <div class="acciones-formulario">
+
+                            <button
+                                type="submit"
+                                id="btnEnviarObservacion"
+                                class="btn-primario"
+                            >
+                                Enviar observación
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+
+
+                <!-- ==========================================
+                     INFORMACIÓN
+                     ========================================== -->
+
+                <div class="panel panel-informacion">
+
+                    <div class="panel-cabecera">
+
+                        <div>
+
+                            <h3>
+                                🛠️ ¿Qué puedo reportar?
+                            </h3>
+
+                            <p>
+                                Utiliza esta sección para informar
+                                problemas del espacio utilizado.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="aviso-informativo">
+
+                        <div class="aviso-icono">
+                            💡
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Ejemplos
+                            </strong>
+
+                            <p>
+                                Puedes reportar problemas de
+                                iluminación, ventiladores,
+                                tomacorrientes, mobiliario,
+                                proyectores, equipos u otras
+                                condiciones del aula o laboratorio.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="aviso-informativo">
+
+                        <div class="aviso-icono">
+                            👨‍💼
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Administración
+                            </strong>
+
+                            <p>
+                                La observación será enviada al
+                                panel administrativo para su
+                                revisión y atención.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- ======================================================
+         MODAL: RESERVA RÁPIDA
+         ====================================================== -->
+
+    <div
+        id="modalReservaRapida"
+        class="modal"
+        aria-hidden="true"
+    >
+
+        <div
+            class="modal-fondo"
+            data-cerrar-modal="modalReservaRapida"
+        ></div>
+
+
+        <div class="modal-contenido modal-confirmacion">
+
+
+            <div class="modal-cabecera">
+
+                <div>
+
+                    <h3>
+                        Confirmar reserva
+                    </h3>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="btn-cerrar-modal"
+                    data-cerrar-modal="modalReservaRapida"
+                    aria-label="Cerrar"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+
+            <div class="confirmacion-contenido">
+
+                <div class="confirmacion-icono reserva-icono-confirmacion">
+                    📅
+                </div>
+
+
+                <p>
+                    ¿Deseas reservar este espacio?
+                </p>
+
+
+                <div class="detalle-confirmacion">
+
+                    <div class="detalle-reserva-rapida">
+
+                        <span>
+                            Espacio
+                        </span>
+
+                        <strong id="reservaRapidaEspacio">
+                            -
+                        </strong>
+
+                    </div>
+
+
+                    <div class="detalle-reserva-rapida">
+
+                        <span>
+                            Fecha
+                        </span>
+
+                        <strong id="reservaRapidaFecha">
+                            -
+                        </strong>
+
+                    </div>
+
+
+                    <div class="detalle-reserva-rapida">
+
+                        <span>
+                            Horario
+                        </span>
+
+                        <strong id="reservaRapidaHorario">
+                            -
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <small>
+                    Al confirmar, la reserva quedará registrada
+                    automáticamente a tu nombre.
+                </small>
+
+            </div>
+
+
+
+            <div
+                id="mensajeReservaRapida"
+                class="mensaje-formulario oculto"
+            ></div>
+
+
+
+            <div class="modal-acciones">
+
+                <button
+                    type="button"
+                    class="btn-secundario"
+                    data-cerrar-modal="modalReservaRapida"
+                >
+                    Cancelar
+                </button>
+
+
+                <button
+                    type="button"
+                    id="btnConfirmarReservaRapida"
+                    class="btn-primario"
+                >
+                    Confirmar reserva
+                </button>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ======================================================
+         MODAL: EDITAR MI RESERVA
+         ====================================================== -->
+
+    <div
+        id="modalEditarReservaDocente"
+        class="modal"
+        aria-hidden="true"
+    >
+
+        <div
+            class="modal-fondo"
+            data-cerrar-modal="modalEditarReservaDocente"
+        ></div>
+
+
+        <div class="modal-contenido">
+
+
+            <div class="modal-cabecera">
+
+                <div>
+
+                    <h3>
+                        Editar reserva
+                    </h3>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="btn-cerrar-modal"
+                    data-cerrar-modal="modalEditarReservaDocente"
+                    aria-label="Cerrar"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+
+            <form
+                id="formEditarReservaDocente"
+                class="formulario-panel"
+            >
+
+                <input
+                    type="hidden"
+                    id="editarReservaDocenteId"
+                >
+
+
+                <div class="campo">
+
+                    <label for="editarReservaDocenteEspacio">
+                        Aula o laboratorio
+                    </label>
+
+                    <select
+                        id="editarReservaDocenteEspacio"
+                        required
+                    >
+
+                        <option value="">
+                            Seleccionar espacio
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label for="editarReservaDocenteFecha">
+                        Fecha
+                    </label>
+
+                    <input
+                        type="date"
+                        id="editarReservaDocenteFecha"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label for="editarReservaDocenteHorario">
+                        Horario
+                    </label>
+
+                    <select
+                        id="editarReservaDocenteHorario"
+                        required
+                    >
+
+                        <option value="09:00-12:00">
+                            Mañana — 09:00 a 12:00
+                        </option>
+
+                        <option value="14:00-17:00">
+                            Tarde — 14:00 a 17:00
+                        </option>
+
+                        <option value="19:00-21:30">
+                            Noche — 19:00 a 21:30
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div
+                    id="mensajeEditarReservaDocente"
+                    class="mensaje-formulario oculto"
+                ></div>
+
+
+                <div class="modal-acciones">
+
+                    <button
+                        type="button"
+                        class="btn-secundario"
+                        data-cerrar-modal="modalEditarReservaDocente"
+                    >
+                        Cancelar
+                    </button>
+
+
+                    <button
+                        type="submit"
+                        id="btnGuardarEdicionReservaDocente"
+                        class="btn-primario"
+                    >
+                        Guardar cambios
+                    </button>
+
+                </div>
+
+            </form>
+
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ======================================================
+         MODAL: CANCELAR MI RESERVA
+         ====================================================== -->
+
+    <div
+        id="modalCancelarReservaDocente"
+        class="modal"
+        aria-hidden="true"
+    >
+
+        <div
+            class="modal-fondo"
+            data-cerrar-modal="modalCancelarReservaDocente"
+        ></div>
+
+
+        <div class="modal-contenido modal-confirmacion">
+
+
+            <div class="modal-cabecera">
+
+                <div>
+
+                    <h3>
+                        Cancelar reserva
+                    </h3>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="btn-cerrar-modal"
+                    data-cerrar-modal="modalCancelarReservaDocente"
+                    aria-label="Cerrar"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+
+            <div class="confirmacion-contenido">
+
+                <div class="confirmacion-icono">
+                    ⚠️
+                </div>
+
+
+                <p>
+                    ¿Deseas cancelar esta reserva?
+                </p>
+
+
+                <div
+                    id="detalleCancelarReservaDocente"
+                    class="detalle-confirmacion"
+                >
+                    -
+                </div>
+
+
+                <small>
+                    El espacio volverá a estar disponible para
+                    otros docentes.
+                </small>
+
+            </div>
+
+
+            <input
+                type="hidden"
+                id="cancelarReservaDocenteId"
+            >
+
+
+            <div
+                id="mensajeCancelarReservaDocente"
+                class="mensaje-formulario oculto"
+            ></div>
+
+
+            <div class="modal-acciones">
+
+                <button
+                    type="button"
+                    class="btn-secundario"
+                    data-cerrar-modal="modalCancelarReservaDocente"
+                >
+                    Volver
+                </button>
+
+
+                <button
+                    type="button"
+                    id="btnConfirmarCancelarReservaDocente"
+                    class="btn-peligro"
+                >
+                    Sí, cancelar reserva
+                </button>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ======================================================
+         MENSAJE GLOBAL
+         ====================================================== -->
+
+    <div
+        id="mensajeGlobal"
+        class="mensaje-global"
+        role="status"
+        aria-live="polite"
+    ></div>
+
+
+
+    <!-- ======================================================
+         CARGA GLOBAL
+         ====================================================== -->
+
+    <div
+        id="cargandoGlobal"
+        class="cargando-global oculto"
+    >
+
+        <div class="cargando-caja">
+
+            <div class="spinner"></div>
+
+            <span id="textoCargandoGlobal">
+                Procesando...
+            </span>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ======================================================
+         FOOTER
+         ====================================================== -->
+
+    <footer class="footer-panel">
+
+        <div>
+
+            <strong>
+                Instituto CETA
+            </strong>
+
+            <span>
+                Sistema de Reserva de Aulas y Laboratorios
+            </span>
+
+        </div>
+
+
+        <span>
+            Desarrollado por Andres Vega
+        </span>
+
+    </footer>
+
+
+
+    <!-- ======================================================
+         SUPABASE
+         ====================================================== -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+    ></script>
+
 
     <script src="js/supabase.js?v=1"></script>
 
-    <script>
-        const btnCerrarSesion =
-            document.getElementById("btnCerrarSesion");
 
-        btnCerrarSesion.addEventListener("click", async () => {
+    <!-- ======================================================
+         PANEL DOCENTE
+         ====================================================== -->
 
-            const { error } =
-                await supabaseClient.auth.signOut();
+    <script src="js/docente.js?v=2"></script>
 
-            if (error) {
-                alert("No se pudo cerrar la sesión.");
-                console.error(error);
-                return;
-            }
-
-            window.location.href = "index.html";
-        });
-    </script>
 
 </body>
 
