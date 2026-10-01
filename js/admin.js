@@ -4156,60 +4156,72 @@ function obtenerAsignacionPorId(
 // 59. CREAR ASIGNACIÓN FIJA
 // ============================================================
 
-async function crearAsignacion(
-    event
-) {
+// ============================================================
+// 59. CREAR ASIGNACIONES FIJAS RÁPIDAS
+// ============================================================
+
+async function crearAsignacion(event) {
 
     event.preventDefault();
 
 
-    if (
-        !validarGestionParaAsignacion()
-    ) {
+    if (!validarGestionParaAsignacion()) {
+        return;
+    }
+
+
+    const docenteId =
+        elemento("asignacionDocente")?.value;
+
+
+    if (!docenteId) {
+
+        mostrarMensajeFormulario(
+            "mensajeNuevaAsignacion",
+            "Seleccione un docente.",
+            "error"
+        );
 
         return;
 
     }
 
 
-    const espacioId =
-        Number(
-            elemento(
-                "asignacionEspacio"
-            ).value
+    /*
+        Obtenemos únicamente las casillas donde
+        el administrador seleccionó un aula.
+    */
+
+    const selectores =
+        Array.from(
+            document.querySelectorAll(
+                ".select-asignacion-rapida"
+            )
         );
 
 
-    const docenteId =
-        elemento(
-            "asignacionDocente"
-        ).value;
+    const nuevasAsignaciones =
+        selectores
+            .filter(select => select.value)
+            .map(select => ({
+
+                espacioId:
+                    Number(select.value),
+
+                dia:
+                    Number(select.dataset.dia),
+
+                horario:
+                    select.dataset.horario
+
+            }));
 
 
-    const dia =
-        Number(
-            elemento(
-                "asignacionDia"
-            ).value
-        );
-
-
-    const horario =
-        elemento(
-            "asignacionHorario"
-        ).value;
-
-
-    if (
-        !espacioId ||
-        !docenteId ||
-        !dia ||
-        !horario
-    ) {
+    if (nuevasAsignaciones.length === 0) {
 
         mostrarMensajeFormulario(
             "mensajeNuevaAsignacion",
-            "Complete todos los datos de la asignación.",
+            "Seleccione al menos un aula o laboratorio en el horario.",
             "error"
         );
 
@@ -4219,17 +4231,17 @@ async function crearAsignacion(
 
 
     const boton =
-        elemento(
-            "btnCrearAsignacion"
-        );
+        elemento("btnCrearAsignacion");
 
 
-    boton.disabled =
-        true;
+    if (boton) {
 
+        boton.disabled = true;
 
-    boton.textContent =
-        "Creando...";
+        boton.textContent =
+            `Guardando 0/${nuevasAsignaciones.length}...`;
+
+    }
 
 
     mostrarMensajeFormulario(
@@ -4238,88 +4250,175 @@ async function crearAsignacion(
     );
 
 
+    let creadas = 0;
+
+    const errores = [];
+
+
     try {
 
-        const {
-            error
-        } = await supabaseClient
-            .rpc(
-                "crear_asignacion_aula",
-                {
-                    p_gestion_id:
-                        gestionSeleccionadaId,
+        /*
+            Las creamos una por una utilizando la misma
+            RPC que ya funciona actualmente.
 
-                    p_espacio_id:
-                        espacioId,
+            Esto evita modificar Supabase por ahora.
+        */
 
-                    p_usuario_id:
-                        docenteId,
+        for (
+            let indice = 0;
+            indice < nuevasAsignaciones.length;
+            indice++
+        ) {
 
-                    p_dia_semana:
-                        dia,
-
-                    p_horario:
-                        horario
-                }
-            );
+            const asignacion =
+                nuevasAsignaciones[indice];
 
 
-        if (error) {
+            if (boton) {
 
-            throw new Error(
-                mensajeErrorSupabase(
-                    error,
-                    "No se pudo crear la asignación."
-                )
-            );
+                boton.textContent =
+                    `Guardando ${indice + 1}/${nuevasAsignaciones.length}...`;
+
+            }
+
+
+            const {
+                error
+            } =
+                await supabaseClient.rpc(
+                    "crear_asignacion_aula",
+                    {
+
+                        p_gestion_id:
+                            gestionSeleccionadaId,
+
+                        p_espacio_id:
+                            asignacion.espacioId,
+
+                        p_usuario_id:
+                            docenteId,
+
+                        p_dia_semana:
+                            asignacion.dia,
+
+                        p_horario:
+                            asignacion.horario
+
+                    }
+                );
+
+
+            if (error) {
+
+                errores.push({
+
+                    asignacion:
+                        asignacion,
+
+                    mensaje:
+                        mensajeErrorSupabase(
+                            error,
+                            "No se pudo crear esta asignación."
+                        )
+
+                });
+
+                continue;
+
+            }
+
+
+            creadas++;
 
         }
 
 
-        elemento(
-            "formNuevaAsignacion"
-        ).reset();
-
-
-        mostrarMensajeFormulario(
-            "mensajeNuevaAsignacion",
-            "Asignación fija creada correctamente.",
-            "exito"
-        );
-
+        /*
+            Recargamos la información independientemente
+            de si todas o solamente algunas se crearon.
+        */
 
         await cargarAsignaciones();
-
 
         await cargarVistaSemanal();
 
 
-        mostrarMensajeGlobal(
-            "Asignación fija creada correctamente."
-        );
+        if (errores.length === 0) {
+
+            mostrarMensajeFormulario(
+                "mensajeNuevaAsignacion",
+                `${creadas} asignación(es) fija(s) creadas correctamente.`,
+                "exito"
+            );
+
+
+            mostrarMensajeGlobal(
+                "Horario fijo guardado correctamente."
+            );
+
+
+            /*
+                Limpiamos solamente las aulas.
+                Dejamos seleccionado el docente por si
+                el administrador quiere continuar trabajando.
+            */
+
+            document
+                .querySelectorAll(
+                    ".select-asignacion-rapida"
+                )
+                .forEach(select => {
+
+                    select.value = "";
+
+                });
+
+
+            actualizarResumenAsignacionRapida();
+
+        } else {
+
+            mostrarMensajeFormulario(
+                "mensajeNuevaAsignacion",
+                `Se crearon ${creadas} de ${nuevasAsignaciones.length} asignaciones. Algunas no pudieron guardarse porque el espacio ya está ocupado o existe un conflicto.`,
+                "error"
+            );
+
+
+            mostrarMensajeGlobal(
+                "El horario se guardó parcialmente.",
+                "error"
+            );
+
+        }
 
     }
     catch (error) {
 
-        console.error(error);
+        console.error(
+            "Error creando horario fijo:",
+            error
+        );
 
 
         mostrarMensajeFormulario(
             "mensajeNuevaAsignacion",
-            error.message ||
-            "No se pudo crear la asignación.",
+            error.message
+            || "No se pudo guardar el horario fijo.",
             "error"
         );
 
     }
     finally {
 
-        boton.disabled =
-            false;
+        if (boton) {
 
+            boton.disabled = false;
 
-        boton.textContent =
-            "Crear asignación fija";
+            boton.textContent =
+                "Guardar horario fijo";
+
+        }
 
     }
 
@@ -4834,7 +4933,229 @@ async function actualizarAsignacionesManual() {
 
 }
 
+// ============================================================
+// ASIGNACIÓN RÁPIDA - LLENAR AULAS
+// ============================================================
 
+function llenarSelectoresAsignacionRapida() {
+
+    const selectores =
+        document.querySelectorAll(
+            ".select-asignacion-rapida"
+        );
+
+
+    selectores.forEach(select => {
+
+        const valorAnterior =
+            select.value;
+
+
+        select.innerHTML = `
+            <option value="">
+                Sin asignar
+            </option>
+        `;
+
+
+        espaciosAulas.forEach(espacio => {
+
+            if (espacio.activo !== true) {
+                return;
+            }
+
+
+            const option =
+                document.createElement("option");
+
+
+            option.value =
+                espacio.id;
+
+
+            option.textContent =
+                `${espacio.nombre} — ${
+                    espacio.tipo === "laboratorio"
+                        ? "Laboratorio"
+                        : "Aula"
+                }`;
+
+
+            select.appendChild(option);
+
+        });
+
+
+        if (
+            valorAnterior
+            &&
+            espaciosAulas.some(
+                espacio =>
+                    String(espacio.id)
+                    === String(valorAnterior)
+            )
+        ) {
+
+            select.value =
+                valorAnterior;
+
+        }
+
+    });
+
+}
+
+
+
+// ============================================================
+// ASIGNACIÓN RÁPIDA - RESUMEN
+// ============================================================
+
+function actualizarResumenAsignacionRapida() {
+
+    const resumen =
+        elemento(
+            "resumenAsignacionRapida"
+        );
+
+
+    if (!resumen) {
+        return;
+    }
+
+
+    const seleccionadas =
+        Array.from(
+            document.querySelectorAll(
+                ".select-asignacion-rapida"
+            )
+        )
+        .filter(
+            select => select.value
+        );
+
+
+    const cantidad =
+        seleccionadas.length;
+
+
+    if (cantidad === 0) {
+
+        resumen.innerHTML = `
+
+            <div class="aviso-icono">
+                📅
+            </div>
+
+            <div>
+
+                <strong>
+                    Ninguna asignación seleccionada
+                </strong>
+
+                <p>
+                    Seleccione aulas o laboratorios
+                    en el horario semanal.
+                </p>
+
+            </div>
+        `;
+
+        return;
+
+    }
+
+
+    resumen.innerHTML = `
+
+        <div class="aviso-icono">
+            ✅
+        </div>
+
+        <div>
+
+            <strong>
+                ${cantidad} asignación${
+                    cantidad === 1
+                        ? ""
+                        : "es"
+                } seleccionada${
+                    cantidad === 1
+                        ? ""
+                        : "s"
+                }
+            </strong>
+
+            <p>
+                Al guardar se crearán todas estas
+                asignaciones fijas para el docente
+                seleccionado.
+            </p>
+
+        </div>
+    `;
+
+}
+
+
+
+// ============================================================
+// ASIGNACIÓN RÁPIDA - LIMPIAR
+// ============================================================
+
+function limpiarAsignacionRapida() {
+
+    document
+        .querySelectorAll(
+            ".select-asignacion-rapida"
+        )
+        .forEach(select => {
+
+            select.value = "";
+
+        });
+
+
+    actualizarResumenAsignacionRapida();
+
+}
+
+
+
+// ============================================================
+// ASIGNACIÓN RÁPIDA - EVENTOS
+// ============================================================
+
+function configurarAsignacionRapida() {
+
+    llenarSelectoresAsignacionRapida();
+
+
+    document
+        .querySelectorAll(
+            ".select-asignacion-rapida"
+        )
+        .forEach(select => {
+
+            select.addEventListener(
+                "change",
+                actualizarResumenAsignacionRapida
+            );
+
+        });
+
+
+    elemento(
+        "btnLimpiarAsignacionRapida"
+    )?.addEventListener(
+        "click",
+        limpiarAsignacionRapida
+    );
+
+
+    actualizarResumenAsignacionRapida();
+
+}
 
 // ============================================================
 // 66. EVENTOS DE ASIGNACIONES
