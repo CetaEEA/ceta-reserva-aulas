@@ -1330,193 +1330,430 @@
 
 
 
-            <!-- =============================================
-                 ASIGNACIÓN FIJA
-            ============================================== -->
+<!-- =====================================================
+     ASIGNACIÓN FIJA RÁPIDA POR DOCENTE
+====================================================== -->
 
-            <div class="panel">
+<div class="panel">
 
-                <div class="panel-cabecera">
+    <div class="panel-cabecera">
 
-                    <div>
+        <div>
 
-                        <span class="seccion-etiqueta">
-                            Horario recurrente
-                        </span>
+            <span class="seccion-etiqueta">
+                Horario recurrente
+            </span>
 
-                        <h3>
-                            Nueva asignación fija
-                        </h3>
+            <h3>
+                Asignación fija rápida
+            </h3>
 
-                        <p>
-                            Una asignación fija bloqueará el
-                            espacio seleccionado durante todos
-                            los días equivalentes de la gestión.
-                        </p>
+            <p>
+                Seleccione un docente y configure varias
+                aulas o laboratorios para diferentes días
+                y horarios de la gestión.
+            </p>
 
-                    </div>
+        </div>
 
-                </div>
+    </div>
 
 
+    <form
+        id="formNuevaAsignacion"
+        class="formulario-panel"
+    >
 
-                <form
-                    id="formNuevaAsignacion"
-                    class="formulario-panel"
+        <!-- DOCENTE -->
+
+        <div class="grid-formulario">
+
+            <div class="campo">
+
+                <label for="asignacionDocente">
+                    Docente
+                </label>
+
+                <select
+                    id="asignacionDocente"
+                    required
                 >
 
+                    <option value="">
+                        Seleccione un docente
+                    </option>
 
-                    <div class="grid-formulario grid-cuatro">
-
-
-                        <!-- ESPACIO -->
-
-                        <div class="campo">
-
-                            <label for="asignacionEspacio">
-                                Aula / Laboratorio
-                            </label>
-
-                            <select
-                                id="asignacionEspacio"
-                                required
-                            >
-
-                                <option value="">
-                                    Seleccione un espacio
-                                </option>
-
-                            </select>
-
-                        </div>
-
-
-
-                        <!-- DOCENTE -->
-
-                        <div class="campo">
-
-                            <label for="asignacionDocente">
-                                Docente
-                            </label>
-
-                            <select
-                                id="asignacionDocente"
-                                required
-                            >
-
-                                <option value="">
-                                    Seleccione un docente
-                                </option>
-
-                            </select>
-
-                        </div>
-
-
-
-                        <!-- DÍA -->
-
-                        <div class="campo">
-
-                            <label for="asignacionDia">
-                                Día
-                            </label>
-
-                            <select
-                                id="asignacionDia"
-                                required
-                            >
-
-                                <option value="">
-                                    Seleccione
-                                </option>
-
-                                <option value="1">
-                                    Lunes
-                                </option>
-
-                                <option value="2">
-                                    Martes
-                                </option>
-
-                                <option value="3">
-                                    Miércoles
-                                </option>
-
-                                <option value="4">
-                                    Jueves
-                                </option>
-
-                                <option value="5">
-                                    Viernes
-                                </option>
-
-                            </select>
-
-                        </div>
-
-
-
-                        <!-- HORARIO -->
-
-                        <div class="campo">
-
-                            <label for="asignacionHorario">
-                                Horario
-                            </label>
-
-                            <select
-                                id="asignacionHorario"
-                                required
-                            >
-
-                                <option value="">
-                                    Seleccione
-                                </option>
-
-                                <option value="09:00-12:00">
-                                    09:00 - 12:00
-                                </option>
-
-                                <option value="14:00-17:00">
-                                    14:00 - 17:00
-                                </option>
-
-                                <option value="19:00-21:30">
-                                    19:00 - 21:30
-                                </option>
-
-                            </select>
-
-                        </div>
-
-
-                    </div>
-
-
-
-                    <div class="acciones-formulario">
-
-                        <button
-                            type="submit"
-                            id="btnCrearAsignacion"
-                            class="btn-primario"
-                        >
-                            Crear asignación fija
-                        </button>
-
-                    </div>
-
-
-                    <p
-                        id="mensajeNuevaAsignacion"
-                        class="mensaje-formulario"
-                    ></p>
-
-                </form>
+                </select>
 
             </div>
+
+        </div>
+
+
+        <!-- =================================================
+             HORARIO SEMANAL
+        ================================================== -->
+
+        <div class="asignacion-rapida-contenedor">
+
+            <div class="asignacion-rapida-cabecera">
+
+                <div>
+                    <strong>
+                        Horario fijo del docente
+                    </strong>
+
+                    <p>
+                        Seleccione solamente los espacios
+                        que desea asignar. Puede dejar
+                        casillas vacías.
+                    </p>
+                </div>
+
+                <button
+                    type="button"
+                    id="btnLimpiarAsignacionRapida"
+                    class="btn-secundario"
+                >
+                    Limpiar horario
+                </button>
+
+            </div>
+
+
+            <div class="tabla-responsive">
+
+                <table class="tabla-admin tabla-asignacion-rapida">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Día
+                            </th>
+
+                            <th>
+                                ☀️ Mañana
+                                <small>
+                                    09:00 - 12:00
+                                </small>
+                            </th>
+
+                            <th>
+                                🌤️ Tarde
+                                <small>
+                                    14:00 - 17:00
+                                </small>
+                            </th>
+
+                            <th>
+                                🌙 Noche
+                                <small>
+                                    19:00 - 21:30
+                                </small>
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        <!-- LUNES -->
+
+                        <tr>
+
+                            <th scope="row">
+                                Lunes
+                            </th>
+
+                            <td>
+                                <select
+                                    class="select-asignacion-rapida"
+                                    data-dia="1"
+                                    data-horario="09:00-12:00"
+                                >
+                                    <option value="">
+                                        Sin asignar
+                                    </option>
+                                </select>
+                            </td>
+
+                            <td>
+                                <select
+                                    class="select-asignacion-rapida"
+                                    data-dia="1"
+                                    data-horario="14:00-17:00"
+                                >
+                                    <option value="">
+                                        Sin asignar
+                                    </option>
+                                </select>
+                            </td>
+
+                            <td>
+                                <select
+                                    class="select-asignacion-rapida"
+                                    data-dia="1"
+                                    data-horario="19:00-21:30"
+                                >
+                                    <option value="">
+                                        Sin asignar
+                                    </option>
+                                </select>
+                            </td>
+
+                        </tr>
+
+
+                        <!-- MARTES -->
+
+                        <tr>
+
+                            <th scope="row">
+                                Martes
+                            </th>
+
+                            <td>
+                                <select
+                                    class="select-asignacion-rapida"
+                                    data-dia="2"
+                                    data-horario="09:00-12:00"
+                                >
+                                    <option value="">
+                                        Sin asignar
+                                    </option>
+                                </select>
+                            </td>
+
+                            <td>
+                                <select
+                                    class="select-asignacion-rapida"
+                                    data-dia="2"
+                                    data-horario="14:00-17:00"
+                                >
+                                    <option value="">
+                                        Sin asignar
+                                    </option>
+                                </select>
+                            </td>
+
+                            <td>
+                                <select
+                                    class="select-asignacion-rapida"
+                                    data-dia="2"
+                                    data-horario="19:00-21:30"
+                                >
+                                    <option value="">
+                                        Sin asignar
+                                    </option>
+                                </select>
+                            </td>
+
+                        </tr>
+
+
+                        <!-- MIÉRCOLES -->
+
+                        <tr>
+
+                            <th scope="row">
+                                Miércoles
+                            </th>
+
+                            <td>
+                                <select
+                                    class="select-asignacion-rapida"
+                                    data-dia="3"
+                                    data-horario="09:00-12:00"
+                                >
+                                    <option value="">
+                                        Sin asignar
+                                    </option>
+                                </select>
+                            </td>
+
+                            <td>
+                                <select
+                                    class="select-asignacion-rapida"
+                                    data-dia="3"
+                                    data-horario="14:00-17:00"
+                                >
+                                    <option value="">
+                                        Sin asignar
+                                    </option>
+                                </select>
+                            </td>
+
+                            <td>
+                                <select
+                                    class="select-asignacion-rapida"
+                                    data-dia="3"
+                                    data-horario="19:00-21:30"
+                                >
+                                    <option value="">
+                                        Sin asignar
+                                    </option>
+                                </select>
+                            </td>
+
+                        </tr>
+
+
+                        <!-- JUEVES -->
+
+                        <tr>
+
+                            <th scope="row">
+                                Jueves
+                            </th>
+
+                            <td>
+                                <select
+                                    class="select-asignacion-rapida"
+                                    data-dia="4"
+                                    data-horario="09:00-12:00"
+                                >
+                                    <option value="">
+                                        Sin asignar
+                                    </option>
+                                </select>
+                            </td>
+
+                            <td>
+                                <select
+                                    class="select-asignacion-rapida"
+                                    data-dia="4"
+                                    data-horario="14:00-17:00"
+                                >
+                                    <option value="">
+                                        Sin asignar
+                                    </option>
+                                </select>
+                            </td>
+
+                            <td>
+                                <select
+                                    class="select-asignacion-rapida"
+                                    data-dia="4"
+                                    data-horario="19:00-21:30"
+                                >
+                                    <option value="">
+                                        Sin asignar
+                                    </option>
+                                </select>
+                            </td>
+
+                        </tr>
+
+
+                        <!-- VIERNES -->
+
+                        <tr>
+
+                            <th scope="row">
+                                Viernes
+                            </th>
+
+                            <td>
+                                <select
+                                    class="select-asignacion-rapida"
+                                    data-dia="5"
+                                    data-horario="09:00-12:00"
+                                >
+                                    <option value="">
+                                        Sin asignar
+                                    </option>
+                                </select>
+                            </td>
+
+                            <td>
+                                <select
+                                    class="select-asignacion-rapida"
+                                    data-dia="5"
+                                    data-horario="14:00-17:00"
+                                >
+                                    <option value="">
+                                        Sin asignar
+                                    </option>
+                                </select>
+                            </td>
+
+                            <td>
+                                <select
+                                    class="select-asignacion-rapida"
+                                    data-dia="5"
+                                    data-horario="19:00-21:30"
+                                >
+                                    <option value="">
+                                        Sin asignar
+                                    </option>
+                                </select>
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+
+        <!-- RESUMEN -->
+
+        <div
+            id="resumenAsignacionRapida"
+            class="aviso-informativo"
+        >
+
+            <div class="aviso-icono">
+                📅
+            </div>
+
+            <div>
+
+                <strong>
+                    Ninguna asignación seleccionada
+                </strong>
+
+                <p>
+                    Seleccione aulas o laboratorios
+                    en el horario semanal.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- BOTÓN GUARDAR -->
+
+        <div class="acciones-formulario">
+
+            <button
+                type="submit"
+                id="btnCrearAsignacion"
+                class="btn-primario"
+            >
+                Guardar horario fijo
+            </button>
+
+        </div>
+
+
+        <p
+            id="mensajeNuevaAsignacion"
+            class="mensaje-formulario"
+        ></p>
+
+    </form>
+
+</div>
 
 
 
