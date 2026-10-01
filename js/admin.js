@@ -5162,7 +5162,7 @@ function configurarAsignacionRapida() {
 // ============================================================
 
 function configurarEventosAsignaciones() {
-
+    configurarAsignacionRapida();
     elemento(
         "formNuevaAsignacion"
     )?.addEventListener(
